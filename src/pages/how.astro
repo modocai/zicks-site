@@ -1,6 +1,6 @@
 ---
-const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 import Base from '../layouts/Base.astro';
+const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 const faq = {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
  {"@type":"Question","name":"GEO 가 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"Generative Engine Optimization. ChatGPT · Gemini · Perplexity 같은 AI 검색이 답을 쓸 때 우리 회사를 언급하거나 우리 페이지를 출처로 쓰게 만드는 일입니다. 검색 순위가 아니라 답 안에 들어가는지를 봅니다."}},
  {"@type":"Question","name":"AI 추천 순위를 보장하나요?","acceptedAnswer":{"@type":"Answer","text":"보장하지 않습니다. 대신 매주 같은 질문으로 AI 답변을 측정해 「언급되었는가」와 「언급될 조건이 갖춰졌는가」를 나눠 보고합니다."}},

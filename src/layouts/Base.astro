@@ -1,6 +1,6 @@
 ---
-const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 import '../styles/global.css';
+const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 const { title, description, path = '/', jsonld = null } = Astro.props;
 const site = (Astro.site ?? new URL('https://zicks.modoc-ai.com')).href.replace(/\/$/, '');
 const url = site + b + path;
