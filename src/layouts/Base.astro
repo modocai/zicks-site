@@ -1,12 +1,13 @@
 ---
+const b = import.meta.env.BASE_URL.replace(/\/$/, '');
 import '../styles/global.css';
 const { title, description, path = '/', jsonld = null } = Astro.props;
 const site = (Astro.site ?? new URL('https://zicks.modoc-ai.com')).href.replace(/\/$/, '');
-const url = site + path;
+const url = site + b + path;
 const org = {
   "@context": "https://schema.org", "@type": "Organization",
   "name": "zicks by MoDoc AI", "alternateName": ["zicks", "모닥에이아이코리아"],
-  "url": site, "logo": site + "/images/modoc-ai-logo-dark.webp",
+  "url": site + b + "/", "logo": site + b + "/images/modoc-ai-logo-dark.webp",
   "description": "AI native GEO · SEO 운영 엔진. 고객의 질문을 검수 · 서명된 글로 바꾸고 매주 AI 검색 답변을 측정합니다.",
   "founder": { "@type": "Person", "name": "김명찬", "jobTitle": "대표 · 의사" },
   "areaServed": ["KR", "US"], "sameAs": ["https://www.modoc-ai.com", "https://www.fevercoach.us"]
@@ -15,7 +16,7 @@ const service = {
   "@context": "https://schema.org", "@type": "Service", "name": "zicks AI 검색 노출 · 콘텐츠 운영",
   "provider": { "@type": "Organization", "name": "모닥에이아이코리아" },
   "serviceType": "Generative Engine Optimization (GEO) · SEO 콘텐츠 운영 · 측정",
-  "areaServed": "KR", "url": site + "/services/"
+  "areaServed": "KR", "url": site + b + "/services/"
 };
 ---
 <!doctype html>
@@ -25,23 +26,23 @@ const service = {
 <title>{title}</title>
 <meta name="description" content={description}>
 <link rel="canonical" href={url}>
-<meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:url" content={url}><meta property="og:type" content="website"><meta property="og:image" content={site + '/images/modoc-ai-logo-dark.webp'}>
+<meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:url" content={url}><meta property="og:type" content="website"><meta property="og:image" content={site + b + '/images/modoc-ai-logo-dark.webp'}>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href={b+"/favicon.svg"} type="image/svg+xml">
 <script type="application/ld+json" set:html={JSON.stringify(org)}></script>
 <script type="application/ld+json" set:html={JSON.stringify(service)}></script>
 {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)}></script>}
 </head>
 <body>
 <header class="site"><div class="wrap">
-  <a class="brand" href="/">zicks<small>by MoDoc AI</small></a>
+  <a class="brand" href={b+"/"}>zicks<small>by MoDoc AI</small></a>
   <nav class="main" aria-label="주 메뉴">
-    <a href="/how/">어떻게 일하나</a><a href="/services/">서비스</a><a href="/cases/">사례</a><a href="/pricing/">가격</a><a class="cta" href="/contact/">무료 진단 요청</a>
+    <a href={b+"/how/"}>어떻게 일하나</a><a href={b+"/services/"}>서비스</a><a href={b+"/cases/"}>사례</a><a href={b+"/pricing/"}>가격</a><a class="cta" href={b+"/contact/"}>무료 진단 요청</a>
   </nav>
 </div></header>
 <main><slot /></main>
 <footer class="site"><div class="wrap">
   <div><b style="color:#fff">zicks</b> · 모닥에이아이코리아 (MoDoc AI)<br>AI native GEO · SEO 운영 엔진<br><span style="color:#9fc3dd">AI 추천 순위 · 검색 순위 · 매출 증가는 보장하지 않습니다. 보고하는 것은 「인용되었는가」와 「인용될 조건이 갖춰졌는가」입니다.</span></div>
-  <div><a href="/contact/">문의</a> · <a href="https://www.modoc-ai.com">modoc-ai.com</a> · <a href="https://www.fevercoach.us">FeverCoach</a> · <a href="/llms.txt">llms.txt</a><br><span style="color:#9fc3dd">이 사이트는 정적 사이트(Astro)로 만들어 무료 호스팅에 올렸고, 모든 AI 크롤러에 열려 있습니다.</span></div>
+  <div><a href={b+"/contact/"}>문의</a> · <a href="https://www.modoc-ai.com">modoc-ai.com</a> · <a href="https://www.fevercoach.us">FeverCoach</a> · <a href={b+"/llms.txt"}>llms.txt</a><br><span style="color:#9fc3dd">이 사이트는 정적 사이트(Astro)로 만들어 무료 호스팅에 올렸고, 모든 AI 크롤러에 열려 있습니다.</span></div>
 </div></footer>
 </body></html>
