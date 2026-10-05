@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="사례 · zicks" description="FeverCoach 블로그 11주 성과와 zicks 자체 사이트 운영 기록. 고객사 사례는 서면 동의 뒤에만 공개합니다." path="/cases/">
+<section><div class="wrap">
+  <h2>FeverCoach — 자사 소아 발열 앱</h2>
+  <p class="lead">의사가 답한 2,400개 이상의 질문을 재료로 영어 · 스페인어 · 한국어 블로그를 자동 발행하고, 매주 Google Search Console 로 측정했습니다. zicks 의 첫 번째 사용자입니다.</p>
+  <div class="grid g4">
+    <div class="card"><small>검색 클릭 (11주)</small><span class="num">460 → 2,910</span><small>Google Search Console</small></div>
+    <div class="card"><small>구글에 등록된 페이지 (11주)</small><span class="num">318 → 2,096</span><small>Google Search Console</small></div>
+    <div class="card"><small>생성형 AI 노출 (3개월)</small><span class="num">98.1K</span><small>일간 약 300 → 3,500</small></div>
+    <div class="card"><small>외부 링크 도메인 (4개월)</small><span class="num">160 → 631</span><small>Ahrefs</small></div>
+  </div>
+  <p class="note" style="margin-top:12px">측정 기간 2026-06 → 2026-10. 다른 업종 · 사이트의 결과를 보장하지 않습니다. 개입(바꾼 것)과 측정값은 날짜별 원장으로 기록해 두었고, 요청하시면 보여 드립니다.</p>
+</div></section>
+<section class="sand"><div class="wrap">
+  <h2>zicks — 이 사이트</h2>
+  <p class="lead">저희도 같은 방식으로 합니다. 이 사이트는 정적 사이트 생성기(Astro)로 만들어 무료 호스팅에 올렸고, 모든 AI 크롤러에 열어 두었습니다. 회사 정보 코드 · 사이트맵 · llms.txt 가 들어 있습니다. 질문 세트 측정 기록은 쌓이는 대로 이 페이지에 공개합니다.</p>
+  <div class="grid g3">
+    <div class="card"><h3>읽을 수 있는가</h3><p>robots.txt 에서 GPTBot · ClaudeBot · PerplexityBot 등 전부 허용. 서버가 없어 응답이 빠릅니다.</p></div>
+    <div class="card"><h3>무엇을 하는 회사인가</h3><p>Organization · Service · FAQ 코드를 모든 페이지에 넣었습니다. <a href="/llms.txt">llms.txt</a> 로 AI 에게 한 번에 설명합니다.</p></div>
+    <div class="card"><h3>측정</h3><p>질문 세트를 매주 ChatGPT · Gemini · Perplexity · Claude 에 묻고 언급 여부를 기록합니다. 첫 측정은 사이트 공개 주에 합니다.</p></div>
+  </div>
+</div></section>
+<section><div class="wrap"><h2>고객사</h2><p class="lead">진행 중인 고객사 사례는 서면 동의 뒤에만 공개합니다. 사례 대신 <a href="/contact/">무료 진단</a>으로 지금 홈페이지가 AI 에게 어떻게 보이는지 먼저 확인해 보세요.</p></div></section>
+</Base>

@@ -1,0 +1,16 @@
+# zicks
+
+> zicks 는 모닥에이아이코리아(MoDoc AI)의 AI native GEO · SEO 운영 엔진입니다. 고객의 실제 질문을 현장 담당자가 검수 · 서명한 글로 바꾸고, 매주 같은 질문 세트로 AI 검색(ChatGPT · Gemini · Perplexity · Claude · 네이버)의 답변을 측정해 다음 글의 주제를 고릅니다. 종료 시 도구 · 측정 기록 · 매뉴얼을 고객에게 인계합니다.
+
+## 페이지
+- [홈](https://zicks.modoc-ai.com/): 한 줄 소개와 AI 가 업체를 고르는 네 조건
+- [어떻게 일하나](https://zicks.modoc-ai.com/how/): 측정 루프와 글 규격
+- [서비스](https://zicks.modoc-ai.com/services/): A 기반 정비 · B 홈페이지 이관 · C 콘텐츠 · 측정 운영
+- [사례](https://zicks.modoc-ai.com/cases/): FeverCoach, zicks 자체 사이트
+- [가격](https://zicks.modoc-ai.com/pricing/): 단계별 금액과 후불 조건
+- [문의](https://zicks.modoc-ai.com/contact/): 홈페이지 무료 진단 요청
+
+## 사실
+- 회사: 모닥에이아이코리아 (MoDoc AI). 대표 김명찬(의사 · 창업자).
+- 첫 적용: 자사 소아 발열 앱 FeverCoach 블로그. 11주 만에 Google 검색 클릭 460 → 2,910, 생성형 AI 노출 3개월 98.1K (Google Search Console).
+- 보장하지 않는 것: AI 추천 순위 · 검색 순위 · 매출 증가.
