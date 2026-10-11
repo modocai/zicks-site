@@ -1,0 +1,98 @@
+---
+import '../../styles/global.css';
+const b = import.meta.env.BASE_URL.replace(/\/$/, '');
+const site = (Astro.site ?? new URL('https://zicks.modoc-ai.com')).href.replace(/\/$/, '');
+const title = 'Zicks | Content services for healthcare teams';
+const description = 'Paid content pilots for clinics and healthcare software teams. Clear scope, customer review, and measurement agreed before work starts.';
+const inquiry = 'mailto:myeongchan@modoc-ai.com?subject=' + encodeURIComponent('Zicks paid content pilot') + '&body=' + encodeURIComponent('Company and website:\n\nClinic content or software content:\n\nOne question or workflow to explain:\n\nWho would review and publish the work?\n');
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={site + b + '/en/'} />
+  <link rel="icon" href={b + '/favicon.svg'} type="image/svg+xml" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={site + b + '/en/'} />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content={site + b + '/images/modoc-ai-logo-dark.webp'} />
+</head>
+<body>
+  <header class="site"><div class="wrap">
+    <a class="brand" href={b + '/en/'}>zicks<small>by MoDoc AI</small></a>
+    <nav class="main" aria-label="Main navigation">
+      <a href="#pilots">Paid pilots</a><a href={b + '/'} lang="ko">한국어</a>
+      <a class="cta" href={inquiry}>Email MC</a>
+    </nav>
+  </div></header>
+  <main>
+    <div class="hero"><div class="wrap">
+      <h1>Turn recurring questions<br />into <span class="q">useful content.</span></h1>
+      <p>For clinics and healthcare software teams: website articles, product guides, and clear next steps for your readers. Start with a small paid project your team can review and publish.</p>
+      <a class="btn" href="#pilots">Compare the pilots</a>
+    </div></div>
+    <section id="pilots"><div class="wrap">
+      <h2>One focused project to start</h2>
+      <p class="lead">Choose the audience you need to help. We agree on the topic, source material, reviewer, and schedule before work begins.</p>
+      <div class="grid g2">
+        <article class="card">
+          <span class="pill">For clinics</span>
+          <h3>Patient-question content</h3>
+          <span class="num">US$1,250</span>
+          <p>Fixed fee for a 30-day pilot, starting on an agreed date.</p>
+          <ul class="clean">
+            <li>Two original FAQ article drafts based on your recurring questions</li>
+            <li>Four social post drafts adapted from those articles</li>
+            <li>A baseline review and an end-of-pilot report using available website data</li>
+          </ul>
+          <p>Your clinician approves medical content. Your team publishes it. We work from questions stripped of patient details.</p>
+          <p class="note">Website rebuilding, advertising, translation, and video production are outside this pilot.</p>
+        </article>
+        <article class="card">
+          <span class="pill">For healthcare software teams</span>
+          <h3>Explain one product workflow</h3>
+          <span class="num">US$2,500</span>
+          <p>Fixed fee for one agreed workflow.</p>
+          <ul class="clean">
+            <li>Three articles for a defined customer or prospective-buyer audience</li>
+            <li>Up to ten annotated screenshots from an approved demo environment</li>
+            <li>One consolidated revision round</li>
+          </ul>
+          <p>Your product lead checks accuracy. Your team publishes it. We agree on help-center or marketing use before drafting.</p>
+          <p class="note">Production integrations, patient data, and clinical protocols are outside this pilot.</p>
+        </article>
+      </div>
+    </div></section>
+    <section class="sand"><div class="wrap">
+      <h2>Review first. Measure what happened.</h2>
+      <div class="grid g3">
+        <div class="card"><h3>Start with source material</h3><p>Bring a recurring question, an approved explanation, or a product walkthrough. We flag missing information instead of inventing an answer.</p></div>
+        <div class="card"><h3>Keep approval with your team</h3><p>We prepare drafts and record revisions. Your designated reviewer approves the content before your team publishes it.</p></div>
+        <div class="card"><h3>Choose a measurable next step</h3><p>Agree on available measures, such as article visits and inquiry or demo-link clicks. Report them separately from customers and revenue.</p></div>
+      </div>
+      <p class="note">Search rankings, AI citations, leads, and revenue are not guaranteed. Tracking setup and account access are agreed separately.</p>
+    </div></section>
+    <section><div class="wrap">
+      <h2>Built by a healthcare software team</h2>
+      <p class="lead">MoDoc AI operates <a href="https://www.fevercoach.us/">FeverCoach</a> and is developing Zicks. Myeongchan (MC) Kim, MD, is our founder. These pilots are scoped services delivered with tools and human review.</p>
+      <p>FeverCoach is our own product. Its use here is not a client endorsement or a promise of results for your organization.</p>
+      <h3>What happens after a pilot?</h3>
+      <p>Review the delivered work and decide whether more content is useful. Clinic content operations can be scoped at US$2,500 per month for four FAQ drafts, eight social drafts, and a monthly report. Software content maintenance is scoped around actual updates. Neither pilot renews automatically.</p>
+    </div></section>
+    <section class="sand" id="contact"><div class="wrap">
+      <h2>What does your team keep explaining?</h2>
+      <p class="lead">Email your website, one question or workflow, and who would review the work. MC will use that to discuss fit and scope. Please leave out patient information.</p>
+      <a class="btn" href={inquiry}>Discuss a paid pilot</a>
+      <p><a href="mailto:myeongchan@modoc-ai.com">myeongchan@modoc-ai.com</a></p>
+    </div></section>
+  </main>
+  <footer class="site"><div class="wrap">
+    <div><b>Zicks by MoDoc AI, Inc.</b><br />163 Highland Ave #1015, Needham, MA 02494, United States</div>
+    <div><a href="https://www.modoc-ai.com/">MoDoc AI</a> · <a href={b + '/'} lang="ko">한국어 사이트</a></div>
+  </div></footer>
+</body>
+</html>
