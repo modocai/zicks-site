@@ -37,11 +37,13 @@ const service = {
 <header class="site"><div class="wrap">
   <a class="brand" href={b+"/"}>zicks<small>by MoDoc AI</small></a>
   <nav class="main" aria-label="주 메뉴">
+    <a href={b+"/en/"} lang="en">English</a>
     <a href={b+"/how/"}>어떻게 일하나</a><a href={b+"/services/"}>서비스</a><a href={b+"/cases/"}>사례</a><a href={b+"/pricing/"}>가격</a><a class="cta" href={b+"/contact/"}>무료 진단 요청</a>
   </nav>
 </div></header>
 <main><slot /></main>
 <footer class="site"><div class="wrap">
+  <a href={b+"/en/"} lang="en">English · Content services</a>
   <div><b style="color:#fff">zicks</b> · 모닥에이아이코리아 (MoDoc AI)<br>AI native GEO · SEO 운영 엔진<br><span style="color:#9fc3dd">AI 추천 순위 · 검색 순위 · 매출 증가는 보장하지 않습니다. 보고하는 것은 「인용되었는가」와 「인용될 조건이 갖춰졌는가」입니다.</span></div>
   <div><a href={b+"/contact/"}>문의</a> · <a href="https://www.modoc-ai.com">modoc-ai.com</a> · <a href="https://www.fevercoach.us">FeverCoach</a> · <a href={b+"/llms.txt"}>llms.txt</a><br><span style="color:#9fc3dd">이 사이트는 정적 사이트(Astro)로 만들어 무료 호스팅에 올렸고, 모든 AI 크롤러에 열려 있습니다.</span></div>
 </div></footer>
