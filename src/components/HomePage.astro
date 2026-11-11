@@ -1,0 +1,307 @@
+---
+import Base from '../layouts/Base.astro';
+import { assetPath, getDict, pagePath, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const dict = getDict(locale);
+const h = dict.home;
+---
+<Base
+  locale={locale}
+  slug=""
+  title={h.metaTitle}
+  description={h.metaDescription}
+>
+  <!-- 1. 히어로 + 예시 리포트 쇼케이스 -->
+  <section class="hero-sec">
+    <div class="container hero-grid">
+      <div>
+        <h1>
+          {h.hero.titleLines.map((line, idx) => (
+            <>
+              {idx > 0 && <br />}
+              {line}
+            </>
+          ))}
+        </h1>
+        <p class="hero-lead">{h.hero.lead}</p>
+        <div class="btn-row">
+          <a class="btn-solid" href={pagePath(locale, 'contact')}>
+            {h.hero.primaryCta}
+          </a>
+          <a class="btn-tint" href={pagePath(locale, 'how')}>
+            {h.hero.secondaryCta}
+          </a>
+        </div>
+        <ul class="trust-list">
+          {h.hero.trustPoints.map((pt) => (
+            <li>{pt}</li>
+          ))}
+        </ul>
+      </div>
+
+      <figure class="mock-window" data-nosnippet aria-label={h.hero.mock.windowTag}>
+        <div class="mock-topbar">
+          <div class="mock-dots">
+            <i></i><i></i><i></i>
+            <span class="sample-pill">{h.hero.mock.sampleBadge}</span>
+          </div>
+          <span class="mock-tag">{h.hero.mock.windowTag}</span>
+        </div>
+
+        <div class="mock-qa">
+          <p class="mock-q">{h.hero.mock.questionLabel}</p>
+          <p class="mock-a">
+            {h.hero.mock.answerBeforeCite}
+            <span class="mock-cite">{h.hero.mock.citeBadge}</span>
+            {h.hero.mock.answerAfterCite}
+          </p>
+        </div>
+
+        <div class="mock-engines">
+          {h.hero.mock.engines.map((eng) => (
+            <div class="engine-chip">
+              <span>{eng.name}</span>
+              <span class={`status-badge ${eng.tone}`}>{eng.status}</span>
+            </div>
+          ))}
+        </div>
+        <figcaption class="mock-footnote">{h.hero.mock.footnote}</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 2. 네 조건 (무료 진단 기준) -->
+  <section class="sec-white reveal-on-scroll">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-eyebrow">{h.fourChecks.eyebrow}</span>
+        <h2>{h.fourChecks.heading}</h2>
+        <p>{h.fourChecks.lead}</p>
+      </div>
+
+      <div class="checks-grid">
+        {h.fourChecks.items.map((item) => (
+          <article class="check-card">
+            <span class="check-num">{item.num}</span>
+            <h3>{item.title}</h3>
+            <p class="check-summary">{item.summary}</p>
+            <p class="check-detail">{item.detail}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 딥 인디고 벤토 블록 (1 특대 + 2 대형) -->
+  <section class="dark-bento-sec reveal-on-scroll">
+    <div class="container">
+      <div class="dark-center-head">
+        <h2>
+          {h.bento.headingLines.map((line, idx) => (
+            <>
+              {idx > 0 && <><span class="mobile-space"> </span><br class="desktop-br" /></>}
+              {line}
+            </>
+          ))}
+        </h2>
+        <p>{h.bento.lead}</p>
+      </div>
+
+      <div class="bento-grid">
+        <article class="bento-card wide">
+          <div>
+            <span class="bento-chip purple">{h.bento.wide.chip}</span>
+            <h3>
+              {h.bento.wide.titleLines.map((line, idx) => (
+                <>
+                  {idx > 0 && <><span class="mobile-space"> </span><br class="desktop-br" /></>}
+                  {line}
+                </>
+              ))}
+            </h3>
+            <p class="bento-body">{h.bento.wide.body}</p>
+            <div class="btn-row">
+              <a class="btn-solid btn-sm" href={pagePath(locale, h.bento.wide.primaryBtn.slug)}>
+                {h.bento.wide.primaryBtn.label}
+              </a>
+              <a class="btn-tint btn-sm" href={pagePath(locale, h.bento.wide.secondaryBtn.slug)}>
+                {h.bento.wide.secondaryBtn.label}
+              </a>
+            </div>
+          </div>
+
+          <div class="flow-stack">
+            {h.bento.wide.steps.map((step) => (
+              <div class={`flow-row${step.isHuman ? ' is-human' : ''}`}>
+                <span>{step.label}</span>
+                <span class={`role-pill ${step.isHuman ? 'human' : 'auto'}`}>
+                  {step.role}
+                </span>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article class="bento-card">
+          <div>
+            <span class="bento-chip">{h.bento.left.chip}</span>
+            <h3>
+              {h.bento.left.titleLines.map((line, idx) => (
+                <>
+                  {idx > 0 && <><span class="mobile-space"> </span><br class="desktop-br" /></>}
+                  {line}
+                </>
+              ))}
+            </h3>
+            <p class="bento-body">{h.bento.left.body}</p>
+          </div>
+          <div class="bento-subbox">
+            {h.bento.left.rows.map((row) => (
+              <div class="compare-item">
+                <span class={`compare-label${row.highlight ? ' hl' : ''}`}>
+                  {row.label}
+                </span>
+                <span class={`compare-val${row.highlight ? ' hl' : ''}`}>
+                  {row.value}
+                </span>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article class="bento-card">
+          <div>
+            <span class="bento-chip">{h.bento.right.chip}</span>
+            <h3>
+              {h.bento.right.titleLines.map((line, idx) => (
+                <>
+                  {idx > 0 && <><span class="mobile-space"> </span><br class="desktop-br" /></>}
+                  {line}
+                </>
+              ))}
+            </h3>
+            <p class="bento-body">{h.bento.right.body}</p>
+          </div>
+          <div class="bento-subbox">
+            <div class="tag-cloud">
+              {h.bento.right.tags.map((tag) => (
+                <span>{tag}</span>
+              ))}
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- (영문 등 시장별 파일럿 요약 구역: /en/#pilots 북마크 호환) -->
+  {h.pilotsSection && (
+    <section class="sec-light reveal-on-scroll" id={h.pilotsSection.id}>
+      <div class="container">
+        <div class="sec-head">
+          <span class="sec-eyebrow purple">{h.pilotsSection.eyebrow}</span>
+          <h2>{h.pilotsSection.heading}</h2>
+          <p>{h.pilotsSection.lead}</p>
+        </div>
+
+        <div class="pilots-grid">
+          {h.pilotsSection.cards.map((card) => (
+            <article class="pilot-card">
+              <div>
+                <span class="pill">{card.badge}</span>
+                <h3>{card.title}</h3>
+                <div class="pilot-price">{card.price}</div>
+                <p class="pilot-period">{card.period}</p>
+                <ul class="pilot-points">
+                  {card.points.map((pt) => (
+                    <li>{pt}</li>
+                  ))}
+                </ul>
+                <p class="pilot-approval">{card.approvalNote}</p>
+              </div>
+              <p class="note" style="margin:0">{card.note}</p>
+            </article>
+          ))}
+        </div>
+
+        <p class="note" style="margin-top:20px">{h.pilotsSection.footnote}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- 4. FeverCoach 자사 선행 검증 / 배경 -->
+  <section class="sec-white reveal-on-scroll">
+    <div class="container">
+      <div class="proof-top">
+        <div class="sec-head" style="margin-bottom:0">
+          <span class="sec-eyebrow purple">{h.proof.eyebrow}</span>
+          <h2>
+            {h.proof.headingLines.map((line, idx) => (
+              <>
+                {idx > 0 && <br />}
+                {line}
+              </>
+            ))}
+          </h2>
+          <p>{h.proof.lead}</p>
+        </div>
+
+        <div class="brand-cluster">
+          <span class="fc-badge">
+            <img
+              src={assetPath('/images/fevercoach_Logo-without-background.png')}
+              alt="FeverCoach"
+              width="26"
+              height="26"
+            />
+            FeverCoach
+          </span>
+          <img
+            class="modoc-badge-img"
+            src={assetPath('/images/modoc-ai-logo-light.webp')}
+            alt="MoDoc AI"
+            height="26"
+          />
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        {h.proof.stats.map((st) => (
+          <div class="stat-card">
+            <div class="stat-label">{st.label}</div>
+            <div class="stat-value">
+              {st.before ?? ''}
+              <em>{st.value}</em>
+            </div>
+            <div class="stat-caption">{st.caption}</div>
+          </div>
+        ))}
+      </div>
+
+      <div class="proof-foot">
+        <span>{h.proof.disclaimer}</span>
+        <a class="proof-more" href={pagePath(locale, 'cases')}>
+          {h.proof.moreLabel}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 하단 무료 진단 배너 -->
+  <section class="bottom-banner-sec reveal-on-scroll">
+    <div class="container">
+      <div class="cta-banner">
+        <h2>{h.bottomCta.heading}</h2>
+        <p>{h.bottomCta.lead}</p>
+        <a class="btn-solid" href={pagePath(locale, 'contact')}>
+          {h.bottomCta.buttonLabel}
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

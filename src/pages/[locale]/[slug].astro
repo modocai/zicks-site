@@ -1,0 +1,25 @@
+---
+import SubpageBasic from '../../components/SubpageBasic.astro';
+import { NON_DEFAULT_LOCALES, type Locale, type PageSlug } from '../../i18n';
+
+export function getStaticPaths() {
+  const slugs: Array<Exclude<PageSlug, ''>> = [
+    'how',
+    'services',
+    'cases',
+    'pricing',
+    'contact',
+  ];
+  return NON_DEFAULT_LOCALES.flatMap((locale) =>
+    slugs.map((slug) => ({
+      params: { locale, slug },
+    }))
+  );
+}
+
+const { locale, slug } = Astro.params as {
+  locale: Locale;
+  slug: Exclude<PageSlug, ''>;
+};
+---
+<SubpageBasic locale={locale} slug={slug} />

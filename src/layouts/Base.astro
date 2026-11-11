@@ -1,50 +1,326 @@
 ---
 import '../styles/global.css';
-const b = import.meta.env.BASE_URL.replace(/\/$/, '');
-const { title, description, path = '/', jsonld = null } = Astro.props;
-const site = (Astro.site ?? new URL('https://zicks.modoc-ai.com')).href.replace(/\/$/, '');
-const url = site + b + path;
-const org = {
-  "@context": "https://schema.org", "@type": "Organization",
-  "name": "zicks by MoDoc AI", "alternateName": ["zicks", "모닥에이아이코리아"],
-  "url": site + b + "/", "logo": site + b + "/images/modoc-ai-logo-dark.webp",
-  "description": "AI native GEO · SEO 운영 엔진. 고객의 질문을 검수 · 서명된 글로 바꾸고 매주 AI 검색 답변을 측정합니다.",
-  "founder": { "@type": "Person", "name": "김명찬", "jobTitle": "대표 · 의사" },
-  "areaServed": ["KR", "US"], "sameAs": ["https://www.modoc-ai.com", "https://www.fevercoach.us"]
+import {
+  assetPath,
+  CONTACT_EMAIL,
+  DEFAULT_LOCALE,
+  getDict,
+  LOCALE_META,
+  LOCALES,
+  pageAbsUrl,
+  pagePath,
+  type Locale,
+  type PageSlug,
+} from '../i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  locale?: Locale;
+  slug?: PageSlug;
+  path?: string;
+  jsonld?: object | object[] | null;
+  extraSchema?: object | object[] | null;
+}
+
+const {
+  title,
+  description,
+  locale = DEFAULT_LOCALE,
+  slug,
+  jsonld = null,
+  extraSchema = null,
+} = Astro.props;
+
+function inferSlug(pathname: string): PageSlug {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+  let rel = base && pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
+  rel = rel.replace(/^\/+|\/+$/g, '');
+  const parts = rel ? rel.split('/') : [];
+  if (parts.length > 0 && (LOCALES as readonly string[]).includes(parts[0])) {
+    parts.shift();
+  }
+  const candidate = (parts[0] ?? '') as PageSlug;
+  const valid: readonly PageSlug[] = ['', 'how', 'services', 'cases', 'pricing', 'contact'];
+  return valid.includes(candidate) ? candidate : '';
+}
+
+const resolvedSlug: PageSlug = slug !== undefined ? slug : inferSlug(Astro.url.pathname);
+const dict = getDict(locale);
+const meta = LOCALE_META[locale];
+const siteOrigin = (Astro.site ?? new URL('https://zicks.modoc-ai.com')).toString().replace(/\/$/, '');
+const rootAbsUrl = pageAbsUrl(DEFAULT_LOCALE, '');
+const canonical = pageAbsUrl(locale, resolvedSlug);
+const ogImageUrl = `${siteOrigin}${assetPath('/images/modoc-ai-logo-dark.webp')}`;
+
+const founderObj: Record<string, string> = {
+  '@type': 'Person',
+  name: dict.orgSchema.founderName,
+  jobTitle: dict.orgSchema.founderJobTitle,
 };
-const service = {
-  "@context": "https://schema.org", "@type": "Service", "name": "zicks AI 검색 노출 · 콘텐츠 운영",
-  "provider": { "@type": "Organization", "name": "모닥에이아이코리아" },
-  "serviceType": "Generative Engine Optimization (GEO) · SEO 콘텐츠 운영 · 측정",
-  "areaServed": "KR", "url": site + b + "/services/"
+if (dict.orgSchema.founderHonorificSuffix) {
+  founderObj.honorificSuffix = dict.orgSchema.founderHonorificSuffix;
+}
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: dict.orgSchema.name,
+  alternateName: dict.orgSchema.alternateName,
+  url: pageAbsUrl(locale, ''),
+  logo: ogImageUrl,
+  description: dict.orgSchema.description,
+  email: CONTACT_EMAIL,
+  founder: founderObj,
+  areaServed: ['KR', 'US'],
+  sameAs: ['https://www.modoc-ai.com', 'https://www.fevercoach.us'],
 };
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: dict.serviceSchema.name,
+  provider: {
+    '@type': 'Organization',
+    name: dict.serviceSchema.providerName,
+  },
+  areaServed: meta.areaServed,
+  serviceType: dict.serviceSchema.serviceType,
+  url: pageAbsUrl(locale, 'services'),
+};
+
+const rawExtras = [jsonld, extraSchema].flatMap((item) => {
+  if (!item) return [];
+  return Array.isArray(item) ? item : [item];
+});
+const schemas = [orgSchema, serviceSchema, ...rawExtras];
 ---
 <!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{title}</title>
-<meta name="description" content={description}>
-<link rel="canonical" href={url}>
-<meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:url" content={url}><meta property="og:type" content="website"><meta property="og:image" content={site + b + '/images/modoc-ai-logo-dark.webp'}>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
-<link rel="icon" href={b+"/favicon.svg"} type="image/svg+xml">
-<script type="application/ld+json" set:html={JSON.stringify(org)}></script>
-<script type="application/ld+json" set:html={JSON.stringify(service)}></script>
-{jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)}></script>}
-</head>
-<body>
-<header class="site"><div class="wrap">
-  <a class="brand" href={b+"/"}>zicks<small>by MoDoc AI</small></a>
-  <nav class="main" aria-label="주 메뉴">
-    <a href={b+"/en/"} lang="en">English</a>
-    <a href={b+"/how/"}>어떻게 일하나</a><a href={b+"/services/"}>서비스</a><a href={b+"/cases/"}>사례</a><a href={b+"/pricing/"}>가격</a><a class="cta" href={b+"/contact/"}>무료 진단 요청</a>
-  </nav>
-</div></header>
-<main><slot /></main>
-<footer class="site"><div class="wrap">
-  <a href={b+"/en/"} lang="en">English · Content services</a>
-  <div><b style="color:#fff">zicks</b> · 모닥에이아이코리아 (MoDoc AI)<br>AI native GEO · SEO 운영 엔진<br><span style="color:#9fc3dd">AI 추천 순위 · 검색 순위 · 매출 증가는 보장하지 않습니다. 보고하는 것은 「인용되었는가」와 「인용될 조건이 갖춰졌는가」입니다.</span></div>
-  <div><a href={b+"/contact/"}>문의</a> · <a href="https://www.modoc-ai.com">modoc-ai.com</a> · <a href="https://www.fevercoach.us">FeverCoach</a> · <a href={b+"/llms.txt"}>llms.txt</a><br><span style="color:#9fc3dd">이 사이트는 정적 사이트(Astro)로 만들어 무료 호스팅에 올렸고, 모든 AI 크롤러에 열려 있습니다.</span></div>
-</div></footer>
-</body></html>
+<html lang={meta.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {LOCALES.map((loc) => (
+      <link
+        rel="alternate"
+        hreflang={LOCALE_META[loc].htmlLang}
+        href={pageAbsUrl(loc, resolvedSlug)}
+      />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={pageAbsUrl(DEFAULT_LOCALE, resolvedSlug)} />
+    <link rel="icon" href={assetPath('/favicon.svg')} type="image/svg+xml" />
+    <link
+      rel="stylesheet"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="zicks · MoDoc AI" />
+    <meta property="og:locale" content={meta.ogLocale} />
+    {LOCALES.filter((l) => l !== locale).map((alt) => (
+      <meta property="og:locale:alternate" content={LOCALE_META[alt].ogLocale} />
+    ))}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary" />
+    {schemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-row">
+        <a class="brand-link" href={pagePath(locale, '')}>
+          zicks <small>{dict.brandSub}</small>
+        </a>
+
+        <div class="desktop-nav">
+          <nav class="nav-links" aria-label={dict.aria.primaryNav}>
+            {dict.nav.map((item) => (
+              <a
+                href={pagePath(locale, item.slug)}
+                aria-current={resolvedSlug === item.slug ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div class="header-actions">
+            <div class="lang-switch" role="group" aria-label={dict.aria.langSwitcher}>
+              {LOCALES.map((loc) => (
+                <a
+                  href={pagePath(loc, resolvedSlug)}
+                  class={loc === locale ? 'active' : undefined}
+                  aria-current={loc === locale ? 'true' : undefined}
+                  lang={LOCALE_META[loc].htmlLang}
+                  hreflang={LOCALE_META[loc].htmlLang}
+                >
+                  {LOCALE_META[loc].shortLabel}
+                </a>
+              ))}
+            </div>
+            <a class="header-cta" href={pagePath(locale, 'contact')}>
+              {dict.ctaLabel}
+            </a>
+          </div>
+        </div>
+
+        <div class="mobile-actions">
+          <a class="header-cta" href={pagePath(locale, 'contact')}>
+            {dict.ctaLabel}
+          </a>
+          <button
+            type="button"
+            class="menu-toggle"
+            id="menu-toggle-btn"
+            aria-expanded="false"
+            aria-controls="mobile-drawer"
+            aria-label={dict.aria.openMenu}
+            data-open-label={dict.aria.openMenu}
+            data-close-label={dict.aria.closeMenu}
+          >
+            <svg id="icon-open" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+              <line x1="4" y1="7" x2="20" y2="7" />
+              <line x1="4" y1="12" x2="20" y2="12" />
+              <line x1="4" y1="17" x2="20" y2="17" />
+            </svg>
+            <svg id="icon-close" aria-hidden="true" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="18" y1="6" x2="6" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-drawer" id="mobile-drawer">
+        <nav class="mobile-nav-list" aria-label={dict.aria.mobileNav}>
+          {dict.nav.map((item) => (
+            <a
+              href={pagePath(locale, item.slug)}
+              aria-current={resolvedSlug === item.slug ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        <div class="mobile-lang-row">
+          <span>{dict.aria.langSwitcher}</span>
+          <div class="lang-switch" role="group" aria-label={dict.aria.langSwitcher}>
+            {LOCALES.map((loc) => (
+              <a
+                href={pagePath(loc, resolvedSlug)}
+                class={loc === locale ? 'active' : undefined}
+                aria-current={loc === locale ? 'true' : undefined}
+                lang={LOCALE_META[loc].htmlLang}
+                hreflang={LOCALE_META[loc].htmlLang}
+              >
+                {LOCALE_META[loc].nativeLabel}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-top">
+          <div>
+            <div class="footer-brand">zicks</div>
+            <div>{dict.footer.companyLine} · {dict.footer.tagline}</div>
+            {dict.footer.addressLine && <div>{dict.footer.addressLine}</div>}
+          </div>
+          <nav class="footer-nav" aria-label={dict.aria.footerNav}>
+            {dict.nav.map((item) => (
+              <a href={pagePath(locale, item.slug)}>{item.label}</a>
+            ))}
+            <a href={pagePath(locale, 'contact')}>{dict.ctaLabel}</a>
+          </nav>
+        </div>
+
+        <div class="footer-bottom">
+          <div>
+            {dict.footer.disclaimer}<br />
+            {dict.footer.openWebNote}
+          </div>
+          <div class="footer-links-right">
+            {dict.footer.contactLabel}: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a><br />
+            <a href="https://www.modoc-ai.com" rel="noopener">modoc-ai.com</a> ·{' '}
+            <a href="https://www.fevercoach.us" rel="noopener">FeverCoach</a> ·{' '}
+            <a href={assetPath('/llms.txt')}>llms.txt</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script is:inline>
+      (() => {
+        const btn = document.getElementById('menu-toggle-btn');
+        const drawer = document.getElementById('mobile-drawer');
+        const openIcon = document.getElementById('icon-open');
+        const closeIcon = document.getElementById('icon-close');
+        if (btn && drawer) {
+          const setOpen = (open) => {
+            drawer.classList.toggle('is-open', open);
+            btn.setAttribute('aria-expanded', String(open));
+            btn.setAttribute(
+              'aria-label',
+              open ? btn.dataset.closeLabel || 'Close' : btn.dataset.openLabel || 'Menu'
+            );
+            if (openIcon && closeIcon) {
+              openIcon.style.display = open ? 'none' : 'block';
+              closeIcon.style.display = open ? 'block' : 'none';
+            }
+          };
+
+          btn.addEventListener('click', () => {
+            setOpen(!drawer.classList.contains('is-open'));
+          });
+
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+              setOpen(false);
+              btn.focus();
+            }
+          });
+        }
+
+        if (
+          'IntersectionObserver' in window &&
+          window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+        ) {
+          const targets = document.querySelectorAll('.reveal-on-scroll');
+          const vh = window.innerHeight || 800;
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+                  io.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.08 }
+          );
+          targets.forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top > vh * 0.95) {
+              el.classList.add('will-reveal');
+              io.observe(el);
+            }
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
