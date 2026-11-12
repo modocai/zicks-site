@@ -175,7 +175,7 @@ export const ko: LocaleDict = {
           label: '외부에서 링크하는 도메인',
           before: '160 → ',
           value: '631',
-          caption: '약 4개월 · Ahrefs',
+          caption: '약 4개월 · 외부 링크 분석 도구',
         },
       ],
       disclaimer:
@@ -532,52 +532,150 @@ export const ko: LocaleDict = {
     },
   },
 
-  subpages: {
-    cases: {
-      metaTitle: '사례 · zicks',
-      metaDescription: 'FeverCoach 블로그 11주 성과와 zicks 자체 사이트 운영 기록. 고객사 사례는 서면 동의 뒤에만 공개합니다.',
-      eyebrow: '검증 사례',
-      h1: 'FeverCoach — 자사 소아 발열 앱',
-      lead: '의사가 검수한 답변 2,400개 이상을 재료로 영어 · 스페인어 · 한국어 블로그를 자동 발행하고, 매주 Google Search Console로 측정했습니다. zicks의 첫 번째 사용자입니다.',
-      cards: [
+  /* ====== 구간 3: 사례 (/ko/cases/) ====== */
+  cases: {
+    metaTitle: '사례 · zicks',
+    metaDescription:
+      'FeverCoach 블로그 11주 성과와 zicks 자체 사이트 운영 기록. 고객사 사례는 서면 동의 뒤에만 공개합니다.',
+    header: {
+      eyebrow: '선행 검증 · 자체 운영',
+      h1Lines: ['우리 제품으로 먼저 해 보고,', '이 사이트도 같은 방식으로 운영합니다'],
+      lead: '의사가 검수한 답변 2,400개 이상을 재료로 영어 · 스페인어 · 한국어 블로그를 발행하고 매주 Google Search Console로 측정했습니다. FeverCoach는 zicks의 첫 번째 사용자입니다.',
+    },
+    fevercoach: {
+      badge: '자사 제품에 먼저 적용',
+      heading: 'FeverCoach — 자사 소아 발열 앱',
+      lead: '의사가 검수한 질문 · 답변 원고를 다국어 블로그로 발행하면서 색인 규모, 검색 유입, 구글 생성형 AI 노출, 외부 참조 도메인 변화를 날짜별 원장으로 기록했습니다.',
+      stats: [
         {
-          badge: '검색 클릭 (11주)',
-          title: '460 → 2,910',
-          body: 'Google Search Console 기준. 같은 11주 동안 구글에 등록된 페이지는 318 → 2,096으로 늘었습니다.',
+          label: '검색 클릭 (11주)',
+          before: '460 → ',
+          value: '2,910',
+          caption: 'Google Search Console · 3개 언어 합산',
         },
         {
-          badge: '구글 생성형 AI 노출 (3개월)',
-          title: '98.1K',
-          body: '일간 약 300 → 3,500 노출 (Google Search Console).',
+          label: '구글에 등록된 페이지 (11주)',
+          before: '318 → ',
+          value: '2,096',
+          caption: 'Google Search Console',
         },
         {
-          badge: '외부에서 링크하는 도메인',
-          title: '160 → 631',
-          body: '약 4개월 동안 외부 링크 도메인 변화 (Ahrefs).',
+          label: '구글 생성형 AI 노출 (3개월)',
+          value: '98.1K',
+          caption: '일간 약 300 → 3,500 · Google Search Console',
+        },
+        {
+          label: '참조 도메인 (4개월)',
+          before: '160 → ',
+          value: '631',
+          caption: '외부에서 링크하는 도메인 · 외부 링크 분석 도구',
         },
       ],
-      note: '측정 기간 2026-06 → 2026-10. 다른 업종 · 사이트의 결과를 보장하지 않습니다. 고객사 사례는 서면 동의 뒤에만 공개합니다.',
-      nextLink: { label: '가격 보기 →', slug: 'pricing' },
+      ledgerNote:
+        '측정 기간 2026-06 → 2026-10. 자사 제품(FeverCoach)의 기록이며 다른 업종 · 사이트의 결과를 보장하지 않습니다. 개입(바꾼 것)과 측정값은 날짜별 원장으로 기록해 두었고, 요청하시면 보여 드립니다.',
     },
-    contact: {
-      metaTitle: '무료 진단 요청 · zicks',
-      metaDescription: '홈페이지 주소와 물어봤던 질문 한두 개를 보내 주시면 3영업일 안에 한 장 진단을 드립니다.',
-      eyebrow: '무료 진단 요청',
-      h1: '홈페이지 무료 진단 요청',
-      lead: '홈페이지 주소와 AI에게 물어봤던 질문 한두 개만 보내 주세요. 크롤러 접근 · 색인 · 회사 정보 코드 · 실제 AI 답변을 재서 3영업일 안에 한 장으로 회신합니다.',
-      cards: [
+    thisSite: {
+      eyebrow: '자체 적용 현황',
+      heading: 'zicks — 이 사이트도 같은 원칙으로 만들었습니다',
+      lead: '정적 사이트 생성기(Astro)로 만들어 무료 호스팅에 올렸고, 모든 주요 AI 크롤러에 열어 두었습니다. 회사 정보 코드 · 사이트맵 · llms.txt가 실제로 들어가 있습니다.',
+      checks: [
         {
-          badge: '이메일 문의',
-          title: 'admin@modoc-ai.com',
-          body: '모닥에이아이코리아 대표 김명찬이 직접 보고 답합니다. 영업 전화는 하지 않습니다.',
+          num: '01',
+          title: '읽을 수 있는가',
+          body: 'robots.txt에서 GPTBot · ClaudeBot · PerplexityBot 등 주요 검색 · AI 크롤러를 전부 허용했습니다. 서버를 거치지 않는 정적 HTML이라 응답이 빠릅니다.',
+          assetLink: {
+            label: 'robots.txt 직접 보기 ↗',
+            relPath: '/robots.txt',
+          },
         },
         {
-          badge: '보내 주실 것',
-          title: '홈페이지 주소 + 질문 1~2개',
-          body: '회사명 · 홈페이지 주소, 고객이 자주 묻는 질문 1~2개, 회신받을 메일 주소를 적어 보내 주세요.',
+          num: '02',
+          title: '무엇을 하는 회사인가',
+          body: 'Organization · Service 구조화 코드는 모든 페이지에, FAQ 코드는 「어떻게 일하나」 페이지에 넣었습니다. llms.txt로 AI에게 한 번에 설명합니다.',
+          assetLink: {
+            label: 'llms.txt 직접 보기 ↗',
+            relPath: '/llms.txt',
+          },
+        },
+        {
+          num: '03',
+          title: '측정',
+          body: '질문 세트를 매주 ChatGPT · Claude · Gemini · Perplexity에 묻고 언급 여부를 기록합니다. 첫 측정은 개편 사이트 공개 주에 하며, 기록이 쌓이는 대로 이 페이지에 공개합니다.',
         },
       ],
-      note: '진단 결과만 받아 보시고 계약을 진행하지 않으셔도 됩니다.',
     },
+    clientPolicy: {
+      badge: '고객사 사례 공개 원칙',
+      heading: '고객사 기록은 서면 동의 뒤에만 공개합니다',
+      body: '진행 중인 고객사의 질문 목록과 측정 기록은 고객사 자산이므로 임의로 외부에 올리지 않습니다. 타사 사례 대신 무료 진단으로 지금 귀사 홈페이지가 AI에게 어떻게 보이는지 먼저 확인해 보세요.',
+      ctaLabel: '무료 진단 요청',
+      secondaryLabel: '가격 보기 →',
+      secondarySlug: 'pricing',
+    },
+  },
+
+  /* ====== 구간 3: 무료 진단 요청 (/ko/contact/) ====== */
+  contact: {
+    metaTitle: '무료 진단 요청 · zicks',
+    metaDescription:
+      '홈페이지 주소만 보내 주시면 크롤러 접근 · 색인 · 회사 정보 코드 · 설명문을 같은 도구로 재서 3영업일 안에 한 장으로 드립니다.',
+    header: {
+      eyebrow: '무료 1장 진단',
+      h1Lines: ['홈페이지 주소와 질문 한두 개로', '현재 AI 노출 상태를 먼저 확인하세요'],
+      lead: '홈페이지 주소와 AI에게 물어봤던 질문 한두 개만 보내 주세요. 크롤러 접근 · 색인 · 회사 정보 코드 · 설명문을 재서 한 장으로 드리고, AI가 지금 귀사를 어떻게 설명하는지 답변 원문을 함께 보냅니다. 3영업일 안에 회신합니다.',
+    },
+    actionCard: {
+      badge: '이메일로 바로 요청',
+      emailLabel: '문의 이메일',
+      composeBtn: '메일 앱 열기 (양식 자동 채움)',
+      copyBtn: '이메일 주소 복사',
+      copiedBtn: '✓ 복사되었습니다',
+      templateTitle: '웹메일 사용 시 아래 세 줄만 적어 보내 주세요',
+      templateItems: [
+        '회사명 · 홈페이지 주소',
+        'AI에게 물어봤던 질문 (또는 고객이 자주 묻는 질문 1~2개)',
+        '회신받을 담당자 성함 · 연락처',
+      ],
+      reviewerBadge: '담당자 직접 확인',
+      reviewerTitle: '김명찬 대표 (의사 · 창업자)가 직접 봅니다',
+      reviewerBody: '모닥에이아이코리아 · MoDoc AI. 진단 결과만 받아 보시고 계약을 진행하지 않으셔도 됩니다.',
+    },
+    auditMock: {
+      sampleBadge: '구성 안내',
+      windowTag: '3영업일 내 회신되는 1장 진단서',
+      title: '무료 진단 한 장에 담기는 네 가지',
+      rows: [
+        {
+          num: '01',
+          title: '크롤러 접근 · 색인 상태',
+          detail: 'robots.txt · 사이트맵 · 주요 검색 및 AI 봇 차단 여부 확인',
+          status: '기술 점검',
+        },
+        {
+          num: '02',
+          title: '회사 · 서비스 정의 코드',
+          detail: '페이지 제목 · 설명문 · Organization/Service JSON-LD 유무 확인',
+          status: '구조 점검',
+        },
+        {
+          num: '03',
+          title: '현재 AI 답변 원문 첨부',
+          detail: 'AI가 지금 귀사와 보내 주신 질문을 어떻게 설명하는지 답변 원문을 함께 전달',
+          status: '원문 첨부',
+        },
+        {
+          num: '04',
+          title: '바로 고칠 수 있는 우선순위',
+          detail: '현재 홈페이지에서 먼저 보완할 수 있는 항목 정리',
+          status: '요약 안내',
+        },
+      ],
+      footnote: '홈페이지 주소와 물어봤던 질문 한두 개를 보내 주시면 위 항목을 한 장으로 보내 드립니다.',
+    },
+    reassurance: [
+      '3영업일 안에 회신합니다',
+      '진단 결과만 받아 보셔도 됩니다',
+      '순위 · 매출 증가는 보장하지 않습니다',
+    ],
   },
 };

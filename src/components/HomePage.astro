@@ -47,7 +47,9 @@ const h = dict.home;
       <figure class="mock-window" data-nosnippet aria-label={h.hero.mock.windowTag}>
         <div class="mock-topbar">
           <div class="mock-dots">
-            <i></i><i></i><i></i>
+            <span class="dots-decor" aria-hidden="true">
+              <i></i><i></i><i></i>
+            </span>
             <span class="sample-pill">{h.hero.mock.sampleBadge}</span>
           </div>
           <span class="mock-tag">{h.hero.mock.windowTag}</span>
@@ -243,7 +245,7 @@ const h = dict.home;
           <h2>
             {h.proof.headingLines.map((line, idx) => (
               <>
-                {idx > 0 && <br />}
+                {idx > 0 && <>{' '}<br class="desktop-br" /></>}
                 {line}
               </>
             ))}

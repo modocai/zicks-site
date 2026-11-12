@@ -1,8 +1,9 @@
 ---
+import CasesPage from '../../components/CasesPage.astro';
+import ContactPage from '../../components/ContactPage.astro';
 import HowPage from '../../components/HowPage.astro';
 import PricingPage from '../../components/PricingPage.astro';
 import ServicesPage from '../../components/ServicesPage.astro';
-import SubpageBasic from '../../components/SubpageBasic.astro';
 import { NON_DEFAULT_LOCALES, type Locale, type PageSlug } from '../../i18n';
 
 export function getStaticPaths() {
@@ -29,8 +30,10 @@ const { locale, slug } = Astro.params as {
   <HowPage locale={locale} />
 ) : slug === 'services' ? (
   <ServicesPage locale={locale} />
+) : slug === 'cases' ? (
+  <CasesPage locale={locale} />
 ) : slug === 'pricing' ? (
   <PricingPage locale={locale} />
 ) : (
-  <SubpageBasic locale={locale} slug={slug} />
+  <ContactPage locale={locale} />
 )}

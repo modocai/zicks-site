@@ -292,15 +292,78 @@ export interface PricingContent {
   };
 }
 
-export interface SubpagePlaceholder {
+export interface CasesContent {
   metaTitle: string;
   metaDescription: string;
-  eyebrow: string;
-  h1: string;
-  lead: string;
-  cards: Array<{ badge?: string; title: string; body: string; meta?: string }>;
-  note?: string;
-  nextLink?: { label: string; slug: PageSlug };
+  header: {
+    eyebrow: string;
+    h1Lines: string[];
+    lead: string;
+  };
+  fevercoach: {
+    badge: string;
+    heading: string;
+    lead: string;
+    stats: StatItem[];
+    ledgerNote: string;
+  };
+  thisSite: {
+    eyebrow: string;
+    heading: string;
+    lead: string;
+    checks: Array<{
+      num: string;
+      title: string;
+      body: string;
+      assetLink?: {
+        label: string;
+        relPath: string;
+      };
+    }>;
+  };
+  clientPolicy: {
+    badge: string;
+    heading: string;
+    body: string;
+    ctaLabel: string;
+    secondaryLabel: string;
+    secondarySlug: PageSlug;
+  };
+}
+
+export interface ContactContent {
+  metaTitle: string;
+  metaDescription: string;
+  header: {
+    eyebrow: string;
+    h1Lines: string[];
+    lead: string;
+  };
+  actionCard: {
+    badge: string;
+    emailLabel: string;
+    composeBtn: string;
+    copyBtn: string;
+    copiedBtn: string;
+    templateTitle: string;
+    templateItems: string[];
+    reviewerBadge: string;
+    reviewerTitle: string;
+    reviewerBody: string;
+  };
+  auditMock: {
+    sampleBadge: string;
+    windowTag: string;
+    title: string;
+    rows: Array<{
+      num: string;
+      title: string;
+      detail: string;
+      status: string;
+    }>;
+    footnote: string;
+  };
+  reassurance: string[];
 }
 
 export interface LocaleDict {
@@ -345,5 +408,6 @@ export interface LocaleDict {
   how: HowContent;
   services: ServicesContent;
   pricing: PricingContent;
-  subpages?: Partial<Record<Exclude<PageSlug, ''>, SubpagePlaceholder>>;
+  cases: CasesContent;
+  contact: ContactContent;
 }

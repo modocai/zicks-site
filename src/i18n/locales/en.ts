@@ -555,52 +555,143 @@ export const en: LocaleDict = {
     },
   },
 
-  subpages: {
-    cases: {
-      metaTitle: 'Background · zicks',
-      metaDescription: 'Built by MoDoc AI, the healthcare software team operating FeverCoach.',
+  /* ====== Phase 3: Background (/cases/) ====== */
+  cases: {
+    metaTitle: 'Background · zicks',
+    metaDescription:
+      'Built by MoDoc AI, the healthcare software team operating FeverCoach. Open static website architecture and client confidentiality policy.',
+    header: {
       eyebrow: 'Background',
-      h1: 'Built by a healthcare software team',
+      h1Lines: ['Built by a healthcare software team', 'operating its own product'],
       lead: 'MoDoc AI operates FeverCoach and is developing zicks. Myeongchan (MC) Kim, MD, is our founder. These pilots are scoped services delivered with tools and human review.',
-      cards: [
+    },
+    fevercoach: {
+      badge: 'In-house product & operations',
+      heading: 'FeverCoach — operated by MoDoc AI',
+      lead: 'Before offering content services to clinics and healthcare software teams, we built structured drafting and physician-review workflows for our own multilingual pediatric fever app.',
+      stats: [
         {
-          badge: 'In-house operations',
-          title: 'FeverCoach',
-          body: 'MoDoc AI builds and operates FeverCoach (fevercoach.us), developing structured workflows for recurring health questions and human review.',
+          label: 'Founder background',
+          value: 'MD-founded',
+          caption: 'Myeongchan (MC) Kim, MD · Founder of MoDoc AI, Inc.',
         },
         {
-          badge: 'Open static architecture',
-          title: 'zicks website',
-          body: 'Built as a fast static site with open crawler rules, structured Organization and Service metadata, and clear scope boundaries.',
+          label: 'FeverCoach',
+          value: 'Built by physicians',
+          caption: 'FeverCoach (fevercoach.us) operated in-house by MoDoc AI',
         },
         {
-          badge: 'Client work',
-          title: 'Shared only with permission',
-          body: 'FeverCoach is our own product. Its use here is not a client endorsement or a promise of results for your organization.',
+          label: 'FeverCoach Q&A corpus',
+          value: '2,400+',
+          caption: '2,400+ physician-reviewed answers in our in-house corpus',
         },
       ],
-      note: 'Client case studies are published only with written consent.',
-      nextLink: { label: 'View pricing →', slug: 'pricing' },
+      ledgerNote:
+        'FeverCoach is our own product. Its use here is not a client endorsement or a promise of results for your organization.',
     },
-    contact: {
-      metaTitle: 'Request a free audit · zicks',
-      metaDescription: 'Email your website and one recurring question or workflow to request a free visibility audit or discuss a pilot.',
-      eyebrow: 'Contact',
-      h1: 'What does your team keep explaining?',
-      lead: 'Email your website, one question or workflow, and who would review the work. MC will use that to discuss fit, a free visibility check, or pilot scope. Please leave out patient information.',
-      cards: [
+    thisSite: {
+      eyebrow: 'Open web architecture',
+      heading: 'zicks — how this website is structured',
+      lead: 'We apply the same technical basics to our own website: fast static HTML, open crawler permissions, and structured machine-readable definitions.',
+      checks: [
         {
-          badge: 'Email',
-          title: 'admin@modoc-ai.com',
-          body: 'Send your website URL and one or two questions patients or buyers ask. Please do not include any patient information.',
+          num: '01',
+          title: 'Open crawler access',
+          body: 'Built as static HTML (Astro) with open rules in robots.txt for Googlebot, GPTBot, ClaudeBot, and PerplexityBot.',
+          assetLink: {
+            label: 'View robots.txt ↗',
+            relPath: '/robots.txt',
+          },
         },
         {
-          badge: 'Free baseline check',
-          title: 'Website & AI visibility snapshot',
-          body: 'We check crawler access, page metadata, and how ChatGPT, Claude, Gemini, and Perplexity currently read your site.',
+          num: '02',
+          title: 'Structured organization & service data',
+          body: 'Every page includes Organization and Service JSON-LD (plus FAQPage schema on How it works), paired with a concise llms.txt summary.',
+          assetLink: {
+            label: 'View llms.txt ↗',
+            relPath: '/llms.txt',
+          },
+        },
+        {
+          num: '03',
+          title: 'Clear scope & disclaimers',
+          body: 'Deliverables, reviewer responsibilities, and non-guaranteed outcomes are stated upfront in plain text.',
         },
       ],
-      note: 'Search rankings, AI citations, leads, and revenue are not guaranteed.',
     },
+    clientPolicy: {
+      badge: 'Client confidentiality',
+      heading: 'Client work is shared only with written permission',
+      body: 'We do not publish client names, topics, or reports without explicit written consent. Instead of case studies, request a free visibility audit to see how your own website reads today.',
+      ctaLabel: 'Request a free audit',
+      secondaryLabel: 'View pricing →',
+      secondarySlug: 'pricing',
+    },
+  },
+
+  /* ====== Phase 3: Contact (/contact/) ====== */
+  contact: {
+    metaTitle: 'Request a free audit · zicks',
+    metaDescription:
+      'Email your website and one recurring question or workflow to request a free visibility audit or discuss a scoped content pilot.',
+    header: {
+      eyebrow: 'Free visibility audit & pilot inquiry',
+      h1Lines: ['What does your team', 'keep explaining?'],
+      lead: 'Email your website, one question or workflow, and who would review the work. MC will use that to discuss fit, a free visibility audit, or pilot scope. Please leave out patient information.',
+    },
+    actionCard: {
+      badge: 'Direct email',
+      emailLabel: 'Contact email',
+      composeBtn: 'Open email draft (pre-filled)',
+      copyBtn: 'Copy email address',
+      copiedBtn: '✓ Copied',
+      templateTitle: 'Using webmail? Include these four lines',
+      templateItems: [
+        'Company and website URL',
+        'Free visibility audit, clinic content pilot, or software content pilot',
+        'One recurring question or product workflow to explain',
+        'Who on your team would review and publish the work',
+      ],
+      reviewerBadge: 'Founder contact',
+      reviewerTitle: 'Myeongchan (MC) Kim, MD · Founder',
+      reviewerBody: 'zicks by MoDoc AI, Inc. (163 Highland Ave #1015, Needham, MA 02494). Please leave out patient information.',
+    },
+    auditMock: {
+      sampleBadge: 'Overview',
+      windowTag: '1-page free visibility audit',
+      title: 'What we inspect in a free visibility audit',
+      rows: [
+        {
+          num: '01',
+          title: 'Crawler & indexing access',
+          detail: 'Check robots.txt, sitemap, and whether major search or AI bots are blocked',
+          status: 'Technical check',
+        },
+        {
+          num: '02',
+          title: 'Organization & page metadata',
+          detail: 'Inspect page titles, descriptions, and structured JSON-LD definitions',
+          status: 'Schema check',
+        },
+        {
+          num: '03',
+          title: 'Current AI search snapshot',
+          detail: `Check how ${enginesText} currently answer a sample question about your space`,
+          status: 'Snapshot',
+        },
+        {
+          num: '04',
+          title: 'Practical next steps',
+          detail: 'Outline clear fixes or whether a focused clinic or software pilot fits',
+          status: 'Summary',
+        },
+      ],
+      footnote: 'Send your website URL and one recurring question to receive this one-page summary.',
+    },
+    reassurance: [
+      'Scope agreed before paid work begins',
+      'No automatic renewal on pilots',
+      'Rankings, citations, and revenue are not guaranteed',
+    ],
   },
 };

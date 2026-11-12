@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+import { assetPath, getDict, pagePath, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const dict = getDict(locale);
+const c = dict.cases;
+---
+<Base
+  locale={locale}
+  slug="cases"
+  title={c.metaTitle}
+  description={c.metaDescription}
+>
+  <!-- 상단 머리말 -->
+  <section class="sub-hero">
+    <div class="container">
+      <span class="sec-eyebrow">{c.header.eyebrow}</span>
+      <h1>
+        {c.header.h1Lines.map((line, idx) => (
+          <>
+            {idx > 0 && <>{' '}<br class="desktop-br" /></>}
+            {line}
+          </>
+        ))}
+      </h1>
+      <p class="sub-lead">{c.header.lead}</p>
+    </div>
+  </section>
+
+  <!-- 1. FeverCoach 선행 검증 / 배경 지표 -->
+  <section class="sec-white">
+    <div class="container">
+      <div class="proof-top">
+        <div class="sec-head" style="margin-bottom:0">
+          <span class="sec-eyebrow purple">{c.fevercoach.badge}</span>
+          <h2>{c.fevercoach.heading}</h2>
+          <p>{c.fevercoach.lead}</p>
+        </div>
+
+        <div class="brand-cluster">
+          <a
+            class="fc-badge"
+            style="text-decoration:none"
+            href="https://www.fevercoach.us"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src={assetPath('/images/fevercoach_Logo-without-background.png')}
+              alt="FeverCoach"
+              width="26"
+              height="26"
+              loading="lazy"
+            />
+            FeverCoach
+          </a>
+          <a href="https://www.modoc-ai.com" target="_blank" rel="noopener">
+            <img
+              class="modoc-badge-img"
+              src={assetPath('/images/modoc-ai-logo-light.webp')}
+              alt="MoDoc AI"
+              height="26"
+              loading="lazy"
+            />
+          </a>
+        </div>
+      </div>
+
+      <div class={c.fevercoach.stats.length === 3 ? 'stats-grid' : 'cases-stats-grid'}>
+        {c.fevercoach.stats.map((st) => (
+          <div class="stat-card">
+            <div class="stat-label">{st.label}</div>
+            <div class="stat-value">
+              {st.before ?? ''}
+              <em>{st.value}</em>
+            </div>
+            <div class="stat-caption">{st.caption}</div>
+          </div>
+        ))}
+      </div>
+
+      <div class="ledger-callout">
+        <p>{c.fevercoach.ledgerNote}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. zicks 자체 사이트 적용 체크카드 -->
+  <section class="sec-light reveal-on-scroll">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-eyebrow">{c.thisSite.eyebrow}</span>
+        <h2>{c.thisSite.heading}</h2>
+        <p>{c.thisSite.lead}</p>
+      </div>
+
+      <div class="offers-grid">
+        {c.thisSite.checks.map((chk) => (
+          <article class="offer-card">
+            <div>
+              <span class="check-num">{chk.num}</span>
+              <h3>{chk.title}</h3>
+              <p class="offer-summary" style="margin-bottom:0">{chk.body}</p>
+            </div>
+            {chk.assetLink && (
+              <div style="margin-top:20px">
+                <a class="asset-chip-link" href={assetPath(chk.assetLink.relPath)}>
+                  {chk.assetLink.label}
+                </a>
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 고객사 공개 원칙 & 하단 전환 배너 -->
+  <section class="bottom-banner-sec reveal-on-scroll" style="padding-top:72px">
+    <div class="container">
+      <div class="cta-banner">
+        <span class="bento-chip" style="background:rgba(255,255,255,0.14);color:#fff;margin-bottom:14px">
+          {c.clientPolicy.badge}
+        </span>
+        <h2>{c.clientPolicy.heading}</h2>
+        <p>{c.clientPolicy.body}</p>
+        <div class="banner-btns">
+          <a class="btn-solid" href={pagePath(locale, 'contact')}>
+            {c.clientPolicy.ctaLabel}
+          </a>
+          <a class="btn-on-dark" href={pagePath(locale, c.clientPolicy.secondarySlug)}>
+            {c.clientPolicy.secondaryLabel}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
