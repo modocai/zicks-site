@@ -53,7 +53,7 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
             <a class="email-address-text" href={mailtoHref}>{CONTACT_EMAIL}</a>
           </div>
 
-          <div class="btn-row" style="margin-bottom:26px">
+          <div class="btn-row">
             <a class="btn-solid" href={mailtoHref}>
               {c.actionCard.composeBtn}
             </a>
@@ -82,7 +82,7 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
 
           <!-- 담당자 실명 확인 카드 -->
           <div class="reviewer-card">
-            <span class="bento-chip purple" style="margin-bottom:8px">
+            <span class="bento-chip purple">
               {c.actionCard.reviewerBadge}
             </span>
             <h2 class="contact-reviewer-head">{c.actionCard.reviewerTitle}</h2>
@@ -97,7 +97,7 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
               <span class="dots-decor" aria-hidden="true">
                 <i></i><i></i><i></i>
               </span>
-              <span class="sample-pill" style="background:var(--bg-white)">
+              <span class="sample-pill">
                 {c.auditMock.sampleBadge}
               </span>
             </div>

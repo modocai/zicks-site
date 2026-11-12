@@ -36,7 +36,7 @@ const c = dict.cases;
   <section class="sec-white">
     <div class="container">
       <div class="proof-top">
-        <div class="sec-head" style="margin-bottom:0">
+        <div class="sec-head">
           <span class="sec-eyebrow purple">{c.fevercoach.badge}</span>
           <h2>{c.fevercoach.heading}</h2>
           <p>{c.fevercoach.lead}</p>
@@ -45,7 +45,6 @@ const c = dict.cases;
         <div class="brand-cluster">
           <a
             class="fc-badge"
-            style="text-decoration:none"
             href="https://www.fevercoach.us"
             target="_blank"
             rel="noopener"
@@ -105,10 +104,10 @@ const c = dict.cases;
             <div>
               <span class="check-num">{chk.num}</span>
               <h3>{chk.title}</h3>
-              <p class="offer-summary" style="margin-bottom:0">{chk.body}</p>
+              <p class="offer-summary">{chk.body}</p>
             </div>
             {chk.assetLink && (
-              <div style="margin-top:20px">
+              <div class="asset-link-wrap">
                 <a class="asset-chip-link" href={assetPath(chk.assetLink.relPath)}>
                   {chk.assetLink.label}
                 </a>
@@ -121,10 +120,10 @@ const c = dict.cases;
   </section>
 
   <!-- 3. 고객사 공개 원칙 & 하단 전환 배너 -->
-  <section class="bottom-banner-sec reveal-on-scroll" style="padding-top:72px">
+  <section class="bottom-banner-sec with-top-pad reveal-on-scroll">
     <div class="container">
       <div class="cta-banner">
-        <span class="bento-chip" style="background:rgba(255,255,255,0.14);color:#fff;margin-bottom:14px">
+        <span class="bento-chip on-dark">
           {c.clientPolicy.badge}
         </span>
         <h2>{c.clientPolicy.heading}</h2>

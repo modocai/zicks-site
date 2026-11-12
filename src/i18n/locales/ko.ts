@@ -638,7 +638,7 @@ export const ko: LocaleDict = {
       ],
       reviewerBadge: '담당자 직접 확인',
       reviewerTitle: '김명찬 대표 (의사 · 창업자)가 직접 봅니다',
-      reviewerBody: '모닥에이아이코리아 · MoDoc AI. 진단 결과만 받아 보시고 계약을 진행하지 않으셔도 됩니다.',
+      reviewerBody: '모닥에이아이코리아 · MoDoc AI. 보내 주신 홈페이지 주소와 질문을 직접 확인해 3영업일 안에 답변 메일을 드립니다.',
     },
     auditMock: {
       sampleBadge: '구성 안내',

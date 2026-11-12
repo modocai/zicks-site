@@ -84,7 +84,7 @@ export const en: LocaleDict = {
           { name: 'Gemini', status: 'Checked in audit', tone: 'cited' },
           { name: 'Perplexity', status: 'Checked in audit', tone: 'cited' },
         ],
-        footnote: 'Illustrative example of a free baseline visibility check, not client data.',
+        footnote: 'Illustrative example of a free visibility audit, not client data.',
       },
     },
     fourChecks: {
@@ -132,7 +132,7 @@ export const en: LocaleDict = {
         primaryBtn: { label: 'Compare the pilots', slug: 'services' },
         secondaryBtn: { label: 'How it works', slug: 'how' },
         steps: [
-          { label: '① Free baseline check of crawler access & current AI answers', role: 'Free audit' },
+          { label: '① Free visibility audit of crawler access & current AI answers', role: 'Free audit' },
           { label: '② Drafts prepared from approved source material', role: 'zicks draft' },
           { label: '③ Your clinician or product lead approves before publishing', role: '✓ Team sign-off', isHuman: true },
           { label: '④ Review agreed website visits & inquiry or demo clicks', role: 'End-of-pilot report' },
@@ -223,7 +223,7 @@ export const en: LocaleDict = {
     },
     bottomCta: {
       heading: 'What does your team keep explaining?',
-      lead: 'Email your website, one question or workflow, and who would review the work. MC will use that to discuss fit, a free visibility check, or pilot scope. Please leave out patient information.',
+      lead: 'Email your website, one question or workflow, and who would review the work. MC will use that to discuss fit, a free visibility audit, or pilot scope. Please leave out patient information.',
       buttonLabel: 'Request a free audit',
     },
   },
@@ -246,7 +246,7 @@ export const en: LocaleDict = {
       steps: [
         {
           num: '01',
-          title: 'Free visibility check & scope agreement',
+          title: 'Free visibility audit & scope agreement',
           desc: `Inspect crawler access, page metadata, and current AI answers (${enginesText}), then agree on topic, source material, reviewer, and schedule.`,
           role: 'Baseline & scope',
         },
@@ -380,7 +380,7 @@ export const en: LocaleDict = {
       'Free one-page visibility audits and scoped content pilots for clinics and healthcare software teams.',
     header: {
       eyebrow: 'Services',
-      h1Lines: ['Start with a free visibility check,', 'then run one focused pilot'],
+      h1Lines: ['Start with a free visibility audit,', 'then run one focused pilot'],
       lead: 'Choose the audience you need to help. Topic, source material, designated reviewer, and schedule are agreed before any paid work begins.',
     },
     featured: {
@@ -393,7 +393,7 @@ export const en: LocaleDict = {
         badge: 'Responsibility split',
         title: 'Clear roles throughout the engagement',
         items: [
-          { label: 'Free baseline crawler & visibility check', owner: 'zicks prepares' },
+          { label: 'Free crawler & AI visibility audit', owner: 'zicks prepares' },
           { label: 'Article, social, or annotated workflow drafts', owner: 'zicks prepares' },
           { label: 'Clinical or product accuracy approval', owner: 'Your reviewer', isClientOwned: true },
           { label: 'Publishing to your website or help center', owner: 'Your team', isClientOwned: true },
@@ -483,15 +483,15 @@ export const en: LocaleDict = {
     starterBox: {
       chip: 'Before any paid pilot',
       headingLines: ['Start with a free audit,', 'confirm scope upfront'],
-      body: 'Email your website, one question or workflow, and who would review the work. MC will use that to discuss fit, a free visibility check, or pilot scope.',
+      body: 'Email your website, one question or workflow, and who would review the work. MC will use that to discuss fit, a free visibility audit, or pilot scope.',
       badges: ['No auto-renewal', 'Scope agreed upfront', 'Leave out patient info'],
       footnote:
         'Tracking setup, analytics account access, and custom deliverable adjustments are agreed separately.',
       timelineMock: {
         badge: 'Typical engagement flow',
-        title: 'From initial check to end-of-pilot review',
+        title: 'From initial audit to end-of-pilot review',
         milestones: [
-          { phase: 'Step 1', task: 'Free visibility check & confirm topic, reviewer, and schedule', tag: 'Pre-pilot' },
+          { phase: 'Step 1', task: 'Free visibility audit & confirm topic, reviewer, and schedule', tag: 'Pre-pilot' },
           { phase: 'Step 2', task: 'Draft articles or workflow guides from approved inputs', tag: 'Drafting' },
           { phase: 'Step 3', task: 'Clinician or product lead review & consolidated revisions', tag: 'Sign-off' },
           { phase: 'Step 4', task: 'Team publishes · End-of-pilot report · No auto-renewal', tag: 'Wrap-up' },
@@ -540,7 +540,7 @@ export const en: LocaleDict = {
           summary: 'Review delivered pilot work first, then decide whether ongoing monthly output helps.',
           includes: [
             `Clinics: ${EN_PRICING.monthlyFaqDrafts} FAQ article drafts per month with clinician approval`,
-            `${EN_PRICING.monthlySocialDrafts} adapted social post drafts per month`,
+            `${EN_PRICING.monthlySocialDrafts[0].toUpperCase()}${EN_PRICING.monthlySocialDrafts.slice(1)} adapted social post drafts per month`,
             'Monthly website data report',
           ],
           footnote: 'Software content maintenance is scoped around actual product updates rather than a fixed monthly volume.',

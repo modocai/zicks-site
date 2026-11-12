@@ -64,7 +64,7 @@ const faqSchema = {
           </div>
         </div>
 
-        <figure class="ui-panel" style="margin:0" aria-label={c.loopBlock.mockBadge}>
+        <figure class="ui-panel" aria-label={c.loopBlock.mockBadge}>
           <div class="ui-panel-head">
             <span class="ui-panel-title">{c.loopBlock.mockBadge}</span>
           </div>
@@ -125,7 +125,7 @@ const faqSchema = {
             <div>
               <span class="pill">{card.badge}</span>
               <h3>{card.title}</h3>
-              <p class="offer-summary" style="margin-bottom:0">{card.body}</p>
+              <p class="offer-summary">{card.body}</p>
             </div>
           </article>
         ))}
@@ -143,13 +143,13 @@ const faqSchema = {
 
       <div class="versus-list">
         {c.comparison.rows.map((row) => (
-          <div class="versus-row" style="background:var(--bg-white)">
+          <div class="versus-row">
             <div class="versus-topic">{row.topic}</div>
-            <div class="versus-col legacy" style="background:var(--bg-light)">
+            <div class="versus-col legacy">
               <span class="versus-col-label">{c.comparison.legacyTitle}</span>
               {row.legacy}
             </div>
-            <div class="versus-col zicks" style="background:var(--teal-soft)">
+            <div class="versus-col zicks">
               <span class="versus-col-label">{c.comparison.zicksTitle}</span>
               {row.zicks}
             </div>

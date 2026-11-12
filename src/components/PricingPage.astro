@@ -53,10 +53,10 @@ const p = dict.pricing;
               <span>✓ {b}</span>
             ))}
           </div>
-          <p class="note" style="margin:0">{p.starterBox.footnote}</p>
+          <p class="note note-tight">{p.starterBox.footnote}</p>
         </div>
 
-        <figure class="ui-panel" style="margin:0" aria-label={p.starterBox.timelineMock.title}>
+        <figure class="ui-panel" aria-label={p.starterBox.timelineMock.title}>
           <div class="ui-panel-head">
             <span class="ui-panel-title">{p.starterBox.timelineMock.title}</span>
             <span class="mock-tag">{p.starterBox.timelineMock.badge}</span>
@@ -89,7 +89,7 @@ const p = dict.pricing;
 
       <div class="pricing-grid">
         {p.plansSection.cards.map((card) => (
-          <article class={`plan-card${card.featured ? ' is-featured' : ''}`} style={card.featured ? undefined : 'background:var(--bg-white)'}>
+          <article class={`plan-card${card.featured ? ' is-featured' : ''}`}>
             <div>
               <span class="pill">{card.badge}</span>
               <h3 class="plan-title">{card.title}</h3>
@@ -110,7 +110,7 @@ const p = dict.pricing;
       </div>
 
       {p.addons && (
-        <div class="addon-box" style="background:var(--bg-white)">
+        <div class="addon-box">
           <h3>{p.addons.heading}</h3>
           {p.addons.items.map((ad) => (
             <div class="addon-row">
@@ -125,7 +125,7 @@ const p = dict.pricing;
   </section>
 
   <!-- 3. 하단 무료 진단 배너 -->
-  <section class="bottom-banner-sec reveal-on-scroll" style="padding-top:72px">
+  <section class="bottom-banner-sec with-top-pad reveal-on-scroll">
     <div class="container">
       <div class="cta-banner">
         <h2>{p.bottomNav.heading}</h2>

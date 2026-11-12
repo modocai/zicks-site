@@ -226,12 +226,12 @@ const h = dict.home;
                 </ul>
                 <p class="pilot-approval">{card.approvalNote}</p>
               </div>
-              <p class="note" style="margin:0">{card.note}</p>
+              <p class="note note-tight">{card.note}</p>
             </article>
           ))}
         </div>
 
-        <p class="note" style="margin-top:20px">{h.pilotsSection.footnote}</p>
+        <p class="note note-spaced">{h.pilotsSection.footnote}</p>
       </div>
     </section>
   )}
@@ -240,7 +240,7 @@ const h = dict.home;
   <section class="sec-white reveal-on-scroll">
     <div class="container">
       <div class="proof-top">
-        <div class="sec-head" style="margin-bottom:0">
+        <div class="sec-head">
           <span class="sec-eyebrow purple">{h.proof.eyebrow}</span>
           <h2>
             {h.proof.headingLines.map((line, idx) => (

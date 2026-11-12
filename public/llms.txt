@@ -1,16 +1,32 @@
 # zicks
 
-> zicks 는 모닥에이아이코리아(MoDoc AI)의 AI native GEO · SEO 운영 엔진입니다. 고객의 실제 질문을 현장 담당자가 검수 · 서명한 글로 바꾸고, 매주 같은 질문 세트로 AI 검색(ChatGPT · Gemini · Perplexity · Claude · 네이버)의 답변을 측정해 다음 글의 주제를 고릅니다. 종료 시 도구 · 측정 기록 · 매뉴얼을 고객에게 인계합니다.
+> Official website of zicks by MoDoc AI (`https://zicks.modoc-ai.com`). Default root (`/`) serves English pages for US clinics and healthcare software teams; `/ko/` serves Korean pages for GEO & SEO content operations in South Korea.
 
-## 페이지
-- [홈](https://zicks.modoc-ai.com/): 한 줄 소개와 AI 가 업체를 고르는 네 조건
-- [어떻게 일하나](https://zicks.modoc-ai.com/how/): 측정 루프와 글 규격
-- [서비스](https://zicks.modoc-ai.com/services/): A 기반 정비 · B 홈페이지 이관 · C 콘텐츠 · 측정 운영
-- [사례](https://zicks.modoc-ai.com/cases/): FeverCoach, zicks 자체 사이트
-- [가격](https://zicks.modoc-ai.com/pricing/): 단계별 금액과 후불 조건
-- [문의](https://zicks.modoc-ai.com/contact/): 홈페이지 무료 진단 요청
+## English Pages (Default · US Healthcare Teams)
+- [Home](https://zicks.modoc-ai.com/): Overview of free website visibility audits (`ChatGPT · Claude · Gemini · Perplexity`) and scoped paid content pilots for clinics and healthcare software teams
+- [How it works](https://zicks.modoc-ai.com/how/): Review-first workflow, starting inputs, operating principles, and FAQ
+- [Services](https://zicks.modoc-ai.com/services/): Patient-question content pilot (clinics), product workflow guide pilot (healthcare software), and optional post-pilot operations
+- [Background](https://zicks.modoc-ai.com/cases/): MoDoc AI background, in-house product FeverCoach, open static web architecture, and client confidentiality policy
+- [Pricing](https://zicks.modoc-ai.com/pricing/): Current reference pilot fees and scope boundaries (no automatic renewal)
+- [Contact](https://zicks.modoc-ai.com/contact/): Request a free visibility audit or discuss pilot fit (`admin@modoc-ai.com`)
 
-## 사실
-- 회사: 모닥에이아이코리아 (MoDoc AI). 대표 김명찬(의사 · 창업자).
-- 첫 적용: 자사 소아 발열 앱 FeverCoach 블로그. 11주 만에 Google 검색 클릭 460 → 2,910, 생성형 AI 노출 3개월 98.1K (Google Search Console).
+## Key Facts (English)
+- Operator: MoDoc AI, Inc. (`163 Highland Ave #1015, Needham, MA 02494, United States`). Founder: Myeongchan (MC) Kim, MD.
+- First in-house product: FeverCoach (`https://www.fevercoach.us`), built by physicians. Its Q&A corpus has 2,400+ physician-reviewed answers.
+- Boundaries: Your designated clinician or product lead approves accuracy before your team publishes. Please leave out patient information. Search rankings, AI citations, leads, and revenue are not guaranteed.
+
+---
+
+## 한국어 페이지 (`/ko/` · 국내 GEO · SEO 콘텐츠 운영)
+- [홈](https://zicks.modoc-ai.com/ko/): AI native GEO · SEO 운영 엔진 소개와 AI가 업체를 고르는 네 조건
+- [어떻게 일하나](https://zicks.modoc-ai.com/ko/how/): 주간 고정 질문 측정 루프(`ChatGPT · Claude · Gemini · Perplexity · 네이버`), 질문 다섯 갈래 구성, 원고 · 검수 규격, FAQ
+- [서비스](https://zicks.modoc-ai.com/ko/services/): 기반 정비(구성 A) · 콘텐츠 · 측정 운영(구성 C) · 홈페이지 이관(구성 B) 및 인계 자산
+- [사례](https://zicks.modoc-ai.com/ko/cases/): 자사 소아 발열 앱 FeverCoach 검증 성과와 zicks 자체 사이트 적용 현황
+- [가격](https://zicks.modoc-ai.com/ko/pricing/): 구성별 기준 금액과 완료 보고 뒤 청구하는 후불 정산 조건
+- [무료 진단 요청](https://zicks.modoc-ai.com/ko/contact/): 홈페이지 무료 1장 진단 요청 (`admin@modoc-ai.com`)
+
+## 핵심 사실 (한국어)
+- 운영사: 모닥에이아이코리아 (MoDoc AI). 대표 김명찬 (의사 · 창업자).
+- 선행 검증 (자사 제품 FeverCoach 블로그, 2026-06 → 2026-10): 의사가 검수한 답변 2,400개 이상을 재료로 다국어 블로그 발행 — 11주 Google 검색 클릭 `460 → 2,910` · 등록 페이지 `318 → 2,096`, 3개월 구글 생성형 AI 노출 `98.1K` (일간 약 `300 → 3,500`, Google Search Console), 약 4개월 참조 도메인 `160 → 631`.
+- 운영 원칙: 현장 담당자 서명 없는 글은 게시하지 않으며, 종료 시 측정 기록 · 매뉴얼 · 도구 사용권을 인계합니다.
 - 보장하지 않는 것: AI 추천 순위 · 검색 순위 · 매출 증가.

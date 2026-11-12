@@ -57,14 +57,14 @@ const s = dict.services;
           </div>
         </div>
 
-        <figure class="ui-panel" style="margin:0" aria-label={s.featured.mock.title}>
+        <figure class="ui-panel" aria-label={s.featured.mock.title}>
           <div class="ui-panel-head">
             <span class="ui-panel-title">{s.featured.mock.title}</span>
             <span class="mock-tag">{s.featured.mock.badge}</span>
           </div>
           <div class="step-card-list">
             {s.featured.mock.items.map((item) => (
-              <div class={`flow-row${item.isClientOwned ? ' is-human' : ''}`} style="background:var(--bg-light)">
+              <div class={`flow-row${item.isClientOwned ? ' is-human' : ''}`}>
                 <span>✓ {item.label}</span>
                 <span class={`role-pill ${item.isClientOwned ? 'human' : 'auto'}`}>
                   {item.owner}
@@ -141,7 +141,7 @@ const s = dict.services;
         </div>
       </div>
 
-      <p class="note" style="margin-top:18px">{s.boundaries.footnote}</p>
+      <p class="note note-spaced">{s.boundaries.footnote}</p>
     </div>
   </section>
 

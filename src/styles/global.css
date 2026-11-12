@@ -960,6 +960,10 @@ html:lang(en) .hero-sec h1 {
   margin-bottom: 36px;
 }
 
+.proof-top .sec-head {
+  margin-bottom: 0;
+}
+
 .brand-cluster {
   display: flex;
   align-items: center;
@@ -977,6 +981,7 @@ html:lang(en) .hero-sec h1 {
   font-weight: 800;
   font-size: 16px;
   color: #3d3373;
+  text-decoration: none;
 }
 
 .fc-badge img {
@@ -1055,6 +1060,16 @@ html:lang(en) .hero-sec h1 {
 .bottom-banner-sec {
   padding: 0 0 96px;
   background: var(--bg-white);
+}
+
+.bottom-banner-sec.with-top-pad {
+  padding-top: 72px;
+}
+
+.bento-chip.on-dark {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  margin-bottom: 14px;
 }
 
 .cta-banner {
@@ -1180,6 +1195,14 @@ footer.site-footer {
   color: var(--ink-muted);
 }
 
+.note-tight {
+  margin: 0;
+}
+
+.note-spaced {
+  margin: 18px 0 0;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1245,10 +1268,19 @@ footer.site-footer {
 }
 
 .ui-panel {
+  margin: 0;
   background: var(--bg-white);
   border-radius: 22px;
   padding: 24px;
   box-shadow: 0 16px 40px rgba(25, 22, 48, 0.06);
+}
+
+.ui-panel .flow-row {
+  background: var(--bg-light);
+}
+
+.ui-panel .flow-row.is-human {
+  background: #fcfbff;
 }
 
 .ui-panel-head {
@@ -1396,6 +1428,18 @@ footer.site-footer {
   color: var(--teal-ink);
 }
 
+.sec-light .versus-row {
+  background: var(--bg-white);
+}
+
+.sec-light .versus-col.legacy {
+  background: var(--bg-light);
+}
+
+.sec-light .versus-col.zicks {
+  background: var(--teal-soft);
+}
+
 /* FAQ 아코디언 */
 .faq-list {
   display: flex;
@@ -1523,6 +1567,14 @@ details.faq-item[open] .faq-icon {
   line-height: 1.58;
 }
 
+.offer-summary:last-child {
+  margin-bottom: 0;
+}
+
+.asset-link-wrap {
+  margin-top: 20px;
+}
+
 .offer-list {
   padding-left: 18px;
   margin: 0;
@@ -1615,10 +1667,18 @@ details.faq-item[open] .faq-icon {
   justify-content: space-between;
 }
 
+.sec-light .plan-card {
+  background: var(--bg-white);
+}
+
 .plan-card.is-featured {
   background: var(--bg-white);
   outline: 2px solid rgba(15, 114, 128, 0.22);
   box-shadow: 0 14px 36px rgba(15, 114, 128, 0.06);
+}
+
+.sec-light .addon-box {
+  background: var(--bg-white);
 }
 
 .plan-title {
@@ -1907,6 +1967,18 @@ details.faq-item[open] .faq-icon {
 }
 
 .contact-audit-mock .step-card-item {
+  background: var(--bg-white);
+}
+
+.contact-panel .btn-row {
+  margin-bottom: 26px;
+}
+
+.reviewer-card .bento-chip {
+  margin-bottom: 8px;
+}
+
+.contact-audit-mock .sample-pill {
   background: var(--bg-white);
 }
 

@@ -1,4 +1,4 @@
-# zicks — 모든 검색엔진과 AI 크롤러에 열려 있습니다.
+# zicks — Open to search engines and AI crawlers (모든 검색엔진과 AI 크롤러에 열려 있습니다)
 User-agent: *
 Allow: /
 
