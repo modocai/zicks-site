@@ -1,0 +1,146 @@
+---
+import Base from '../layouts/Base.astro';
+import { getDict, pagePath, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const dict = getDict(locale);
+const p = dict.pricing;
+---
+<Base
+  locale={locale}
+  slug="pricing"
+  title={p.metaTitle}
+  description={p.metaDescription}
+>
+  <!-- 상단 머리말 (가안 기준 시점 배지 명시, JSON-LD Offer 미포함) -->
+  <section class="sub-hero">
+    <div class="container">
+      <span class="sec-eyebrow purple">{p.header.asOfBadge}</span>
+      <h1>
+        {p.header.h1Lines.map((line, idx) => (
+          <>
+            {idx > 0 && <>{' '}<br class="desktop-br" /></>}
+            {line}
+          </>
+        ))}
+      </h1>
+      <p class="sub-lead">{p.header.lead}</p>
+    </div>
+  </section>
+
+  <!-- 1. 권장 시작 요약 + 첫 4주/파일럿 타임라인 목업 -->
+  <section class="sec-white">
+    <div class="container">
+      <div class="split-showcase">
+        <div>
+          <span class="bento-chip purple">{p.starterBox.chip}</span>
+          <h2>
+            {p.starterBox.headingLines.map((line, idx) => (
+              <>
+                {idx > 0 && <>{' '}<br class="desktop-br" /></>}
+                {line}
+              </>
+            ))}
+          </h2>
+          <p class="split-body">{p.starterBox.body}</p>
+
+          <div class="badge-cluster">
+            {p.starterBox.badges.map((b) => (
+              <span>✓ {b}</span>
+            ))}
+          </div>
+          <p class="note" style="margin:0">{p.starterBox.footnote}</p>
+        </div>
+
+        <figure class="ui-panel" style="margin:0" aria-label={p.starterBox.timelineMock.title}>
+          <div class="ui-panel-head">
+            <span class="ui-panel-title">{p.starterBox.timelineMock.title}</span>
+            <span class="mock-tag">{p.starterBox.timelineMock.badge}</span>
+          </div>
+          <div class="step-card-list">
+            {p.starterBox.timelineMock.milestones.map((m) => (
+              <div class="step-card-item">
+                <div class="step-card-top">
+                  <span class="step-card-name">
+                    <span class="step-num-tag">{m.phase}</span>
+                    {m.task}
+                  </span>
+                  <span class="role-pill auto">{m.tag}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 모바일에서도 안 잘리는 가격 가안 카드 3장 + 부가 옵션 -->
+  <section class="sec-light reveal-on-scroll">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-eyebrow">{p.plansSection.eyebrow}</span>
+        <h2>{p.plansSection.heading}</h2>
+      </div>
+
+      <div class="pricing-grid">
+        {p.plansSection.cards.map((card) => (
+          <article class={`plan-card${card.featured ? ' is-featured' : ''}`} style={card.featured ? undefined : 'background:var(--bg-white)'}>
+            <div>
+              <span class="pill">{card.badge}</span>
+              <h3 class="plan-title">{card.title}</h3>
+              <div class="plan-price">{card.price}</div>
+              <p class="plan-billing">{card.billingNote}</p>
+              <p class="plan-summary">{card.summary}</p>
+              <ul class="offer-list">
+                {card.includes.map((inc) => (
+                  <li>{inc}</li>
+                ))}
+              </ul>
+            </div>
+            {card.footnote && (
+              <p class="offer-boundary">{card.footnote}</p>
+            )}
+          </article>
+        ))}
+      </div>
+
+      {p.addons && (
+        <div class="addon-box" style="background:var(--bg-white)">
+          <h3>{p.addons.heading}</h3>
+          {p.addons.items.map((ad) => (
+            <div class="addon-row">
+              <div class="addon-name">{ad.title}</div>
+              <div class="addon-price">{ad.price}</div>
+              <div class="addon-desc">{ad.desc}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- 3. 하단 무료 진단 배너 -->
+  <section class="bottom-banner-sec reveal-on-scroll" style="padding-top:72px">
+    <div class="container">
+      <div class="cta-banner">
+        <h2>{p.bottomNav.heading}</h2>
+        <p>{p.bottomNav.lead}</p>
+        <div class="banner-btns">
+          <a class="btn-solid" href={pagePath(locale, 'contact')}>
+            {dict.ctaLabel}
+          </a>
+          {p.bottomNav.nextLabel && p.bottomNav.nextSlug !== undefined && (
+            <a class="btn-on-dark" href={pagePath(locale, p.bottomNav.nextSlug)}>
+              {p.bottomNav.nextLabel}
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

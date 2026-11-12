@@ -1,0 +1,24 @@
+---
+import { pageAbsUrl, pagePath } from '../../i18n';
+
+const targetPath = pagePath('en', '');
+const targetCanonical = pageAbsUrl('en', '');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirecting · zicks</title>
+    <link rel="canonical" href={targetCanonical} />
+    <meta http-equiv="refresh" content={`0;url=${targetPath}`} />
+    <script is:inline define:vars={{ targetPath }}>
+      window.location.replace(targetPath + (window.location.hash || ''));
+    </script>
+  </head>
+  <body style="font-family:system-ui,sans-serif;padding:40px;color:#191f28">
+    <p>
+      Redirecting to <a href={targetPath}>zicks ({targetPath})</a>…
+    </p>
+  </body>
+</html>

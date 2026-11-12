@@ -6,19 +6,20 @@ export default defineConfig({
   site: process.env.SITE_URL || 'https://zicks.modoc-ai.com',
   base: process.env.BASE_PATH || '/', // 도메인 연결 전 github.io 미리보기는 /zicks-site
   i18n: {
-    defaultLocale: 'ko',
-    locales: ['ko', 'en'],
+    defaultLocale: 'en',
+    locales: ['en', 'ko'],
     routing: {
       prefixDefaultLocale: false,
     },
   },
   integrations: [
     sitemap({
+      filter: (page) => !/\/en\/?$/.test(page),
       i18n: {
-        defaultLocale: 'ko',
+        defaultLocale: 'en',
         locales: {
-          ko: 'ko',
           en: 'en',
+          ko: 'ko',
         },
       },
     }),

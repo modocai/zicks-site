@@ -1311,3 +1311,593 @@ th {
   color: var(--ink);
   white-space: nowrap;
 }
+
+/* ============================================================
+   구간 2 서브페이지 스타일 (How · Services · Pricing)
+   ============================================================ */
+.sub-hero {
+  background: var(--bg-light);
+  padding: 64px 0 68px;
+}
+
+.sub-hero h1 {
+  font-size: clamp(30px, 3.8vw, 44px);
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.032em;
+  color: var(--ink);
+  margin: 0 0 16px;
+}
+
+.sub-lead {
+  font-size: 17.5px;
+  line-height: 1.62;
+  color: var(--ink-sub);
+  margin: 0;
+  max-width: 720px;
+}
+
+/* 좌측 텍스트 + 우측 목업 패널 스플릿 블록 */
+.split-showcase {
+  background: var(--bg-light);
+  border-radius: var(--radius-xl);
+  padding: 44px;
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.split-showcase.on-light {
+  background: var(--bg-white);
+  box-shadow: 0 16px 44px rgba(25, 22, 48, 0.05);
+}
+
+.split-showcase h2,
+.split-showcase h3.split-title {
+  font-size: clamp(24px, 2.8vw, 32px);
+  line-height: 1.3;
+  font-weight: 800;
+  letter-spacing: -0.028em;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+
+.split-body {
+  font-size: 16.5px;
+  color: var(--ink-sub);
+  line-height: 1.62;
+  margin: 0 0 24px;
+}
+
+.ui-panel {
+  background: var(--bg-white);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 16px 40px rgba(25, 22, 48, 0.06);
+}
+
+.split-showcase.on-light .ui-panel {
+  background: var(--bg-light);
+  box-shadow: none;
+}
+
+.ui-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.ui-panel-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.step-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step-card-item {
+  background: var(--bg-light);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+.split-showcase.on-light .step-card-item {
+  background: var(--bg-white);
+}
+
+.step-card-item.is-human {
+  outline: 2px solid var(--indigo-point);
+  background: #fcfbff;
+}
+
+.step-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.step-card-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.step-num-tag {
+  color: var(--teal-ink);
+  margin-right: 6px;
+}
+
+.step-card-desc {
+  font-size: 13.5px;
+  color: var(--ink-sub);
+  margin: 0;
+  line-height: 1.52;
+}
+
+/* 질문 구성 / 입력 자료 그리드 */
+.comp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 18px;
+}
+
+.comp-card {
+  background: var(--bg-white);
+  border-radius: 20px;
+  padding: 28px;
+}
+
+.sec-white .comp-card {
+  background: var(--bg-light);
+}
+
+.comp-card h3 {
+  font-size: 19px;
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+
+.comp-card p {
+  font-size: 15px;
+  color: var(--ink-sub);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* 좌우 대비 블록 (기존 대행 vs zicks) */
+.versus-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.versus-row {
+  background: var(--bg-light);
+  border-radius: 22px;
+  padding: 24px 28px;
+  display: grid;
+  grid-template-columns: 180px 1fr 1.15fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.versus-topic {
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+}
+
+.versus-col {
+  border-radius: 15px;
+  padding: 16px 18px;
+  font-size: 15px;
+  line-height: 1.56;
+}
+
+.versus-col.legacy {
+  background: rgba(255, 255, 255, 0.65);
+  color: var(--ink-sub);
+}
+
+.versus-col.zicks {
+  background: var(--bg-white);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(15, 114, 128, 0.08);
+}
+
+.versus-col-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 5px;
+  color: var(--ink-muted);
+}
+
+.versus-col.zicks .versus-col-label {
+  color: var(--teal-ink);
+}
+
+/* FAQ 아코디언 */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 860px;
+}
+
+details.faq-item {
+  background: var(--bg-white);
+  border-radius: 18px;
+  padding: 0 24px;
+}
+
+.sec-white details.faq-item {
+  background: var(--bg-light);
+}
+
+details.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 22px 0;
+  font-size: 17.5px;
+  font-weight: 800;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+details.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-light);
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.sec-white .faq-icon {
+  background: var(--bg-white);
+}
+
+details.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+  background: var(--teal-soft);
+  color: var(--teal-ink);
+}
+
+.faq-answer {
+  padding: 0 0 22px;
+  font-size: 15.5px;
+  color: var(--ink-sub);
+  line-height: 1.65;
+}
+
+/* 서비스 상세 카드 & 약속 경계 */
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.offer-card {
+  background: var(--bg-white);
+  border-radius: 24px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sec-white .offer-card {
+  background: var(--bg-light);
+}
+
+.offer-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.offer-code {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--teal-ink);
+  background: var(--teal-soft);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.offer-rec {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--indigo-point);
+  background: var(--indigo-soft);
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+
+.offer-card h3 {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 10px;
+  letter-spacing: -0.02em;
+}
+
+.offer-summary {
+  font-size: 15.5px;
+  color: var(--ink-sub);
+  margin: 0 0 18px;
+  line-height: 1.58;
+}
+
+.offer-list {
+  padding-left: 18px;
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.offer-list li {
+  margin-bottom: 8px;
+}
+
+.offer-boundary {
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-subtle);
+  font-size: 13.5px;
+  color: var(--ink-muted);
+}
+
+.boundary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.boundary-box {
+  border-radius: 22px;
+  padding: 32px;
+  background: var(--bg-light);
+}
+
+.boundary-box.positive {
+  background: var(--teal-soft);
+}
+
+.boundary-box h3 {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+
+.boundary-box ul {
+  padding-left: 18px;
+  margin: 0;
+  color: var(--ink-sub);
+  font-size: 15.5px;
+  line-height: 1.62;
+}
+
+.boundary-box.positive ul {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.boundary-box li + li {
+  margin-top: 10px;
+}
+
+/* 가격 가안 카드 & 타임라인 & 옵션 줄 */
+.badge-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.badge-cluster span {
+  background: var(--bg-white);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 9px;
+}
+
+.split-showcase.on-light .badge-cluster span {
+  background: var(--bg-light);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.plan-card {
+  background: var(--bg-light);
+  border-radius: 24px;
+  padding: 34px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.plan-card.is-featured {
+  background: var(--bg-white);
+  outline: 2px solid rgba(15, 114, 128, 0.22);
+  box-shadow: 0 14px 36px rgba(15, 114, 128, 0.06);
+}
+
+.plan-title {
+  font-size: 21px;
+  font-weight: 800;
+  margin: 4px 0 10px;
+  color: var(--ink);
+}
+
+.plan-price {
+  font-size: clamp(28px, 3vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--teal-ink);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.plan-billing {
+  font-size: 13.5px;
+  color: var(--ink-muted);
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+
+.plan-summary {
+  font-size: 15px;
+  color: var(--ink-sub);
+  margin: 0 0 18px;
+  line-height: 1.58;
+}
+
+.addon-box {
+  margin-top: 28px;
+  background: var(--bg-light);
+  border-radius: 22px;
+  padding: 28px 32px;
+}
+
+.addon-box h3 {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+
+.addon-row {
+  display: grid;
+  grid-template-columns: 220px 190px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 0;
+}
+
+.addon-row + .addon-row {
+  border-top: 1px solid var(--line-subtle);
+}
+
+.addon-name {
+  font-weight: 800;
+  color: var(--ink);
+  font-size: 15.5px;
+}
+
+.addon-price {
+  font-weight: 800;
+  color: var(--teal-ink);
+  font-size: 15.5px;
+}
+
+.addon-desc {
+  color: var(--ink-sub);
+  font-size: 14.5px;
+}
+
+/* 배너 내부 보조 버튼 (어두운 배경 위) */
+.banner-btns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-on-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.btn-on-dark:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 920px) {
+  .split-showcase {
+    grid-template-columns: 1fr;
+    padding: 30px 24px;
+    gap: 26px;
+  }
+  .offers-grid,
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+  .versus-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 20px;
+  }
+  .boundary-grid {
+    grid-template-columns: 1fr;
+  }
+  .addon-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sub-hero {
+    padding: 46px 0 52px;
+  }
+  .ui-panel {
+    padding: 18px;
+  }
+  .step-card-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .addon-box {
+    padding: 22px 20px;
+  }
+}

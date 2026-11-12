@@ -1,9 +1,11 @@
 import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from 'astro:i18n';
 
-export const DEFAULT_LOCALE = 'ko' as const;
-export const LOCALES = ['ko', 'en'] as const;
+export const DEFAULT_LOCALE = 'en' as const;
+export const LOCALES = ['en', 'ko'] as const;
 export type Locale = (typeof LOCALES)[number];
-export const NON_DEFAULT_LOCALES = LOCALES.filter((l): l is Exclude<Locale, typeof DEFAULT_LOCALE> => l !== DEFAULT_LOCALE);
+export const NON_DEFAULT_LOCALES = LOCALES.filter(
+  (l): l is Exclude<Locale, typeof DEFAULT_LOCALE> => l !== DEFAULT_LOCALE
+);
 
 export type PageSlug = '' | 'how' | 'services' | 'cases' | 'pricing' | 'contact';
 
@@ -18,15 +20,6 @@ export interface LocaleMeta {
 }
 
 export const LOCALE_META: Record<Locale, LocaleMeta> = {
-  ko: {
-    code: 'ko',
-    shortLabel: 'KO',
-    nativeLabel: '한국어',
-    htmlLang: 'ko',
-    ogLocale: 'ko_KR',
-    areaServed: 'KR',
-    engines: ['ChatGPT', 'Claude', 'Gemini', 'Perplexity', '네이버'],
-  },
   en: {
     code: 'en',
     shortLabel: 'EN',
@@ -35,6 +28,15 @@ export const LOCALE_META: Record<Locale, LocaleMeta> = {
     ogLocale: 'en_US',
     areaServed: 'US',
     engines: ['ChatGPT', 'Claude', 'Gemini', 'Perplexity'],
+  },
+  ko: {
+    code: 'ko',
+    shortLabel: 'KO',
+    nativeLabel: '한국어',
+    htmlLang: 'ko',
+    ogLocale: 'ko_KR',
+    areaServed: 'KR',
+    engines: ['ChatGPT', 'Claude', 'Gemini', 'Perplexity', '네이버'],
   },
 };
 

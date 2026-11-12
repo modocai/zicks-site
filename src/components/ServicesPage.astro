@@ -1,0 +1,165 @@
+---
+import Base from '../layouts/Base.astro';
+import { getDict, pagePath, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const dict = getDict(locale);
+const s = dict.services;
+---
+<Base
+  locale={locale}
+  slug="services"
+  title={s.metaTitle}
+  description={s.metaDescription}
+>
+  <!-- 상단 머리말 -->
+  <section class="sub-hero">
+    <div class="container">
+      <span class="sec-eyebrow">{s.header.eyebrow}</span>
+      <h1>
+        {s.header.h1Lines.map((line, idx) => (
+          <>
+            {idx > 0 && <>{' '}<br class="desktop-br" /></>}
+            {line}
+          </>
+        ))}
+      </h1>
+      <p class="sub-lead">{s.header.lead}</p>
+    </div>
+  </section>
+
+  <!-- 1. 권장 시작 조합 특대 블록 + 인계 패키지 / 역할 분담 목업 -->
+  <section class="sec-white">
+    <div class="container">
+      <div class="split-showcase">
+        <div>
+          <span class="bento-chip purple">{s.featured.chip}</span>
+          <h2>
+            {s.featured.headingLines.map((line, idx) => (
+              <>
+                {idx > 0 && <>{' '}<br class="desktop-br" /></>}
+                {line}
+              </>
+            ))}
+          </h2>
+          <p class="split-body">{s.featured.body}</p>
+          <div class="btn-row">
+            <a class="btn-solid" href={pagePath(locale, s.featured.primaryBtn.slug)}>
+              {s.featured.primaryBtn.label}
+            </a>
+            <a class="btn-tint" href={pagePath(locale, s.featured.secondaryBtn.slug)}>
+              {s.featured.secondaryBtn.label}
+            </a>
+          </div>
+        </div>
+
+        <figure class="ui-panel" style="margin:0" aria-label={s.featured.mock.title}>
+          <div class="ui-panel-head">
+            <span class="ui-panel-title">{s.featured.mock.title}</span>
+            <span class="mock-tag">{s.featured.mock.badge}</span>
+          </div>
+          <div class="step-card-list">
+            {s.featured.mock.items.map((item) => (
+              <div class={`flow-row${item.isClientOwned ? ' is-human' : ''}`} style="background:var(--bg-light)">
+                <span>✓ {item.label}</span>
+                <span class={`role-pill ${item.isClientOwned ? 'human' : 'auto'}`}>
+                  {item.owner}
+                </span>
+              </div>
+            ))}
+          </div>
+          <figcaption class="mock-footnote">{s.featured.mock.footnote}</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 세 가지 서비스 상세 카드 -->
+  <section class="sec-light reveal-on-scroll" id={s.offersSection.id}>
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-eyebrow">{s.offersSection.eyebrow}</span>
+        <h2>{s.offersSection.heading}</h2>
+        <p>{s.offersSection.lead}</p>
+      </div>
+
+      <div class="offers-grid">
+        {s.offersSection.cards.map((card) => (
+          <article class="offer-card">
+            <div>
+              <div class="offer-meta-row">
+                <span class="offer-code">{card.code} · {card.duration}</span>
+                {card.recommendedTag && (
+                  <span class="offer-rec">{card.recommendedTag}</span>
+                )}
+              </div>
+              <h3>{card.title}</h3>
+              <p class="offer-summary">{card.summary}</p>
+              <ul class="offer-list">
+                {card.details.map((d) => (
+                  <li>{d}</li>
+                ))}
+              </ul>
+            </div>
+            {card.boundaryNote && (
+              <p class="offer-boundary">{card.boundaryNote}</p>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 약속하지 않는 것 · 대신 보고하는 것 -->
+  <section class="sec-white reveal-on-scroll">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-eyebrow purple">{s.boundaries.eyebrow}</span>
+        <h2>{s.boundaries.heading}</h2>
+      </div>
+
+      <div class="boundary-grid">
+        <div class="boundary-box">
+          <h3>{s.boundaries.notPromisedTitle}</h3>
+          <ul>
+            {s.boundaries.notPromisedItems.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="boundary-box positive">
+          <h3>{s.boundaries.reportedTitle}</h3>
+          <ul>
+            {s.boundaries.reportedItems.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <p class="note" style="margin-top:18px">{s.boundaries.footnote}</p>
+    </div>
+  </section>
+
+  <!-- 4. 하단 배너 + 가격 페이지 동선 -->
+  <section class="bottom-banner-sec reveal-on-scroll">
+    <div class="container">
+      <div class="cta-banner">
+        <h2>{s.bottomNav.heading}</h2>
+        <p>{s.bottomNav.lead}</p>
+        <div class="banner-btns">
+          <a class="btn-solid" href={pagePath(locale, s.bottomNav.nextSlug)}>
+            {s.bottomNav.nextLabel}
+          </a>
+          <a class="btn-on-dark" href={pagePath(locale, 'contact')}>
+            {dict.ctaLabel}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

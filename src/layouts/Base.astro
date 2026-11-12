@@ -16,40 +16,22 @@ import {
 interface Props {
   title: string;
   description: string;
-  locale?: Locale;
-  slug?: PageSlug;
-  path?: string;
-  jsonld?: object | object[] | null;
+  locale: Locale;
+  slug: PageSlug;
   extraSchema?: object | object[] | null;
 }
 
 const {
   title,
   description,
-  locale = DEFAULT_LOCALE,
-  slug,
-  jsonld = null,
+  locale,
+  slug: resolvedSlug,
   extraSchema = null,
 } = Astro.props;
 
-function inferSlug(pathname: string): PageSlug {
-  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-  let rel = base && pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
-  rel = rel.replace(/^\/+|\/+$/g, '');
-  const parts = rel ? rel.split('/') : [];
-  if (parts.length > 0 && (LOCALES as readonly string[]).includes(parts[0])) {
-    parts.shift();
-  }
-  const candidate = (parts[0] ?? '') as PageSlug;
-  const valid: readonly PageSlug[] = ['', 'how', 'services', 'cases', 'pricing', 'contact'];
-  return valid.includes(candidate) ? candidate : '';
-}
-
-const resolvedSlug: PageSlug = slug !== undefined ? slug : inferSlug(Astro.url.pathname);
 const dict = getDict(locale);
 const meta = LOCALE_META[locale];
 const siteOrigin = (Astro.site ?? new URL('https://zicks.modoc-ai.com')).toString().replace(/\/$/, '');
-const rootAbsUrl = pageAbsUrl(DEFAULT_LOCALE, '');
 const canonical = pageAbsUrl(locale, resolvedSlug);
 const ogImageUrl = `${siteOrigin}${assetPath('/images/modoc-ai-logo-dark.webp')}`;
 
@@ -89,10 +71,11 @@ const serviceSchema = {
   url: pageAbsUrl(locale, 'services'),
 };
 
-const rawExtras = [jsonld, extraSchema].flatMap((item) => {
-  if (!item) return [];
-  return Array.isArray(item) ? item : [item];
-});
+const rawExtras = extraSchema
+  ? Array.isArray(extraSchema)
+    ? extraSchema
+    : [extraSchema]
+  : [];
 const schemas = [orgSchema, serviceSchema, ...rawExtras];
 ---
 <!doctype html>

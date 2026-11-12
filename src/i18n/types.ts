@@ -112,6 +112,186 @@ export interface HomeContent {
   };
 }
 
+export interface HowContent {
+  metaTitle: string;
+  metaDescription: string;
+  header: {
+    eyebrow: string;
+    h1Lines: string[];
+    lead: string;
+  };
+  loopBlock: {
+    chip: string;
+    heading: string;
+    body: string;
+    mockBadge: string;
+    steps: Array<{
+      num: string;
+      title: string;
+      desc: string;
+      role: string;
+      isHuman?: boolean;
+    }>;
+  };
+  composition: {
+    eyebrow: string;
+    heading: string;
+    lead: string;
+    items: Array<{
+      tag: string;
+      title: string;
+      body: string;
+    }>;
+  };
+  craft: {
+    eyebrow: string;
+    heading: string;
+    lead: string;
+    cards: Array<{
+      badge: string;
+      title: string;
+      body: string;
+    }>;
+  };
+  comparison: {
+    eyebrow: string;
+    heading: string;
+    legacyTitle: string;
+    zicksTitle: string;
+    rows: Array<{
+      topic: string;
+      legacy: string;
+      zicks: string;
+    }>;
+  };
+  faq: {
+    eyebrow: string;
+    heading: string;
+    items: Array<{
+      q: string;
+      a: string;
+    }>;
+  };
+  bottomNav: {
+    heading: string;
+    lead: string;
+    nextLabel: string;
+    nextSlug: PageSlug;
+  };
+}
+
+export interface ServicesContent {
+  metaTitle: string;
+  metaDescription: string;
+  header: {
+    eyebrow: string;
+    h1Lines: string[];
+    lead: string;
+  };
+  featured: {
+    chip: string;
+    headingLines: string[];
+    body: string;
+    primaryBtn: { label: string; slug: PageSlug };
+    secondaryBtn: { label: string; slug: PageSlug };
+    mock: {
+      badge: string;
+      title: string;
+      items: Array<{
+        label: string;
+        owner: string;
+        isClientOwned?: boolean;
+      }>;
+      footnote: string;
+    };
+  };
+  offersSection: {
+    id?: string;
+    eyebrow: string;
+    heading: string;
+    lead: string;
+    cards: Array<{
+      code: string;
+      duration: string;
+      title: string;
+      summary: string;
+      details: string[];
+      boundaryNote?: string;
+      recommendedTag?: string;
+    }>;
+  };
+  boundaries: {
+    eyebrow: string;
+    heading: string;
+    notPromisedTitle: string;
+    notPromisedItems: string[];
+    reportedTitle: string;
+    reportedItems: string[];
+    footnote: string;
+  };
+  bottomNav: {
+    heading: string;
+    lead: string;
+    nextLabel: string;
+    nextSlug: PageSlug;
+  };
+}
+
+export interface PricingContent {
+  metaTitle: string;
+  metaDescription: string;
+  header: {
+    asOfBadge: string;
+    h1Lines: string[];
+    lead: string;
+  };
+  starterBox: {
+    chip: string;
+    headingLines: string[];
+    highlightAmount?: string;
+    body: string;
+    badges: string[];
+    footnote: string;
+    timelineMock: {
+      badge: string;
+      title: string;
+      milestones: Array<{
+        phase: string;
+        task: string;
+        tag: string;
+      }>;
+    };
+  };
+  plansSection: {
+    eyebrow: string;
+    heading: string;
+    cards: Array<{
+      badge: string;
+      title: string;
+      price: string;
+      billingNote: string;
+      summary: string;
+      includes: string[];
+      footnote?: string;
+      featured?: boolean;
+    }>;
+  };
+  addons?: {
+    heading: string;
+    items: Array<{
+      title: string;
+      price: string;
+      desc: string;
+    }>;
+  };
+  bottomNav: {
+    heading: string;
+    lead: string;
+    nextLabel?: string;
+    nextSlug?: PageSlug;
+  };
+}
+
 export interface SubpagePlaceholder {
   metaTitle: string;
   metaDescription: string;
@@ -162,5 +342,8 @@ export interface LocaleDict {
     body: string;
   };
   home: HomeContent;
-  subpages?: Record<Exclude<PageSlug, ''>, SubpagePlaceholder>;
+  how: HowContent;
+  services: ServicesContent;
+  pricing: PricingContent;
+  subpages?: Partial<Record<Exclude<PageSlug, ''>, SubpagePlaceholder>>;
 }

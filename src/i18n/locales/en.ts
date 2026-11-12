@@ -1,7 +1,9 @@
+import { EN_PRICING } from '../../data/pricing';
 import { LOCALE_META } from '../config';
 import type { LocaleDict } from '../types';
 
 const enginesText = LOCALE_META.en.engines.join(' · ');
+const P = EN_PRICING.formatted;
 
 export const en: LocaleDict = {
   locale: 'en',
@@ -10,7 +12,7 @@ export const en: LocaleDict = {
   nav: [
     { slug: 'how', label: 'How it works' },
     { slug: 'services', label: 'Services' },
-    { slug: 'cases', label: 'Case study' },
+    { slug: 'cases', label: 'Background' },
     { slug: 'pricing', label: 'Pricing' },
   ],
   aria: {
@@ -25,7 +27,7 @@ export const en: LocaleDict = {
     name: 'zicks by MoDoc AI, Inc.',
     alternateName: ['zicks', 'MoDoc AI', 'MoDoc AI, Inc.'],
     description:
-      'Paid content pilots and website visibility audits for clinics and healthcare software teams, operated by MoDoc AI.',
+      'Scoped content pilots and website visibility audits for clinics and healthcare software teams, operated by MoDoc AI.',
     founderName: 'Myeongchan Kim',
     founderHonorificSuffix: 'MD',
     founderJobTitle: 'Founder · Physician',
@@ -59,7 +61,7 @@ export const en: LocaleDict = {
         'into useful content',
         'your team can review',
       ],
-      lead: `For clinics and healthcare software teams: website articles, product guides, and clear next steps for your readers. Start with a free one-page visibility audit across Google and AI search (${enginesText}), or a small paid pilot.`,
+      lead: `For clinics and healthcare software teams: website articles, product guides, and clear next steps for your readers. Start with a free one-page visibility audit across Google and AI search (${enginesText}), or a small scoped pilot.`,
       primaryCta: 'Request a free audit',
       secondaryCta: 'How it works',
       trustPoints: [
@@ -159,18 +161,18 @@ export const en: LocaleDict = {
     },
     pilotsSection: {
       id: 'pilots',
-      eyebrow: 'Scoped paid pilots',
+      eyebrow: 'Scoped paid pilots (Reference pricing)',
       heading: 'One focused project to start',
       lead: 'Choose the audience you need to help. We agree on the topic, source material, reviewer, and schedule before work begins.',
       cards: [
         {
           badge: 'For clinics',
           title: 'Patient-question content',
-          price: 'US$1,250',
-          period: 'Fixed fee for a 30-day pilot, starting on an agreed date.',
+          price: P.clinicPilot,
+          period: 'Reference fee for a 30-day pilot, starting on an agreed date.',
           points: [
-            'Two original FAQ article drafts based on your recurring questions',
-            'Four social post drafts adapted from those articles',
+            `${EN_PRICING.clinicFaqDrafts} original FAQ article drafts based on your recurring questions`,
+            `${EN_PRICING.clinicSocialDrafts} social post drafts adapted from those articles`,
             'A baseline review and an end-of-pilot report using available website data',
           ],
           approvalNote:
@@ -180,11 +182,11 @@ export const en: LocaleDict = {
         {
           badge: 'For healthcare software teams',
           title: 'Explain one product workflow',
-          price: 'US$2,500',
-          period: 'Fixed fee for one agreed workflow.',
+          price: P.softwarePilot,
+          period: 'Reference fee for one agreed workflow.',
           points: [
-            'Three articles for a defined customer or prospective-buyer audience',
-            'Up to ten annotated screenshots from an approved demo environment',
+            `${EN_PRICING.softwareArticles} articles for a defined customer or prospective-buyer audience`,
+            `Up to ${EN_PRICING.softwareScreenshots} annotated screenshots from an approved demo environment`,
             'One consolidated revision round',
           ],
           approvalNote:
@@ -192,8 +194,7 @@ export const en: LocaleDict = {
           note: 'Production integrations, patient data, and clinical protocols are outside this pilot.',
         },
       ],
-      footnote:
-        'As of Nov 2026. Review the delivered work and decide whether more content is useful. Clinic content operations can be scoped at US$2,500 per month for four FAQ drafts, eight social drafts, and a monthly report. Software content maintenance is scoped around actual updates. Neither pilot renews automatically.',
+      footnote: `${EN_PRICING.asOfLabel}. Review the delivered work and decide whether more content is useful. Clinic content operations can be scoped around ${P.clinicMonthlyInline} for ${EN_PRICING.monthlyFaqDrafts} FAQ drafts, ${EN_PRICING.monthlySocialDrafts} social drafts, and a monthly report. Software content maintenance is scoped around actual updates. Neither pilot renews automatically.`,
     },
     proof: {
       eyebrow: 'Built by a healthcare software team',
@@ -226,61 +227,337 @@ export const en: LocaleDict = {
       buttonLabel: 'Request a free audit',
     },
   },
-  subpages: {
-    how: {
-      metaTitle: 'How it works · zicks',
-      metaDescription: 'Review-first content workflow for clinics and healthcare software teams.',
+
+  /* ====== Phase 2: How it works (/how/) ====== */
+  how: {
+    metaTitle: 'How it works · zicks',
+    metaDescription:
+      'Review-first content workflow for clinics and healthcare software teams: approved source material, designated team sign-off, and agreed website measures.',
+    header: {
       eyebrow: 'How it works',
-      h1: 'Review first. Measure what happened.',
-      lead: 'Every project starts from approved source material, keeps sign-off with your designated reviewer, and agrees on practical website measures before work begins.',
+      h1Lines: ['Review first.', 'Measure what happened.'],
+      lead: 'Every engagement starts with your real questions or product workflows, keeps clinical or product approval with your team, and reports agreed website metrics honestly.',
+    },
+    loopBlock: {
+      chip: 'Step-by-step workflow',
+      heading: 'Structured drafting with human sign-off at the center',
+      body: 'We flag missing information instead of inventing an answer, prepare drafts, and record revisions.',
+      mockBadge: '4-stage pilot flow',
+      steps: [
+        {
+          num: '01',
+          title: 'Free visibility check & scope agreement',
+          desc: `Inspect crawler access, page metadata, and current AI answers (${enginesText}), then agree on topic, source material, reviewer, and schedule.`,
+          role: 'Baseline & scope',
+        },
+        {
+          num: '02',
+          title: 'Draft from approved source material',
+          desc: 'Turn recurring questions (stripped of patient details) or an approved demo walkthrough into clear drafts.',
+          role: 'zicks draft',
+        },
+        {
+          num: '03',
+          title: 'Designated reviewer sign-off',
+          desc: 'Your clinician or product lead checks accuracy and requests revisions before anything goes live.',
+          role: '✓ Team sign-off',
+          isHuman: true,
+        },
+        {
+          num: '04',
+          title: 'Your team publishes & reviews report',
+          desc: 'Your team publishes the approved pages, and we review agreed website data such as article visits and inquiry or demo-link clicks.',
+          role: 'Measured report',
+        },
+      ],
+    },
+    composition: {
+      eyebrow: 'Good starting inputs',
+      heading: 'What you can bring to a pilot',
+      lead: 'You do not need a finished content brief. Any of the following approved materials is enough to scope a focused project.',
+      items: [
+        {
+          tag: 'Input 01',
+          title: 'Recurring patient questions',
+          body: 'Common pre-visit, preparation, or follow-up questions your front desk or clinicians answer repeatedly—stripped of patient details.',
+        },
+        {
+          tag: 'Input 02',
+          title: 'Approved clinical explanations',
+          body: 'Existing handouts or clinician explanations that need to become clear, structured web articles and adapted social posts.',
+        },
+        {
+          tag: 'Input 03',
+          title: 'One software workflow',
+          body: 'A specific feature or onboarding step prospective buyers or current users ask your team to explain.',
+        },
+        {
+          tag: 'Input 04',
+          title: 'Approved demo environment',
+          body: 'A non-patient demo environment where we can capture and annotate up to ten clear workflow screenshots.',
+        },
+      ],
+    },
+    craft: {
+      eyebrow: 'Operating principles',
+      heading: 'Three rules we follow on every project',
+      lead: 'Built around your existing clinical and product review process.',
       cards: [
         {
-          badge: 'Step 1',
+          badge: 'Principle 01',
           title: 'Start with source material',
           body: 'Bring a recurring question, an approved explanation, or a product walkthrough. We flag missing information instead of inventing an answer.',
         },
         {
-          badge: 'Step 2',
+          badge: 'Principle 02',
           title: 'Keep approval with your team',
           body: 'We prepare drafts and record revisions. Your designated reviewer approves the content before your team publishes it.',
         },
         {
-          badge: 'Step 3',
+          badge: 'Principle 03',
           title: 'Choose a measurable next step',
           body: 'Agree on available measures, such as article visits and inquiry or demo-link clicks. Report them separately from customers and revenue.',
         },
       ],
-      note: 'Search rankings, AI citations, leads, and revenue are not guaranteed. Tracking setup and account access are agreed separately.',
-      nextLink: { label: 'Explore services →', slug: 'services' },
     },
-    services: {
-      metaTitle: 'Services · zicks',
-      metaDescription: 'Free visibility audits and scoped paid content pilots for clinics and healthcare software teams.',
-      eyebrow: 'Services',
-      h1: 'One focused project to start',
-      lead: 'Choose the audience you need to help. We agree on the topic, source material, reviewer, and schedule before work begins.',
-      cards: [
+    comparison: {
+      eyebrow: 'Working model comparison',
+      heading: 'How a zicks pilot differs',
+      legacyTitle: 'Typical content retainer',
+      zicksTitle: 'zicks scoped pilot',
+      rows: [
         {
-          badge: 'For clinics · US$1,250',
-          title: 'Patient-question content',
-          body: 'Fixed fee for a 30-day pilot, starting on an agreed date: two original FAQ drafts from recurring questions stripped of patient details, four adapted social post drafts, and a baseline + end-of-pilot report.',
+          topic: 'Source & accuracy',
+          legacy: 'Topics chosen by the agency',
+          zicks: 'Built from your approved inputs; missing facts flagged rather than invented',
         },
         {
-          badge: 'For software teams · US$2,500',
-          title: 'Explain one product workflow',
-          body: 'Fixed fee for one agreed workflow: three articles for a defined customer or buyer audience, up to ten annotated demo screenshots, and one consolidated revision round.',
+          topic: 'Publishing control',
+          legacy: 'Agency publishes on a set schedule',
+          zicks: 'Your clinician or product lead approves accuracy, and your team publishes',
         },
         {
-          badge: 'After a pilot',
-          title: 'Optional ongoing operations',
-          body: 'Review delivered work first. Clinic operations can be scoped at US$2,500/month (four FAQ drafts, eight social drafts, monthly report); software maintenance follows actual updates. Neither pilot renews automatically.',
+          topic: 'Commitment & reporting',
+          legacy: 'Ongoing monthly retainer',
+          zicks: 'Single focused pilot with no automatic renewal; visits and clicks reported separately from revenue',
         },
       ],
-      note: 'Website rebuilding, advertising, translation, video production, production integrations, patient data, and clinical protocols are outside these pilots.',
-      nextLink: { label: 'View pricing →', slug: 'pricing' },
     },
+    faq: {
+      eyebrow: 'FAQ',
+      heading: 'Common questions',
+      items: [
+        {
+          q: 'Who approves medical or product accuracy?',
+          a: 'Your designated clinician approves medical content, and your product lead checks software workflow accuracy. Nothing is published without your team’s approval.',
+        },
+        {
+          q: 'Do we share patient information?',
+          a: 'No. Please leave out patient information. Clinic pilots work from recurring questions stripped of patient details, and software pilots use an approved demo environment.',
+        },
+        {
+          q: 'Are search rankings or AI citations guaranteed?',
+          a: 'No. Search rankings, AI citations, leads, and revenue are not guaranteed. We agree on available website measures—such as article visits and inquiry or demo-link clicks—before work starts.',
+        },
+        {
+          q: 'What happens when a pilot ends?',
+          a: 'Neither pilot renews automatically. You review the delivered work and report first, then decide whether ongoing monthly content or update-based maintenance is useful.',
+        },
+      ],
+    },
+    bottomNav: {
+      heading: 'See the exact deliverables for clinics and software teams',
+      lead: 'Compare our two focused pilot scopes or start with a free one-page visibility audit.',
+      nextLabel: 'Next: Compare services →',
+      nextSlug: 'services',
+    },
+  },
+
+  /* ====== Phase 2: Services (/services/) ====== */
+  services: {
+    metaTitle: 'Services · zicks',
+    metaDescription:
+      'Free one-page visibility audits and scoped content pilots for clinics and healthcare software teams.',
+    header: {
+      eyebrow: 'Services',
+      h1Lines: ['Start with a free visibility check,', 'then run one focused pilot'],
+      lead: 'Choose the audience you need to help. Topic, source material, designated reviewer, and schedule are agreed before any paid work begins.',
+    },
+    featured: {
+      chip: 'Recommended starting path',
+      headingLines: ['See how your site reads', 'before scoping a pilot'],
+      body: `Send your website and one recurring question. We inspect crawler access, page structure, and how ${enginesText} currently describe your organization—then recommend a pilot only if there is a clear fit.`,
+      primaryBtn: { label: 'View pilot pricing', slug: 'pricing' },
+      secondaryBtn: { label: 'Request a free audit', slug: 'contact' },
+      mock: {
+        badge: 'Responsibility split',
+        title: 'Clear roles throughout the engagement',
+        items: [
+          { label: 'Free baseline crawler & visibility check', owner: 'zicks prepares' },
+          { label: 'Article, social, or annotated workflow drafts', owner: 'zicks prepares' },
+          { label: 'Clinical or product accuracy approval', owner: 'Your reviewer', isClientOwned: true },
+          { label: 'Publishing to your website or help center', owner: 'Your team', isClientOwned: true },
+        ],
+        footnote: 'Tracking setup and analytics account access are agreed separately.',
+      },
+    },
+    offersSection: {
+      id: 'pilots',
+      eyebrow: 'Scoped service options',
+      heading: 'Focused pilots & post-pilot options',
+      lead: 'Each pilot has explicit deliverables and clear boundaries on what is outside scope.',
+      cards: [
+        {
+          code: 'Clinics',
+          duration: '30-day pilot',
+          title: 'Patient-question content',
+          summary: 'Turn recurring patient questions into clinician-approved FAQ articles and adapted social posts.',
+          details: [
+            `${EN_PRICING.clinicFaqDrafts} original FAQ article drafts based on recurring questions stripped of patient details`,
+            `${EN_PRICING.clinicSocialDrafts} social post drafts adapted from those articles`,
+            'Baseline review and end-of-pilot report using available website data',
+            'Your clinician approves medical content; your team publishes it',
+          ],
+          boundaryNote:
+            'Outside this pilot: website rebuilding, advertising, translation, and video production.',
+        },
+        {
+          code: 'Software',
+          duration: '1 workflow',
+          title: 'Explain one product workflow',
+          summary: 'Clarify one important workflow for prospective buyers or existing customers.',
+          details: [
+            `${EN_PRICING.softwareArticles} articles for a defined customer or prospective-buyer audience`,
+            `Up to ${EN_PRICING.softwareScreenshots} annotated screenshots from an approved demo environment`,
+            'One consolidated revision round with your product lead',
+            'Help-center or marketing use agreed before drafting',
+          ],
+          boundaryNote:
+            'Outside this pilot: production integrations, patient data, and clinical protocols.',
+        },
+        {
+          code: 'After a pilot',
+          duration: 'Optional',
+          title: 'Post-pilot content operations',
+          summary: 'Available only after reviewing delivered pilot work. Neither pilot renews automatically.',
+          details: [
+            `Clinics: monthly operations for ${EN_PRICING.monthlyFaqDrafts} FAQ drafts, ${EN_PRICING.monthlySocialDrafts} social drafts, and a monthly report`,
+            'Healthcare software: maintenance scoped around actual product updates',
+            'Review delivered work first—neither pilot renews automatically',
+          ],
+        },
+      ],
+    },
+    boundaries: {
+      eyebrow: 'Scope & expectations',
+      heading: 'What we never promise · What we report instead',
+      notPromisedTitle: 'Not promised',
+      notPromisedItems: [
+        'Guaranteed Google rankings, AI search citations, patient volume, leads, or revenue',
+        'Unapproved clinical advice or work involving patient health records',
+      ],
+      reportedTitle: 'Agreed and delivered',
+      reportedItems: [
+        'Scoped drafts, revision records, and clear handoff for your team to publish',
+        'Available website measures—such as article visits and inquiry or demo-link clicks—reported separately from revenue',
+      ],
+      footnote: 'Clear scope protects both your reviewers’ time and your clinical or product standards.',
+    },
+    bottomNav: {
+      heading: 'Review reference pilot pricing and terms',
+      lead: 'See current reference fees for clinic and healthcare software pilots, with no automatic renewal.',
+      nextLabel: 'Next: View pricing →',
+      nextSlug: 'pricing',
+    },
+  },
+
+  /* ====== Phase 2: Pricing (/pricing/) ====== */
+  pricing: {
+    metaTitle: 'Pricing · zicks',
+    metaDescription: `Reference pilot pricing for clinics (${P.clinicPilot}) and healthcare software teams (${P.softwarePilot}). Agreed scope before starting, no automatic renewal.`,
+    header: {
+      asOfBadge: EN_PRICING.asOfLabel,
+      h1Lines: ['Scoped pilot pricing,', 'with no automatic renewal'],
+      lead: 'We agree on the topic, source material, designated reviewer, and schedule before work begins. Pricing below reflects our current reference structure and is confirmed with scope.',
+    },
+    starterBox: {
+      chip: 'Before any paid pilot',
+      headingLines: ['Start with a free audit,', 'confirm scope upfront'],
+      body: 'Email your website, one question or workflow, and who would review the work. MC will use that to discuss fit, a free visibility check, or pilot scope.',
+      badges: ['No auto-renewal', 'Scope agreed upfront', 'Leave out patient info'],
+      footnote:
+        'Tracking setup, analytics account access, and custom deliverable adjustments are agreed separately.',
+      timelineMock: {
+        badge: 'Typical engagement flow',
+        title: 'From initial check to end-of-pilot review',
+        milestones: [
+          { phase: 'Step 1', task: 'Free visibility check & confirm topic, reviewer, and schedule', tag: 'Pre-pilot' },
+          { phase: 'Step 2', task: 'Draft articles or workflow guides from approved inputs', tag: 'Drafting' },
+          { phase: 'Step 3', task: 'Clinician or product lead review & consolidated revisions', tag: 'Sign-off' },
+          { phase: 'Step 4', task: 'Team publishes · End-of-pilot report · No auto-renewal', tag: 'Wrap-up' },
+        ],
+      },
+    },
+    plansSection: {
+      eyebrow: 'Reference pilot fees',
+      heading: 'Choose the pilot that matches your team',
+      cards: [
+        {
+          badge: 'For clinics · 30 days',
+          title: 'Patient-question content pilot',
+          price: P.clinicPilot,
+          billingNote: 'Reference fee · 30-day pilot starting on an agreed date',
+          summary: 'For practices turning recurring patient questions into clinician-approved website pages.',
+          includes: [
+            `${EN_PRICING.clinicFaqDrafts} original FAQ article drafts (from questions stripped of patient details)`,
+            `${EN_PRICING.clinicSocialDrafts} social post drafts adapted from those articles`,
+            'Baseline review and end-of-pilot report using available website data',
+            'Approved by your clinician and published by your team',
+          ],
+          footnote: 'Excludes website rebuilding, advertising, translation, and video production.',
+          featured: true,
+        },
+        {
+          badge: 'For software teams · 1 workflow',
+          title: 'Product workflow guide pilot',
+          price: P.softwarePilot,
+          billingNote: 'Reference fee · One agreed product workflow',
+          summary: 'For healthcare software teams explaining a key workflow to buyers or users.',
+          includes: [
+            `${EN_PRICING.softwareArticles} articles for a defined customer or prospective-buyer audience`,
+            `Up to ${EN_PRICING.softwareScreenshots} annotated screenshots from an approved demo environment`,
+            'One consolidated revision round with your product lead',
+            'Help-center or marketing placement agreed before drafting',
+          ],
+          footnote: 'Excludes production integrations, patient data, and clinical protocols.',
+          featured: true,
+        },
+        {
+          badge: 'Optional · Post-pilot',
+          title: 'Ongoing clinic operations',
+          price: P.clinicMonthly,
+          billingNote: 'Reference monthly scope · Decided only after a pilot',
+          summary: 'Review delivered pilot work first, then decide whether ongoing monthly output helps.',
+          includes: [
+            `Clinics: ${EN_PRICING.monthlyFaqDrafts} FAQ article drafts per month with clinician approval`,
+            `${EN_PRICING.monthlySocialDrafts} adapted social post drafts per month`,
+            'Monthly website data report',
+          ],
+          footnote: 'Software content maintenance is scoped around actual product updates rather than a fixed monthly volume.',
+        },
+      ],
+    },
+    bottomNav: {
+      heading: 'Ready to see how your website reads today?',
+      lead: 'Send your URL and one question patients or buyers keep asking. Please leave out any patient information.',
+      nextLabel: 'Learn about our background →',
+      nextSlug: 'cases',
+    },
+  },
+
+  subpages: {
     cases: {
-      metaTitle: 'Case study · zicks',
+      metaTitle: 'Background · zicks',
       metaDescription: 'Built by MoDoc AI, the healthcare software team operating FeverCoach.',
       eyebrow: 'Background',
       h1: 'Built by a healthcare software team',
@@ -304,32 +581,6 @@ export const en: LocaleDict = {
       ],
       note: 'Client case studies are published only with written consent.',
       nextLink: { label: 'View pricing →', slug: 'pricing' },
-    },
-    pricing: {
-      metaTitle: 'Pricing · zicks',
-      metaDescription: 'Fixed-fee content pilots for clinics and healthcare software teams (as of Nov 2026).',
-      eyebrow: 'Pricing · As of Nov 2026',
-      h1: 'Scoped fixed-fee pilots',
-      lead: 'Topic, source material, reviewer, and schedule are agreed before work begins. Neither pilot renews automatically.',
-      cards: [
-        {
-          badge: 'For clinics',
-          title: 'US$1,250',
-          body: 'Fixed fee for a 30-day pilot, starting on an agreed date. Two FAQ drafts, four social post drafts, baseline review, and end-of-pilot report.',
-        },
-        {
-          badge: 'For healthcare software teams',
-          title: 'US$2,500',
-          body: 'Fixed fee for one agreed workflow. Three articles, up to ten annotated demo screenshots, and one consolidated revision round.',
-        },
-        {
-          badge: 'Optional post-pilot clinic ops',
-          title: 'US$2,500 / month',
-          body: 'Four FAQ drafts, eight social drafts, and a monthly report after reviewing pilot results. Software maintenance is scoped around actual updates.',
-        },
-      ],
-      note: 'Tracking setup and account access are agreed separately.',
-      nextLink: { label: 'Request a free audit →', slug: 'contact' },
     },
     contact: {
       metaTitle: 'Request a free audit · zicks',
