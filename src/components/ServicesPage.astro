@@ -1,162 +1,110 @@
 ---
 import Base from '../layouts/Base.astro';
-import { getDict, pagePath, type Locale } from '../i18n';
+import { getDict, linkHref, type Market } from '../i18n';
+import BottomCta from './ui/BottomCta.astro';
+import CheckList from './ui/CheckList.astro';
+import Lines from './ui/Lines.astro';
+import SubHero from './ui/SubHero.astro';
 
-interface Props {
-  locale: Locale;
-}
-
-const { locale } = Astro.props;
-const dict = getDict(locale);
-const s = dict.services;
+const { market } = Astro.props as { market: Market };
+const c = getDict(market).services;
+const other = c.offers.other;
 ---
-<Base
-  locale={locale}
-  slug="services"
-  title={s.metaTitle}
-  description={s.metaDescription}
->
-  <!-- 상단 머리말 -->
-  <section class="sub-hero">
-    <div class="container">
-      <h1>
-        {s.header.h1Lines.map((line, idx) => (
-          <>
-            {idx > 0 && <>{' '}<br class="desktop-br" /></>}
-            {line}
-          </>
-        ))}
-      </h1>
-      <p class="sub-lead">{s.header.lead}</p>
-    </div>
-  </section>
+<Base market={market} slug="services" title={c.metaTitle} description={c.metaDescription}>
+  <SubHero market={market} hero={c.hero} />
 
-  <!-- 1. 권장 시작 조합 특대 블록 + 인계 패키지 / 역할 분담 목업 -->
-  <section class="sec-white">
-    <div class="container">
-      <div class="split-showcase">
-        <div>
-          <span class="bento-chip purple">{s.featured.chip}</span>
-          <h2>
-            {s.featured.headingLines.map((line, idx) => (
-              <>
-                {idx > 0 && <>{' '}<br class="desktop-br" /></>}
-                {line}
-              </>
+  <section class="sec sec-white">
+    <div class="container split">
+      <div class="split-copy">
+        <h2><Lines text={c.roles.heading} /></h2>
+        <p class="sec-lead">{c.roles.lead}</p>
+      </div>
+      <div class="split-body">
+        <table class="data-table roles-table">
+          <caption>{c.roles.caption}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{c.roles.headers[0]}</th>
+              <th scope="col" class="col-owner">{c.roles.headers[1]}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {c.roles.rows.map((row) => (
+              <tr>
+                <td>{row.task}</td>
+                <td class:list={['cell-owner', row.client && 'is-client']}>{row.owner}</td>
+              </tr>
             ))}
-          </h2>
-          <p class="split-body">{s.featured.body}</p>
-          <div class="btn-row">
-            <a class="btn-solid" href={pagePath(locale, s.featured.primaryBtn.slug)}>
-              {s.featured.primaryBtn.label}
-            </a>
-            <a class="btn-tint" href={pagePath(locale, s.featured.secondaryBtn.slug)}>
-              {s.featured.secondaryBtn.label}
-            </a>
-          </div>
-        </div>
-
-        <figure class="ui-panel" aria-label={s.featured.mock.title}>
-          <div class="ui-panel-head">
-            <span class="ui-panel-title">{s.featured.mock.title}</span>
-            <span class="mock-tag">{s.featured.mock.badge}</span>
-          </div>
-          <div class="step-card-list">
-            {s.featured.mock.items.map((item) => (
-              <div class={`flow-row${item.isClientOwned ? ' is-human' : ''}`}>
-                <span>✓ {item.label}</span>
-                <span class={`role-pill ${item.isClientOwned ? 'human' : 'auto'}`}>
-                  {item.owner}
-                </span>
-              </div>
-            ))}
-          </div>
-          <figcaption class="mock-footnote">{s.featured.mock.footnote}</figcaption>
-        </figure>
+          </tbody>
+        </table>
+        <p class="small-note">{c.roles.note}</p>
       </div>
     </div>
   </section>
 
-  <!-- 2. 세 가지 서비스 상세 카드 -->
-  <section class="sec-light" id={s.offersSection.id}>
+  <section class="sec sec-gray">
     <div class="container">
-      <div class="sec-head">
-        <h2>{s.offersSection.heading}</h2>
-        <p>{s.offersSection.lead}</p>
-      </div>
-
-      <div class="offers-grid">
-        {s.offersSection.cards.map((card) => (
-          <article class="offer-card">
-            <div>
-              <div class="offer-meta-row">
-                <span class="offer-duration">{card.duration}</span>
-                {card.recommendedTag && (
-                  <span class="offer-rec">{card.recommendedTag}</span>
-                )}
-              </div>
-              <h3>{card.title}</h3>
-              <p class="offer-summary">{card.summary}</p>
-              <ul class="offer-list">
-                {card.details.map((d) => (
-                  <li>{d}</li>
-                ))}
-              </ul>
+      <h2><Lines text={c.offers.heading} /></h2>
+      <p class="sec-lead">{c.offers.lead}</p>
+      <div class="offer-rows">
+        {c.offers.items.map((item) => (
+          <div class="offer-row">
+            <div class="offer-copy">
+              <h3>{item.title}</h3>
+              <p class="offer-meta">{item.meta}</p>
+              <p class="offer-summary">{item.summary}</p>
             </div>
-            {card.boundaryNote && (
-              <p class="offer-boundary">{card.boundaryNote}</p>
-            )}
-          </article>
+            <div class="offer-body">
+              <CheckList items={item.points} />
+              {item.foot && (
+                <p class="foot-line">
+                  {item.foot.label && <><strong>{item.foot.label}</strong>&nbsp; </>}
+                  {item.foot.text}
+                </p>
+              )}
+            </div>
+          </div>
         ))}
       </div>
+
+      {other && (
+        <div class="other-box" id={other.id}>
+          <div class="other-copy">
+            <h3>{other.title}</h3>
+            <p>{other.body}</p>
+          </div>
+          <div class="other-body">
+            <dl class="def-list is-compact">
+              {other.rows.map((row) => (
+                <div>
+                  <dt>{row.label}</dt>
+                  <dd>{row.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <a class="text-link" href={linkHref(market, other.link)}>{other.link.label}</a>
+          </div>
+        </div>
+      )}
     </div>
   </section>
 
-  <!-- 3. 약속하지 않는 것 · 대신 보고하는 것 -->
-  <section class="sec-white">
+  <section class="sec sec-white">
     <div class="container">
-      <div class="sec-head">
-        <h2>{s.boundaries.heading}</h2>
-      </div>
-
-      <div class="boundary-grid">
-        <div class="boundary-box">
-          <h3>{s.boundaries.notPromisedTitle}</h3>
-          <ul>
-            {s.boundaries.notPromisedItems.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
+      <h2><Lines text={c.boundaries.heading} /></h2>
+      <div class="rule-cols is-two">
+        <div>
+          <h3 class="rule-title">{c.boundaries.notTitle}</h3>
+          <CheckList items={c.boundaries.notItems} variant="x" />
         </div>
-        <div class="boundary-box positive">
-          <h3>{s.boundaries.reportedTitle}</h3>
-          <ul>
-            {s.boundaries.reportedItems.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
+        <div>
+          <h3 class="rule-title">{c.boundaries.yesTitle}</h3>
+          <CheckList items={c.boundaries.yesItems} variant="rows" />
         </div>
       </div>
-
-      <p class="note note-spaced">{s.boundaries.footnote}</p>
+      <p class="sec-note">{c.boundaries.note}</p>
     </div>
   </section>
 
-  <!-- 4. 하단 배너 + 가격 페이지 동선 -->
-  <section class="bottom-banner-sec">
-    <div class="container">
-      <div class="cta-banner">
-        <h2>{s.bottomNav.heading}</h2>
-        <p>{s.bottomNav.lead}</p>
-        <div class="banner-btns">
-          <a class="btn-solid" href={pagePath(locale, s.bottomNav.nextSlug)}>
-            {s.bottomNav.nextLabel}
-          </a>
-          <a class="btn-on-dark" href={pagePath(locale, 'contact')}>
-            {dict.ctaLabel}
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <BottomCta market={market} cta={c.bottomCta} />
 </Base>

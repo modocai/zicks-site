@@ -1,135 +1,95 @@
 ---
 import Base from '../layouts/Base.astro';
-import { assetPath, getDict, pagePath, type Locale } from '../i18n';
+import { getDict, type Market } from '../i18n';
+import BottomCta from './ui/BottomCta.astro';
+import Lines from './ui/Lines.astro';
+import SubHero from './ui/SubHero.astro';
 
-interface Props {
-  locale: Locale;
-}
-
-const { locale } = Astro.props;
-const dict = getDict(locale);
-const c = dict.cases;
+const { market } = Astro.props as { market: Market };
+const c = getDict(market).cases;
+const m = c.metrics;
 ---
-<Base
-  locale={locale}
-  slug="cases"
-  title={c.metaTitle}
-  description={c.metaDescription}
->
-  <!-- 상단 머리말 -->
-  <section class="sub-hero">
-    <div class="container">
-      <h1>
-        {c.header.h1Lines.map((line, idx) => (
-          <>
-            {idx > 0 && <>{' '}<br class="desktop-br" /></>}
-            {line}
-          </>
-        ))}
-      </h1>
-      <p class="sub-lead">{c.header.lead}</p>
+<Base market={market} slug="cases" title={c.metaTitle} description={c.metaDescription}>
+  <SubHero market={market} hero={c.hero}>
+    <div class="logo-row">
+      <span class="logo-fevercoach">
+        <img src="/images/fevercoach_Logo-without-background.png" alt="" width="36" height="36" />
+        <span>FeverCoach</span>
+      </span>
+      <img class="logo-modoc" src="/images/modoc-ai-logo-light.webp" alt="MoDoc AI" height="30" />
+    </div>
+  </SubHero>
+
+  <section class="sec sec-white">
+    <div class="container split">
+      <div class="split-copy">
+        <h2><Lines text={c.about.heading} /></h2>
+        <p class="sec-lead">{c.about.lead}</p>
+      </div>
+      {c.about.facts && (
+        <dl class="split-body def-list">
+          {c.about.facts.map((fact) => (
+            <div>
+              <dt>{fact.term}</dt>
+              <dd>
+                {fact.desc}
+                {fact.link && <>{' '}<a href={fact.link.href} rel="noopener">{fact.link.label}</a></>}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </div>
+    <div class="container metrics-block">
+      <h3 class="h3-lg">{m.heading}</h3>
+      <div class="table-scroll">
+        <table class="data-table metrics-table">
+          <thead>
+            <tr>
+              <th scope="col">{m.headers[0]}</th>
+              <th scope="col" class="num col-before">{m.headers[1]}</th>
+              <th scope="col" class="num col-after">{m.headers[2]}</th>
+              <th scope="col" class="col-period">{m.headers[3]}</th>
+              <th scope="col" class="col-source">{m.headers[4]}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {m.rows.map((row) => (
+              <tr>
+                <th scope="row">
+                  {row.label}
+                  {row.sub && <div class="cell-sub">{row.sub}</div>}
+                </th>
+                <td class="num">{row.before}</td>
+                <td class="num cell-after">{row.after}</td>
+                <td>{row.period}</td>
+                <td>{row.source}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="small-note">{m.note}</p>
     </div>
   </section>
 
-  <!-- 1. FeverCoach 선행 검증 / 배경 지표 -->
-  <section class="sec-white">
-    <div class="container">
-      <div class="proof-top">
-        <div class="sec-head">
-          <h2>{c.fevercoach.heading}</h2>
-          <p>{c.fevercoach.lead}</p>
-        </div>
-
-        <div class="brand-cluster">
-          <a
-            class="fc-badge"
-            href="https://www.fevercoach.us"
-            target="_blank"
-            rel="noopener"
-          >
-            <img
-              src={assetPath('/images/fevercoach_Logo-without-background.png')}
-              alt="FeverCoach"
-              width="26"
-              height="26"
-              loading="lazy"
-            />
-            FeverCoach
-          </a>
-          <a href="https://www.modoc-ai.com" target="_blank" rel="noopener">
-            <img
-              class="modoc-badge-img"
-              src={assetPath('/images/modoc-ai-logo-light.webp')}
-              alt="MoDoc AI"
-              height="26"
-              loading="lazy"
-            />
-          </a>
-        </div>
+  <section class="sec sec-gray">
+    <div class="container split">
+      <div class="split-copy">
+        <h2><Lines text={c.site.heading} /></h2>
+        <p class="sec-lead">{c.site.lead}</p>
       </div>
-
-      <div class={c.fevercoach.stats.length === 3 ? 'stats-grid' : 'cases-stats-grid'}>
-        {c.fevercoach.stats.map((st) => (
-          <div class="stat-card">
-            <div class="stat-label">{st.label}</div>
-            <div class="stat-value">
-              {st.before ?? ''}
-              <em>{st.value}</em>
-            </div>
-            <div class="stat-caption">{st.caption}</div>
+      <div class="split-body row-list has-topline">
+        {c.site.items.map((item) => (
+          <div>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+            {item.link && <a class="text-link" href={item.link.asset}>{item.link.label}</a>}
           </div>
         ))}
       </div>
-
-      <div class="ledger-callout">
-        <p>{c.fevercoach.ledgerNote}</p>
-      </div>
     </div>
   </section>
 
-  <!-- 2. zicks 자체 사이트 적용 체크카드 -->
-  <section class="sec-light">
-    <div class="container">
-      <div class="sec-head">
-        <h2>{c.thisSite.heading}</h2>
-        <p>{c.thisSite.lead}</p>
-      </div>
-
-      <div class="offers-grid">
-        {c.thisSite.checks.map((chk) => (
-          <article class="offer-card">
-            <div>
-              <h3>{chk.title}</h3>
-              <p class="offer-summary">{chk.body}</p>
-            </div>
-            {chk.assetLink && (
-              <div class="asset-link-wrap">
-                <a class="asset-chip-link" href={assetPath(chk.assetLink.relPath)}>
-                  {chk.assetLink.label}
-                </a>
-              </div>
-            )}
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. 고객사 공개 원칙 & 하단 전환 배너 -->
-  <section class="bottom-banner-sec with-top-pad">
-    <div class="container">
-      <div class="cta-banner">
-        <h2>{c.clientPolicy.heading}</h2>
-        <p>{c.clientPolicy.body}</p>
-        <div class="banner-btns">
-          <a class="btn-solid" href={pagePath(locale, 'contact')}>
-            {c.clientPolicy.ctaLabel}
-          </a>
-          <a class="btn-on-dark" href={pagePath(locale, c.clientPolicy.secondarySlug)}>
-            {c.clientPolicy.secondaryLabel}
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <BottomCta market={market} cta={c.closing} tone="white" />
 </Base>

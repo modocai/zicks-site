@@ -1,0 +1,20 @@
+---
+import { linkHref, type Market, type SubHero } from '../../i18n';
+import Lines from './Lines.astro';
+
+const { market, hero } = Astro.props as { market: Market; hero: SubHero };
+---
+<section class="sub-hero">
+  <div class="container">
+    <h1><Lines text={hero.title} /></h1>
+    <p class="hero-lead">{hero.lead}</p>
+    {(hero.primary || hero.secondary) && (
+      <div class="btn-row">
+        {hero.primary && <a class="btn-solid" href={linkHref(market, hero.primary)}>{hero.primary.label}</a>}
+        {hero.secondary && <a class="btn-tint" href={linkHref(market, hero.secondary)}>{hero.secondary.label}</a>}
+      </div>
+    )}
+    {hero.note && <p class="hero-note">{hero.note}</p>}
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,11 @@
+---
+/* '\n'으로 나눈 제목 문자열을 <br>로 그린다 */
+const { text } = Astro.props as { text: string };
+const lines = text.split('\n');
+---
+{lines.map((line, i) => (
+  <>
+    {i > 0 && <br />}
+    {line}
+  </>
+))}

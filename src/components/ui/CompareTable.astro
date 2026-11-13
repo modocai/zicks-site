@@ -1,0 +1,25 @@
+---
+import type { Compare } from '../../i18n';
+
+const { compare } = Astro.props as { compare: Compare };
+---
+<div class="table-scroll compare-wrap">
+  <table class="data-table compare-table">
+    <thead>
+      <tr>
+        <th scope="col" class="col-topic">{compare.headers[0]}</th>
+        <th scope="col" class="col-legacy">{compare.headers[1]}</th>
+        <th scope="col" class="col-zicks">{compare.headers[2]}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {compare.rows.map((row) => (
+        <tr>
+          <th scope="row">{row.topic}</th>
+          <td>{row.legacy}</td>
+          <td class="col-zicks">{row.zicks}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

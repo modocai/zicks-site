@@ -1,0 +1,22 @@
+---
+import { linkHref, type Cta, type Market } from '../../i18n';
+import Lines from './Lines.astro';
+
+/* 바로 위 섹션이 회색이면 tone="white" */
+const { market, cta, tone = 'gray' } = Astro.props as { market: Market; cta: Cta; tone?: 'gray' | 'white' };
+---
+<section class:list={['sec', 'cta-sec', tone === 'gray' ? 'sec-gray' : 'sec-white']}>
+  <div class="container">
+    <h2 class="h2-lg"><Lines text={cta.heading} /></h2>
+    <p class="cta-lead">{cta.lead}</p>
+    <div class="btn-row">
+      <a class="btn-solid" href={linkHref(market, cta.primary)}>{cta.primary.label}</a>
+      <a class="btn-tint" href={linkHref(market, cta.secondary)}>{cta.secondary.label}</a>
+    </div>
+    {cta.note && (
+      <p class="cta-note">
+        {cta.note.before}<a href={linkHref(market, cta.note.link)}>{cta.note.link.label}</a>{cta.note.after}
+      </p>
+    )}
+  </div>
+</section>

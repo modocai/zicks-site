@@ -1,32 +1,43 @@
 # zicks
 
-> Official website of zicks by MoDoc AI (`https://zicks.modoc-ai.com`). Default root (`/`) serves English pages for US clinics and healthcare software teams; `/ko/` serves Korean pages for GEO & SEO content operations in South Korea.
+> Official website of zicks by MoDoc AI (`https://zicks.modoc-ai.com`). Two markets, three page sets: the root (`/`) serves US clinics in English, `/us/ko/` serves the same US clinic service in Korean, and `/kr/` serves a separate service for hagwons (학원) and education businesses in South Korea.
 
-## English Pages (Default · US Healthcare Teams)
-- [Home](https://zicks.modoc-ai.com/): Overview of free website visibility audits (`ChatGPT · Claude · Gemini · Perplexity`) and scoped paid content pilots for clinics and healthcare software teams
-- [How it works](https://zicks.modoc-ai.com/how/): Review-first workflow, starting inputs, operating principles, and FAQ
-- [Services](https://zicks.modoc-ai.com/services/): Patient-question content pilot (clinics), product workflow guide pilot (healthcare software), and optional post-pilot operations
-- [Background](https://zicks.modoc-ai.com/cases/): MoDoc AI background, in-house product FeverCoach, open static web architecture, and client confidentiality policy
-- [Pricing](https://zicks.modoc-ai.com/pricing/): Current reference pilot fees and scope boundaries (no automatic renewal)
-- [Contact](https://zicks.modoc-ai.com/contact/): Request a free visibility audit or discuss pilot fit (`admin@modoc-ai.com`)
+## US clinics, English (`/`)
+- [Home](https://zicks.modoc-ai.com/): A free audit of what ChatGPT, Claude, Gemini, Perplexity, and Google AI Overviews tell patients about a clinic, and a 30-day pilot that turns recurring front-desk questions into clinician-approved pages
+- [How it works](https://zicks.modoc-ai.com/how/): Four steps from audit to report, starting inputs, operating principles, and FAQ
+- [Services](https://zicks.modoc-ai.com/services/): Free visibility audit, 30-day patient-question content pilot, optional monthly content operations, and an option for teams outside clinics
+- [Background](https://zicks.modoc-ai.com/cases/): MoDoc AI, the physician-founded team behind the in-house app FeverCoach, its weekly blog measurements, and how this website is built
+- [Pricing](https://zicks.modoc-ai.com/pricing/): Current reference fees and scope boundaries (no automatic renewal)
+- [Get a free audit](https://zicks.modoc-ai.com/contact/): What to email (`admin@modoc-ai.com`) and what the one-page audit covers
 
-## Key Facts (English)
+## US clinics, Korean (`/us/ko/`)
+The same US clinic service as the English pages, written in Korean for Korean-speaking clinic owners and staff in the United States.
+- [홈](https://zicks.modoc-ai.com/us/ko/)
+- [진행 방식](https://zicks.modoc-ai.com/us/ko/how/)
+- [서비스](https://zicks.modoc-ai.com/us/ko/services/)
+- [팀 소개](https://zicks.modoc-ai.com/us/ko/cases/)
+- [가격](https://zicks.modoc-ai.com/us/ko/pricing/)
+- [무료 진단 받기](https://zicks.modoc-ai.com/us/ko/contact/)
+
+## Key facts (US)
 - Operator: MoDoc AI, Inc. (`163 Highland Ave #1015, Needham, MA 02494, United States`). Founder: Myeongchan (MC) Kim, MD.
-- First in-house product: FeverCoach (`https://www.fevercoach.us`), built by physicians. Its Q&A corpus has 2,400+ physician-reviewed answers.
-- Boundaries: Your designated clinician or product lead approves accuracy before your team publishes. Please leave out patient information. Search rankings, AI citations, leads, and revenue are not guaranteed.
+- In-house product: FeverCoach (`https://www.fevercoach.us`), a pediatric fever app built by physicians, with 2,400+ physician-reviewed answers.
+- FeverCoach blog, measured June to October 2026 (own product, not a client result): Google search clicks 460 to 2,910 over 11 weeks; Google AI impressions about 300 to 3,500 a day (98.1K over 3 months, Google Search Console); referring domains 160 to 631 in about 4 months.
+- Boundaries: the clinic's designated clinician approves medical content and the clinic publishes it. Please leave out patient information. Search rankings, AI citations, leads, and revenue are not guaranteed.
 
 ---
 
-## 한국어 페이지 (`/ko/` · 국내 GEO · SEO 콘텐츠 운영)
-- [홈](https://zicks.modoc-ai.com/ko/): AI native GEO · SEO 운영 엔진 소개와 AI가 업체를 고르는 네 조건
-- [어떻게 일하나](https://zicks.modoc-ai.com/ko/how/): 주간 고정 질문 측정 루프(`ChatGPT · Claude · Gemini · Perplexity · 네이버`), 질문 다섯 갈래 구성, 원고 · 검수 규격, FAQ
-- [서비스](https://zicks.modoc-ai.com/ko/services/): 기반 정비(구성 A) · 콘텐츠 · 측정 운영(구성 C) · 홈페이지 이관(구성 B) 및 인계 자산
-- [사례](https://zicks.modoc-ai.com/ko/cases/): 자사 소아 발열 앱 FeverCoach 검증 성과와 zicks 자체 사이트 적용 현황
-- [가격](https://zicks.modoc-ai.com/ko/pricing/): 구성별 기준 금액과 완료 보고 뒤 청구하는 후불 정산 조건
-- [무료 진단 요청](https://zicks.modoc-ai.com/ko/contact/): 홈페이지 무료 1장 진단 요청 (`admin@modoc-ai.com`)
+## 한국 학원과 교육업체 (`/kr/`)
+미국 페이지의 번역이 아닌 별도 서비스입니다. 학부모가 상담에서 묻는 질문을 고정해 AI 검색 답변을 매주 측정하고, 빠진 자리를 원장님이나 담당 강사가 검수한 글로 채웁니다.
+- [홈](https://zicks.modoc-ai.com/kr/): 고정 질문 20개 주간 측정, AI가 학원을 추천할 때 보는 네 가지
+- [진행 방식](https://zicks.modoc-ai.com/kr/how/): 주간 측정, 다음 주 주제 추천, 원장님 검수와 서명, 게시와 재측정
+- [서비스](https://zicks.modoc-ai.com/kr/services/): 기반 정비(구성 A), 홈페이지 이관(구성 B), 콘텐츠와 측정 운영(구성 C)
+- [사례](https://zicks.modoc-ai.com/kr/cases/): 자사 소아 발열 앱 FeverCoach 블로그 기록과 zicks 자체 사이트 운영 기록
+- [가격](https://zicks.modoc-ai.com/kr/pricing/): 구성별 기준 금액과 완료 보고 뒤 청구하는 후불 정산 조건 (VAT 별도)
+- [무료 진단 받기](https://zicks.modoc-ai.com/kr/contact/): 홈페이지나 블로그 주소로 받는 무료 진단서 한 장 (`admin@modoc-ai.com`)
 
-## 핵심 사실 (한국어)
-- 운영사: 모닥에이아이코리아 (MoDoc AI). 대표 김명찬 (의사 · 창업자).
-- 선행 검증 (자사 제품 FeverCoach 블로그, 2026-06 → 2026-10): 의사가 검수한 답변 2,400개 이상을 재료로 다국어 블로그 발행 — 11주 Google 검색 클릭 `460 → 2,910` · 등록 페이지 `318 → 2,096`, 3개월 구글 생성형 AI 노출 `98.1K` (일간 약 `300 → 3,500`, Google Search Console), 약 4개월 참조 도메인 `160 → 631`.
-- 운영 원칙: 현장 담당자 서명 없는 글은 게시하지 않으며, 종료 시 측정 기록 · 매뉴얼 · 도구 사용권을 인계합니다.
-- 보장하지 않는 것: AI 추천 순위 · 검색 순위 · 매출 증가.
+## 핵심 사실 (한국)
+- 운영사: 모닥에이아이코리아 (MoDoc AI). 대표 김명찬 (의사, 창업자).
+- 선행 검증 (자사 제품 FeverCoach 블로그, 2026년 6월부터 10월): 의사가 검수한 답변 2,400개 이상을 재료로 블로그 발행. 11주 Google 검색 클릭 460에서 2,910, 3개월 구글 생성형 AI 노출 98.1K (일간 약 300에서 3,500, Google Search Console), 약 4개월 외부 링크 도메인 160에서 631.
+- 운영 원칙: 원장님이나 담당 강사의 서명 없는 글은 게시하지 않습니다. 고정 질문 목록, 주차별 측정 기록, 운영 매뉴얼은 학원 소유입니다.
+- 보장하지 않는 것: AI 추천 순위, 검색 순위, 원생 모집, 매출 증가.

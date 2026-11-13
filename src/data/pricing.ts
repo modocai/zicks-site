@@ -1,8 +1,8 @@
 /**
- * 한/영 가격 및 기본 산출물 단위 단일 관리 파일 (Single Source of Truth)
- * - 추후 가격 책정 프로세스 완료 시 아래 값만 수정하면
- *   홈(#pilots), 서비스, 가격 페이지 본문과 합계·메타 설명이 모두 함께 갱신됩니다.
- * - 가안 기간 동안 JSON-LD 구조화 코드에는 Offer/price 를 넣지 않습니다.
+ * 가격과 기본 산출물 수량 단일 관리 파일 (Single Source of Truth)
+ * - 미국(us-en, us-ko)은 US_PRICING, 한국(kr)은 KR_PRICING을 쓴다.
+ * - 아래 값만 바꾸면 홈, 서비스, 가격 페이지 본문과 메타 설명이 함께 바뀐다.
+ * - 가안 기간 동안 JSON-LD 구조화 코드에는 Offer/price 를 넣지 않는다.
  */
 
 function addCommas(n: number): string {
@@ -24,8 +24,40 @@ export function formatUsd(usd: number): string {
   return `US$${addCommas(usd)}`;
 }
 
-const koRaw = {
-  asOfLabel: '2026년 11월 기준 · 범위 협의 후 확정',
+const EN_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+
+/** 영어 문장 속 수량 (10 이하는 단어로) */
+export function enCount(n: number, capitalize = false): string {
+  const word = EN_WORDS[n] ?? String(n);
+  return capitalize ? word[0]!.toUpperCase() + word.slice(1) : word;
+}
+
+const usRaw = {
+  clinicPilot: 1_250,
+  clinicMonthly: 2_500,
+  nonClinicPilot: 2_500,
+  clinicFaqDrafts: 2,
+  clinicSocialDrafts: 4,
+  monthlyFaqDrafts: 4,
+  monthlySocialDrafts: 8,
+  nonClinicArticles: 3,
+} as const;
+
+export const US_PRICING = {
+  ...usRaw,
+  asOf: {
+    en: 'Reference fee as of Nov 2026, agreed per scope',
+    ko: '2026년 11월 기준 참고 가격이며, 범위에 따라 조정됩니다',
+  },
+  formatted: {
+    clinicPilot: formatUsd(usRaw.clinicPilot),
+    clinicMonthly: formatUsd(usRaw.clinicMonthly),
+    nonClinicPilot: formatUsd(usRaw.nonClinicPilot),
+  },
+} as const;
+
+const krRaw = {
+  asOfLabel: '2026년 11월 기준, 범위 협의 후 확정',
   planA: 3_000_000,
   planB: 2_500_000,
   planCMonthly: 2_500_000,
@@ -38,49 +70,26 @@ const koRaw = {
   hostingStaticMaxMan: 3,
 } as const;
 
-const koFirstMonthAC = koRaw.planA + koRaw.planCMonthly;
-const koThreeMonthsTotal = koRaw.planA + koRaw.planB + koRaw.planCMonthly * 3;
-const koThreeMonthsArticles = koRaw.monthlyArticles * 3;
+const krFirstMonthAC = krRaw.planA + krRaw.planCMonthly;
+const krThreeMonthsTotal = krRaw.planA + krRaw.planB + krRaw.planCMonthly * 3;
+const krThreeMonthsArticles = krRaw.monthlyArticles * 3;
 
-export const KO_PRICING = {
-  ...koRaw,
-  firstMonthAC: koFirstMonthAC,
-  threeMonthsTotal: koThreeMonthsTotal,
-  threeMonthsArticles: koThreeMonthsArticles,
+export const KR_PRICING = {
+  ...krRaw,
+  firstMonthAC: krFirstMonthAC,
+  threeMonthsTotal: krThreeMonthsTotal,
+  threeMonthsArticles: krThreeMonthsArticles,
   formatted: {
-    planA: formatKrw(koRaw.planA),
-    planAMan: formatManwon(koRaw.planA),
-    planB: formatKrw(koRaw.planB),
-    planBMan: formatManwon(koRaw.planB),
-    planCMonthly: `월 ${formatKrw(koRaw.planCMonthly)}`,
-    planCMonthlyMan: `월 ${formatManwon(koRaw.planCMonthly)}`,
-    optDiscovery: `월 ${formatKrw(koRaw.optDiscoveryMonthly)}`,
-    optMaintRange: `월 ${addCommas(koRaw.optMaintMin)}~${formatKrw(koRaw.optMaintMax)}`,
-    firstMonthACMan: formatManwon(koFirstMonthAC),
-    threeMonthsTotalMan: formatManwon(koThreeMonthsTotal),
-    hostingNote: `워드프레스 월 ${koRaw.hostingWpMinMan}~${koRaw.hostingWpMaxMan}만원, 정적 사이트 월 0~${koRaw.hostingStaticMaxMan}만원(고객 명의)`,
-  },
-} as const;
-
-const enRaw = {
-  asOfLabel: 'Reference pricing as of Nov 2026 · agreed per scope',
-  clinicPilot: 1_250,
-  softwarePilot: 2_500,
-  clinicMonthly: 2_500,
-  clinicFaqDrafts: 'Two',
-  clinicSocialDrafts: 'Four',
-  softwareArticles: 'Three',
-  softwareScreenshots: 'ten',
-  monthlyFaqDrafts: 'four',
-  monthlySocialDrafts: 'eight',
-} as const;
-
-export const EN_PRICING = {
-  ...enRaw,
-  formatted: {
-    clinicPilot: formatUsd(enRaw.clinicPilot),
-    softwarePilot: formatUsd(enRaw.softwarePilot),
-    clinicMonthly: `${formatUsd(enRaw.clinicMonthly)} / month`,
-    clinicMonthlyInline: `${formatUsd(enRaw.clinicMonthly)} per month`,
+    planA: formatKrw(krRaw.planA),
+    planAMan: formatManwon(krRaw.planA),
+    planB: formatKrw(krRaw.planB),
+    planBMan: formatManwon(krRaw.planB),
+    planCMonthly: `월 ${formatKrw(krRaw.planCMonthly)}`,
+    planCMonthlyMan: `월 ${formatManwon(krRaw.planCMonthly)}`,
+    optDiscovery: `월 ${formatKrw(krRaw.optDiscoveryMonthly)}`,
+    optMaintRange: `월 ${addCommas(krRaw.optMaintMin)}~${formatKrw(krRaw.optMaintMax)}`,
+    firstMonthACMan: formatManwon(krFirstMonthAC),
+    threeMonthsTotalMan: formatManwon(krThreeMonthsTotal),
+    hostingNote: `워드프레스 월 ${krRaw.hostingWpMinMan}~${krRaw.hostingWpMaxMan}만원, 정적 사이트 월 0~${krRaw.hostingStaticMaxMan}만원(고객 명의)`,
   },
 } as const;

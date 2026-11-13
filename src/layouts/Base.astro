@@ -1,60 +1,57 @@
 ---
 import '../styles/global.css';
 import {
-  assetPath,
   CONTACT_EMAIL,
-  DEFAULT_LOCALE,
+  DEFAULT_MARKET,
   getDict,
-  LOCALE_META,
-  LOCALES,
+  languagesOf,
+  MARKET_META,
+  MARKETS,
+  OTHER_MARKET,
   pageAbsUrl,
   pagePath,
-  type Locale,
+  type Market,
   type PageSlug,
 } from '../i18n';
 
 interface Props {
   title: string;
   description: string;
-  locale: Locale;
+  market: Market;
   slug: PageSlug;
-  extraSchema?: object | object[] | null;
+  extraSchema?: object | null;
 }
 
-const {
-  title,
-  description,
-  locale,
-  slug: resolvedSlug,
-  extraSchema = null,
-} = Astro.props;
+const { title, description, market, slug, extraSchema = null } = Astro.props;
 
-const dict = getDict(locale);
-const meta = LOCALE_META[locale];
-const siteOrigin = (Astro.site ?? new URL('https://zicks.modoc-ai.com')).toString().replace(/\/$/, '');
-const canonical = pageAbsUrl(locale, resolvedSlug);
-const ogImageUrl = `${siteOrigin}${assetPath('/images/modoc-ai-logo-dark.webp')}`;
-
-const founderObj: Record<string, string> = {
-  '@type': 'Person',
-  name: dict.orgSchema.founderName,
-  jobTitle: dict.orgSchema.founderJobTitle,
-};
-if (dict.orgSchema.founderHonorificSuffix) {
-  founderObj.honorificSuffix = dict.orgSchema.founderHonorificSuffix;
-}
+const dict = getDict(market);
+const meta = MARKET_META[market];
+const site = Astro.site;
+const canonical = pageAbsUrl(site, market, slug);
+const ogImageUrl = `${(site ?? new URL(canonical)).origin}/images/modoc-ai-logo-dark.webp`;
+const languages = languagesOf(meta.region);
+const otherMarket = OTHER_MARKET[meta.region];
+const otherMarketCookie = MARKET_META[otherMarket].region;
+const ogAlternates = [...new Set(MARKETS.map((m) => MARKET_META[m].ogLocale))].filter((l) => l !== meta.ogLocale);
 
 const orgSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: dict.orgSchema.name,
   alternateName: dict.orgSchema.alternateName,
-  url: pageAbsUrl(locale, ''),
+  url: pageAbsUrl(site, market),
   logo: ogImageUrl,
   description: dict.orgSchema.description,
   email: CONTACT_EMAIL,
-  founder: founderObj,
-  areaServed: ['KR', 'US'],
+  founder: {
+    '@type': 'Person',
+    name: dict.orgSchema.founderName,
+    jobTitle: dict.orgSchema.founderJobTitle,
+    ...(dict.orgSchema.founderHonorificSuffix && {
+      honorificSuffix: dict.orgSchema.founderHonorificSuffix,
+    }),
+  },
+  areaServed: meta.region.toUpperCase(),
   sameAs: ['https://www.modoc-ai.com', 'https://www.fevercoach.us'],
 };
 
@@ -62,21 +59,15 @@ const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: dict.serviceSchema.name,
-  provider: {
-    '@type': 'Organization',
-    name: dict.serviceSchema.providerName,
-  },
-  areaServed: meta.areaServed,
+  description: dict.serviceSchema.description,
+  provider: { '@type': 'Organization', name: dict.serviceSchema.providerName },
+  areaServed: meta.region.toUpperCase(),
+  inLanguage: meta.htmlLang,
   serviceType: dict.serviceSchema.serviceType,
-  url: pageAbsUrl(locale, 'services'),
+  url: pageAbsUrl(site, market, 'services'),
 };
 
-const rawExtras = extraSchema
-  ? Array.isArray(extraSchema)
-    ? extraSchema
-    : [extraSchema]
-  : [];
-const schemas = [orgSchema, serviceSchema, ...rawExtras];
+const schemas = [orgSchema, serviceSchema, ...(extraSchema ? [extraSchema] : [])];
 ---
 <!doctype html>
 <html lang={meta.htmlLang}>
@@ -86,15 +77,11 @@ const schemas = [orgSchema, serviceSchema, ...rawExtras];
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {LOCALES.map((loc) => (
-      <link
-        rel="alternate"
-        hreflang={LOCALE_META[loc].htmlLang}
-        href={pageAbsUrl(loc, resolvedSlug)}
-      />
+    {MARKETS.map((m) => (
+      <link rel="alternate" hreflang={MARKET_META[m].hreflang} href={pageAbsUrl(site, m, slug)} />
     ))}
-    <link rel="alternate" hreflang="x-default" href={pageAbsUrl(DEFAULT_LOCALE, resolvedSlug)} />
-    <link rel="icon" href={assetPath('/favicon.svg')} type="image/svg+xml" />
+    <link rel="alternate" hreflang="x-default" href={pageAbsUrl(site, DEFAULT_MARKET, slug)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link
       rel="stylesheet"
       crossorigin
@@ -103,59 +90,62 @@ const schemas = [orgSchema, serviceSchema, ...rawExtras];
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="zicks by MoDoc AI" />
     <meta property="og:locale" content={meta.ogLocale} />
-    {LOCALES.filter((l) => l !== locale).map((alt) => (
-      <meta property="og:locale:alternate" content={LOCALE_META[alt].ogLocale} />
-    ))}
+    {ogAlternates.map((alt) => <meta property="og:locale:alternate" content={alt} />)}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImageUrl} />
     <meta name="twitter:card" content="summary" />
-    {schemas.map((s) => (
-      <script type="application/ld+json" set:html={JSON.stringify(s)} />
-    ))}
+    {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
   </head>
   <body>
+    {dict.langHint && (
+      <div class="lang-hint" id="lang-hint" lang={dict.langHint.lang} hidden>
+        <div class="container">
+          {dict.langHint.text}{' '}
+          <a href={pagePath('us-ko', slug)} hreflang={MARKET_META['us-ko'].hreflang}>{dict.langHint.link}</a>
+        </div>
+      </div>
+    )}
+
     <header class="site-header">
       <div class="container header-row">
-        <a class="brand-link" href={pagePath(locale, '')}>
+        <a class="brand-link" href={pagePath(market)}>
           <span class="brand-name">zicks</span>
           <span class="brand-sub">{dict.brandSub}</span>
         </a>
 
         <nav class="nav-links" aria-label={dict.aria.primaryNav}>
           {dict.nav.map((item) => (
-            <a
-              href={pagePath(locale, item.slug)}
-              aria-current={resolvedSlug === item.slug ? 'page' : undefined}
-            >
+            <a href={pagePath(market, item.slug)} aria-current={slug === item.slug ? 'page' : undefined}>
               {item.label}
             </a>
           ))}
         </nav>
 
         <div class="header-actions">
-          <div class="lang-switch" role="group" aria-label={dict.aria.langSwitcher}>
-            {LOCALES.map((loc) => (
-              <a
-                href={pagePath(loc, resolvedSlug)}
-                aria-current={loc === locale ? 'true' : undefined}
-                lang={LOCALE_META[loc].htmlLang}
-                hreflang={LOCALE_META[loc].htmlLang}
-              >
-                {LOCALE_META[loc].nativeLabel}
-              </a>
-            ))}
-          </div>
-          <a class="header-cta" href={pagePath(locale, 'contact')}>
-            {dict.ctaLabel}
+          <a class="market-link" href={pagePath(otherMarket)} data-market={otherMarketCookie} lang={dict.marketLang}>
+            {dict.marketLink}
           </a>
+          {languages.length > 1 && (
+            <div class="lang-switch" role="group" aria-label={dict.aria.langSwitcher}>
+              {languages.map((m) => (
+                <a
+                  href={pagePath(m, slug)}
+                  aria-current={m === market ? 'true' : undefined}
+                  lang={m === market ? undefined : MARKET_META[m].htmlLang}
+                  hreflang={MARKET_META[m].hreflang}
+                >
+                  {MARKET_META[m].langLabel}
+                </a>
+              ))}
+            </div>
+          )}
+          <a class="header-cta" href={pagePath(market, 'contact')}>{dict.ctaLabel}</a>
         </div>
 
         <div class="mobile-actions">
-          <a class="header-cta" href={pagePath(locale, 'contact')}>
-            {dict.ctaLabel}
-          </a>
+          <a class="header-cta" href={pagePath(market, 'contact')}>{dict.ctaLabel}</a>
           <button
             type="button"
             class="menu-toggle"
@@ -171,7 +161,7 @@ const schemas = [orgSchema, serviceSchema, ...rawExtras];
               <line x1="4" y1="12" x2="20" y2="12" />
               <line x1="4" y1="17" x2="20" y2="17" />
             </svg>
-            <svg id="icon-close" aria-hidden="true" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <svg id="icon-close" aria-hidden="true" hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
               <line x1="6" y1="6" x2="18" y2="18" />
               <line x1="18" y1="6" x2="6" y2="18" />
             </svg>
@@ -182,27 +172,29 @@ const schemas = [orgSchema, serviceSchema, ...rawExtras];
       <div class="mobile-drawer" id="mobile-drawer">
         <nav class="mobile-nav-list" aria-label={dict.aria.mobileNav}>
           {dict.nav.map((item) => (
-            <a
-              href={pagePath(locale, item.slug)}
-              aria-current={resolvedSlug === item.slug ? 'page' : undefined}
-            >
+            <a href={pagePath(market, item.slug)} aria-current={slug === item.slug ? 'page' : undefined}>
               {item.label}
             </a>
           ))}
         </nav>
         <div class="mobile-switch-row">
-          <div class="lang-switch" role="group" aria-label={dict.aria.langSwitcher}>
-            {LOCALES.map((loc) => (
-              <a
-                href={pagePath(loc, resolvedSlug)}
-                aria-current={loc === locale ? 'true' : undefined}
-                lang={LOCALE_META[loc].htmlLang}
-                hreflang={LOCALE_META[loc].htmlLang}
-              >
-                {LOCALE_META[loc].nativeLabel}
-              </a>
-            ))}
-          </div>
+          {languages.length > 1 && (
+            <div class="lang-switch" role="group" aria-label={dict.aria.langSwitcher}>
+              {languages.map((m) => (
+                <a
+                  href={pagePath(m, slug)}
+                  aria-current={m === market ? 'true' : undefined}
+                  lang={m === market ? undefined : MARKET_META[m].htmlLang}
+                  hreflang={MARKET_META[m].hreflang}
+                >
+                  {MARKET_META[m].langLabel}
+                </a>
+              ))}
+            </div>
+          )}
+          <a class="market-link" href={pagePath(otherMarket)} data-market={otherMarketCookie} lang={dict.marketLang}>
+            {dict.marketLink}
+          </a>
         </div>
       </div>
     </header>
@@ -223,16 +215,15 @@ const schemas = [orgSchema, serviceSchema, ...rawExtras];
             </div>
           </div>
           <nav class="footer-nav" aria-label={dict.aria.footerNav}>
-            {dict.nav.map((item) => (
-              <a href={pagePath(locale, item.slug)}>{item.label}</a>
-            ))}
-            <a href={pagePath(locale, 'contact')}>{dict.ctaLabel}</a>
+            {dict.nav.map((item) => <a href={pagePath(market, item.slug)}>{item.label}</a>)}
+            <a href={pagePath(market, 'contact')}>{dict.ctaLabel}</a>
           </nav>
         </div>
 
         <div class="footer-bottom">
           <p>{dict.footer.disclaimer}</p>
           <div class="footer-links">
+            <a href={pagePath(otherMarket)} data-market={otherMarketCookie} lang={dict.marketLang}>{dict.marketLine}</a>
             <a href="https://www.modoc-ai.com" rel="noopener">modoc-ai.com</a>
             <a href="https://www.fevercoach.us" rel="noopener">FeverCoach</a>
           </div>
@@ -242,35 +233,40 @@ const schemas = [orgSchema, serviceSchema, ...rawExtras];
 
     <script is:inline>
       (() => {
+        // 시장 전환 링크를 누르면 선택을 1년 동안 기억한다. 루트의 한국 접속 리다이렉트(middleware.js)가 이 쿠키를 본다.
+        document.querySelectorAll('a[data-market]').forEach((a) => {
+          a.addEventListener('click', () => {
+            document.cookie = `zicks_market=${a.dataset.market}; Max-Age=31536000; Path=/; SameSite=Lax`;
+          });
+        });
+
+        // 한국어 브라우저로 미국 영어 페이지에 오면 한국어판 안내 띠만 보여 준다 (리다이렉트하지 않음).
+        const hint = document.getElementById('lang-hint');
+        if (hint && (navigator.languages || [navigator.language]).some((l) => /^ko\b/i.test(l))) {
+          hint.hidden = false;
+        }
+
         const btn = document.getElementById('menu-toggle-btn');
         const drawer = document.getElementById('mobile-drawer');
         const openIcon = document.getElementById('icon-open');
         const closeIcon = document.getElementById('icon-close');
-        if (btn && drawer) {
-          const setOpen = (open) => {
-            drawer.classList.toggle('is-open', open);
-            btn.setAttribute('aria-expanded', String(open));
-            btn.setAttribute(
-              'aria-label',
-              open ? btn.dataset.closeLabel || 'Close' : btn.dataset.openLabel || 'Menu'
-            );
-            if (openIcon && closeIcon) {
-              openIcon.style.display = open ? 'none' : 'block';
-              closeIcon.style.display = open ? 'block' : 'none';
-            }
-          };
-
-          btn.addEventListener('click', () => {
-            setOpen(!drawer.classList.contains('is-open'));
-          });
-
-          document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
-              setOpen(false);
-              btn.focus();
-            }
-          });
-        }
+        if (!btn || !drawer) return;
+        const setOpen = (open) => {
+          drawer.classList.toggle('is-open', open);
+          btn.setAttribute('aria-expanded', String(open));
+          btn.setAttribute('aria-label', open ? btn.dataset.closeLabel : btn.dataset.openLabel);
+          if (openIcon && closeIcon) {
+            openIcon.toggleAttribute('hidden', open);
+            closeIcon.toggleAttribute('hidden', !open);
+          }
+        };
+        btn.addEventListener('click', () => setOpen(!drawer.classList.contains('is-open')));
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+            setOpen(false);
+            btn.focus();
+          }
+        });
       })();
     </script>
   </body>

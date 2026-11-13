@@ -1,169 +1,124 @@
 ---
 import Base from '../layouts/Base.astro';
-import { CONTACT_EMAIL, getDict, type Locale } from '../i18n';
+import { CONTACT_EMAIL, getDict, type Market } from '../i18n';
+import Lines from './ui/Lines.astro';
 
-interface Props {
-  locale: Locale;
-}
-
-const { locale } = Astro.props;
-const dict = getDict(locale);
-const c = dict.contact;
-
-const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-  dict.inquiryMailto.subject
-)}&body=${encodeURIComponent(dict.inquiryMailto.body)}`;
+const { market } = Astro.props as { market: Market };
+const c = getDict(market).contact;
+const h = c.hero;
+const composeHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(h.mailSubject)}&body=${encodeURIComponent(h.mailBody)}`;
 ---
-<Base
-  locale={locale}
-  slug="contact"
-  title={c.metaTitle}
-  description={c.metaDescription}
->
-  <!-- 상단 머리말 -->
-  <section class="sub-hero">
-    <div class="container">
-      <h1>
-        {c.header.h1Lines.map((line, idx) => (
-          <>
-            {idx > 0 && <>{' '}<br class="desktop-br" /></>}
-            {line}
-          </>
-        ))}
-      </h1>
-      <p class="sub-lead">{c.header.lead}</p>
-    </div>
-  </section>
-
-  <!-- 메인 2열: 좌측 즉시 문의 패널 + 우측 1장 진단서 구성 안내 -->
-  <section class="sec-white">
-    <div class="container">
-      <div class="contact-grid">
-        <!-- 좌측 액션 패널 -->
-        <div class="contact-panel">
-          <div class="email-display-box">
-            <span class="email-display-label">{c.actionCard.emailLabel}</span>
-            <a class="email-address-text" href={mailtoHref}>{CONTACT_EMAIL}</a>
-          </div>
-
+<Base market={market} slug="contact" title={c.metaTitle} description={c.metaDescription}>
+  <section class="sub-hero contact-hero">
+    <div class="container split">
+      <div class="contact-copy">
+        <h1><Lines text={h.title} /></h1>
+        <p class="hero-lead">{h.lead}</p>
+        <div class="contact-email">
+          <div class="contact-email-label">{h.emailLabel}</div>
+          <a class="contact-email-address" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
           <div class="btn-row">
-            <a class="btn-solid" href={mailtoHref}>
-              {c.actionCard.composeBtn}
-            </a>
+            <a class="btn-solid" href={composeHref}>{h.composeLabel}</a>
             <button
               type="button"
               class="btn-tint"
               id="copy-email-btn"
               data-email={CONTACT_EMAIL}
-              data-default={c.actionCard.copyBtn}
-              data-copied={c.actionCard.copiedBtn}
+              data-default={h.copyLabel}
+              data-copied={h.copiedLabel}
             >
-              {c.actionCard.copyBtn}
+              {h.copyLabel}
             </button>
+            <span id="copy-status" class="sr-only" aria-live="polite"></span>
           </div>
-          <span id="copy-status" class="sr-only" aria-live="polite"></span>
-
-          <!-- 웹메일 사용자용 양식 안내 -->
-          <div class="template-guide-box">
-            <h2 class="contact-subhead">{c.actionCard.templateTitle}</h2>
-            <ol>
-              {c.actionCard.templateItems.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ol>
-          </div>
-
-          <!-- 담당자 실명 확인 카드 -->
-          <div class="reviewer-card">
-            <span class="bento-chip purple">
-              {c.actionCard.reviewerBadge}
-            </span>
-            <h2 class="contact-reviewer-head">{c.actionCard.reviewerTitle}</h2>
-            <p>{c.actionCard.reviewerBody}</p>
-          </div>
+          <p class="hero-note">{h.composeNote}</p>
         </div>
+      </div>
 
-        <!-- 우측 1장 진단서 구성 안내 -->
-        <figure class="mock-window contact-audit-mock">
-          <div class="mock-topbar">
-            <span class="sample-pill">
-                {c.auditMock.sampleBadge}
-              </span>
-            <span class="mock-tag">{c.auditMock.windowTag}</span>
-          </div>
+      <div class="contact-box">
+        <h2>{c.box.title}</h2>
+        <ol class="numbered-list">
+          {c.box.items.map((item, i) => (
+            <li>
+              <span class="numbered-num">{i + 1}</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ol>
+        <p class="box-note">{c.box.note}</p>
+        <div class="reviewer">
+          <div class="reviewer-label">{c.box.reviewerLabel}</div>
+          <div class="reviewer-name">{c.box.reviewerName}</div>
+          <div class="reviewer-info"><Lines text={c.box.reviewerInfo} /></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <h2 class="audit-mock-title">{c.auditMock.title}</h2>
-
-          <div class="step-card-list">
-            {c.auditMock.rows.map((row) => (
-              <div class="step-card-item">
-                <div class="step-card-top">
-                  <span class="step-card-name">
-                    <span class="step-num-tag">{row.num}</span>
-                    {row.title}
-                  </span>
-                  <span class="role-pill auto">{row.status}</span>
-                </div>
-                <p class="step-card-desc">{row.detail}</p>
-              </div>
+  <section class="sec sec-white">
+    <div class="container split">
+      <div class="split-copy">
+        <h2><Lines text={c.audit.heading} /></h2>
+        <p class="sec-lead">{c.audit.lead}</p>
+      </div>
+      <div class="split-body">
+        <table class="data-table audit-table">
+          <thead>
+            <tr>
+              <th scope="col" class="col-item">{c.audit.headers[0]}</th>
+              <th scope="col">{c.audit.headers[1]}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {c.audit.rows.map((row) => (
+              <tr>
+                <th scope="row">{row.title}</th>
+                <td>{row.detail}</td>
+              </tr>
             ))}
-          </div>
-
-          <figcaption class="mock-footnote">{c.auditMock.footnote}</figcaption>
-        </figure>
+          </tbody>
+        </table>
+        <p class="sec-note">{c.audit.note}</p>
       </div>
     </div>
   </section>
 
   <script>
-    (() => {
-      const btn = document.getElementById('copy-email-btn') as HTMLButtonElement | null;
-      const live = document.getElementById('copy-status');
-      if (!btn) return;
-      let timer: ReturnType<typeof setTimeout> | undefined;
+    const btn = document.getElementById('copy-email-btn') as HTMLButtonElement | null;
+    const live = document.getElementById('copy-status');
+    let timer: ReturnType<typeof setTimeout> | undefined;
 
-      const fallbackCopy = (text: string): boolean => {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.setAttribute('readonly', '');
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        const ok = document.execCommand('copy');
-        document.body.removeChild(ta);
-        return ok;
-      };
+    const fallbackCopy = (text: string): boolean => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.className = 'sr-only';
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return ok;
+    };
 
-      btn.addEventListener('click', async () => {
-        const email = btn.dataset.email || 'admin@modoc-ai.com';
-        const copiedLabel = btn.dataset.copied || '✓ Copied';
-        const defaultLabel = btn.dataset.default || 'Copy';
-        let copied = false;
-
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          try {
-            await navigator.clipboard.writeText(email);
-            copied = true;
-          } catch {
-            copied = fallbackCopy(email);
-          }
-        } else {
-          copied = fallbackCopy(email);
-        }
-
-        if (copied) {
-          btn.textContent = copiedLabel;
-          btn.classList.add('is-copied');
-          if (live) live.textContent = copiedLabel;
-          clearTimeout(timer);
-          timer = setTimeout(() => {
-            btn.textContent = defaultLabel;
-            btn.classList.remove('is-copied');
-            if (live) live.textContent = '';
-          }, 2200);
-        }
-      });
-    })();
+    btn?.addEventListener('click', async () => {
+      const email = btn.dataset.email ?? '';
+      let copied = false;
+      try {
+        await navigator.clipboard.writeText(email);
+        copied = true;
+      } catch {
+        copied = fallbackCopy(email);
+      }
+      if (!copied) return;
+      btn.textContent = btn.dataset.copied ?? '';
+      btn.classList.add('is-copied');
+      if (live) live.textContent = btn.dataset.copied ?? '';
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        btn.textContent = btn.dataset.default ?? '';
+        btn.classList.remove('is-copied');
+        if (live) live.textContent = '';
+      }, 2200);
+    });
   </script>
 </Base>

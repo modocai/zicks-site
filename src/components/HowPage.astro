@@ -1,14 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
-import { getDict, pagePath, type Locale } from '../i18n';
+import { getDict, type Market } from '../i18n';
+import BottomCta from './ui/BottomCta.astro';
+import CompareTable from './ui/CompareTable.astro';
+import Icon from './ui/Icon.astro';
+import Lines from './ui/Lines.astro';
+import SubHero from './ui/SubHero.astro';
 
-interface Props {
-  locale: Locale;
-}
-
-const { locale } = Astro.props;
-const dict = getDict(locale);
-const c = dict.how;
+const { market } = Astro.props as { market: Market };
+const c = getDict(market).how;
+const t = c.stepsTable;
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -16,179 +17,101 @@ const faqSchema = {
   mainEntity: c.faq.items.map((item) => ({
     '@type': 'Question',
     name: item.q,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: item.a,
-    },
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
   })),
 };
 ---
-<Base
-  locale={locale}
-  slug="how"
-  title={c.metaTitle}
-  description={c.metaDescription}
-  extraSchema={faqSchema}
->
-  <!-- 상단 머리말 -->
-  <section class="sub-hero">
-    <div class="container">
-      <h1>
-        {c.header.h1Lines.map((line, idx) => (
-          <>
-            {idx > 0 && <>{' '}<br class="desktop-br" /></>}
-            {line}
-          </>
-        ))}
-      </h1>
-      <p class="sub-lead">{c.header.lead}</p>
-    </div>
-  </section>
+<Base market={market} slug="how" title={c.metaTitle} description={c.metaDescription} extraSchema={faqSchema}>
+  <SubHero market={market} hero={c.hero} />
 
-  <!-- 1. 핵심 4단계 운영 루프 스플릿 블록 -->
-  <section class="sec-white">
+  <section class="sec sec-white">
     <div class="container">
-      <div class="split-showcase">
-        <div>
-          <span class="bento-chip purple">{c.loopBlock.chip}</span>
-          <h2>{c.loopBlock.heading}</h2>
-          <p class="split-body">{c.loopBlock.body}</p>
-          <div class="btn-row">
-            <a class="btn-solid btn-sm" href={pagePath(locale, 'contact')}>
-              {dict.ctaLabel}
-            </a>
-            <a class="btn-tint btn-sm" href={pagePath(locale, 'services')}>
-              {c.bottomNav.nextLabel}
-            </a>
-          </div>
-        </div>
-
-        <figure class="ui-panel" aria-label={c.loopBlock.mockBadge}>
-          <div class="ui-panel-head">
-            <span class="ui-panel-title">{c.loopBlock.mockBadge}</span>
-          </div>
-          <div class="step-card-list">
-            {c.loopBlock.steps.map((st) => (
-              <div class={`step-card-item${st.isHuman ? ' is-human' : ''}`}>
-                <div class="step-card-top">
-                  <span class="step-card-name">
-                    <span class="step-num-tag">{st.num}</span>
-                    {st.title}
-                  </span>
-                  <span class={`role-pill ${st.isHuman ? 'human' : 'auto'}`}>
-                    {st.role}
-                  </span>
-                </div>
-                <p class="step-card-desc">{st.desc}</p>
-              </div>
+      <h2><Lines text={t.heading} /></h2>
+      <p class="sec-lead">{t.lead}</p>
+      <div class="table-scroll table-gap">
+        <table class="data-table steps-table">
+          <thead>
+            <tr>
+              <th scope="col" class="col-step">{t.headers[0]}</th>
+              <th scope="col">{t.headers[1]}</th>
+              <th scope="col" class="col-owner">{t.headers[2]}</th>
+              <th scope="col" class="col-output">{t.headers[3]}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {t.rows.map((row, i) => (
+              <tr class:list={[row.kind === 'review' && 'is-highlight']}>
+                <td><span class={`step-dot is-${row.kind}`}>{i + 1}</span></td>
+                <td>
+                  <div class="cell-title">{row.title}</div>
+                  <p class="cell-body">{row.body}</p>
+                </td>
+                <td class:list={['cell-owner', row.kind !== 'tool' && 'is-client']}>{row.owner}</td>
+                <td class="cell-output">{row.output}</td>
+              </tr>
             ))}
-          </div>
-        </figure>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
 
-  <!-- 2. 질문 20개 구성 / 시작 입력 자료 -->
-  <section class="sec-light">
-    <div class="container">
-      <div class="sec-head">
-        <h2>{c.composition.heading}</h2>
-        <p>{c.composition.lead}</p>
+  <section class="sec sec-gray">
+    <div class="container split">
+      <div class="split-copy">
+        <h2><Lines text={c.inputs.heading} /></h2>
+        <p class="sec-lead">{c.inputs.lead}</p>
       </div>
-
-      <div class="comp-grid">
-        {c.composition.items.map((item) => (
-          <article class="comp-card">
+      <div class="split-body row-list">
+        {c.inputs.items.map((item) => (
+          <div>
             <h3>{item.title}</h3>
             <p>{item.body}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. 원고 · 검수 · 게시 3규격 -->
-  <section class="sec-white">
-    <div class="container">
-      <div class="sec-head">
-        <h2>{c.craft.heading}</h2>
-        <p>{c.craft.lead}</p>
-      </div>
-
-      <div class="offers-grid">
-        {c.craft.cards.map((card) => (
-          <article class="offer-card">
-            <div>
-              <h3>{card.title}</h3>
-              <p class="offer-summary">{card.body}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. 기존 대행 vs zicks 좌우 대비 블록 -->
-  <section class="sec-light">
-    <div class="container">
-      <div class="sec-head">
-        <h2>{c.comparison.heading}</h2>
-      </div>
-
-      <div class="versus-list">
-        {c.comparison.rows.map((row) => (
-          <div class="versus-row">
-            <div class="versus-topic">{row.topic}</div>
-            <div class="versus-col legacy">
-              <span class="versus-col-label">{c.comparison.legacyTitle}</span>
-              {row.legacy}
-            </div>
-            <div class="versus-col zicks">
-              <span class="versus-col-label">{c.comparison.zicksTitle}</span>
-              {row.zicks}
-            </div>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- 5. FAQ 아코디언 (FAQPage JSON-LD 자동 동기화) -->
-  <section class="sec-white">
+  <section class="sec sec-white">
     <div class="container">
-      <div class="sec-head">
-        <h2>{c.faq.heading}</h2>
+      <h2><Lines text={c.principles.heading} /></h2>
+      <p class="sec-lead">{c.principles.lead}</p>
+      <div class="rule-cols has-topline">
+        {c.principles.items.map((item) => (
+          <div>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </div>
+        ))}
       </div>
+    </div>
+  </section>
 
+  <section class="sec sec-gray">
+    <div class="container">
+      <h2><Lines text={c.compare.heading} /></h2>
+      {c.compare.lead && <p class="sec-lead">{c.compare.lead}</p>}
+      <CompareTable compare={c.compare} />
+    </div>
+  </section>
+
+  <section class="sec sec-white">
+    <div class="container container-narrow">
+      <h2><Lines text={c.faq.heading} /></h2>
       <div class="faq-list">
-        {c.faq.items.map((item, idx) => (
-          <details class="faq-item" open={idx === 0}>
+        {c.faq.items.map((item, i) => (
+          <details open={i === 0}>
             <summary>
-              <span>{item.q}</span>
-              <span class="faq-icon" aria-hidden="true">+</span>
+              {item.q}
+              <Icon name="chevron" />
             </summary>
-            <div class="faq-answer">{item.a}</div>
+            <p>{item.a}</p>
           </details>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- 6. 하단 배너 + 다음 페이지 안내 -->
-  <section class="bottom-banner-sec">
-    <div class="container">
-      <div class="cta-banner">
-        <h2>{c.bottomNav.heading}</h2>
-        <p>{c.bottomNav.lead}</p>
-        <div class="banner-btns">
-          <a class="btn-solid" href={pagePath(locale, 'contact')}>
-            {dict.ctaLabel}
-          </a>
-          <a class="btn-on-dark" href={pagePath(locale, c.bottomNav.nextSlug)}>
-            {c.bottomNav.nextLabel}
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <BottomCta market={market} cta={c.bottomCta} />
 </Base>

@@ -1,0 +1,31 @@
+---
+/* 세 시장 x 여섯 페이지 = 18개 페이지를 이 파일 하나에서 만든다. 주소 규칙은 src/i18n/config.ts */
+import CasesPage from '../components/CasesPage.astro';
+import ContactPage from '../components/ContactPage.astro';
+import HomePage from '../components/HomePage.astro';
+import HowPage from '../components/HowPage.astro';
+import PricingPage from '../components/PricingPage.astro';
+import ServicesPage from '../components/ServicesPage.astro';
+import { MARKETS, pagePath, SLUGS, type Market, type PageSlug } from '../i18n';
+
+export function getStaticPaths() {
+  return MARKETS.flatMap((market) =>
+    SLUGS.map((slug) => ({
+      params: { path: pagePath(market, slug).replace(/^\/|\/$/g, '') || undefined },
+      props: { market, slug },
+    }))
+  );
+}
+
+const { market, slug } = Astro.props as { market: Market; slug: PageSlug };
+const PAGES = {
+  '': HomePage,
+  how: HowPage,
+  services: ServicesPage,
+  cases: CasesPage,
+  pricing: PricingPage,
+  contact: ContactPage,
+};
+const Page = PAGES[slug];
+---
+<Page market={market} />

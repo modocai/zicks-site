@@ -1,0 +1,14 @@
+---
+import Icon from './Icon.astro';
+
+/* 체크 아이콘 목록. variant="rows"는 행마다 구분선, "x"는 회색 X 아이콘 */
+const { items, variant = 'plain' } = Astro.props as { items: string[]; variant?: 'plain' | 'rows' | 'x' };
+---
+<ul class:list={['check-list', variant !== 'plain' && 'is-rows', variant === 'x' && 'is-muted']}>
+  {items.map((item) => (
+    <li>
+      <Icon name={variant === 'x' ? 'x' : 'check'} />
+      <span>{item}</span>
+    </li>
+  ))}
+</ul>
