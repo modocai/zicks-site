@@ -23,7 +23,6 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
   <!-- 상단 머리말 -->
   <section class="sub-hero">
     <div class="container">
-      <span class="sec-eyebrow">{c.header.eyebrow}</span>
       <h1>
         {c.header.h1Lines.map((line, idx) => (
           <>
@@ -33,11 +32,6 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
         ))}
       </h1>
       <p class="sub-lead">{c.header.lead}</p>
-      <ul class="trust-list">
-        {c.reassurance.map((pt) => (
-          <li>{pt}</li>
-        ))}
-      </ul>
     </div>
   </section>
 
@@ -47,7 +41,6 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
       <div class="contact-grid">
         <!-- 좌측 액션 패널 -->
         <div class="contact-panel">
-          <span class="pill">{c.actionCard.badge}</span>
           <div class="email-display-box">
             <span class="email-display-label">{c.actionCard.emailLabel}</span>
             <a class="email-address-text" href={mailtoHref}>{CONTACT_EMAIL}</a>
@@ -93,14 +86,9 @@ const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
         <!-- 우측 1장 진단서 구성 안내 -->
         <figure class="mock-window contact-audit-mock">
           <div class="mock-topbar">
-            <div class="mock-dots">
-              <span class="dots-decor" aria-hidden="true">
-                <i></i><i></i><i></i>
-              </span>
-              <span class="sample-pill">
+            <span class="sample-pill">
                 {c.auditMock.sampleBadge}
               </span>
-            </div>
             <span class="mock-tag">{c.auditMock.windowTag}</span>
           </div>
 

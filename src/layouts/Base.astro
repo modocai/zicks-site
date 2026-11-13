@@ -101,7 +101,7 @@ const schemas = [orgSchema, serviceSchema, ...rawExtras];
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="zicks · MoDoc AI" />
+    <meta property="og:site_name" content="zicks by MoDoc AI" />
     <meta property="og:locale" content={meta.ogLocale} />
     {LOCALES.filter((l) => l !== locale).map((alt) => (
       <meta property="og:locale:alternate" content={LOCALE_META[alt].ogLocale} />
@@ -119,39 +119,37 @@ const schemas = [orgSchema, serviceSchema, ...rawExtras];
     <header class="site-header">
       <div class="container header-row">
         <a class="brand-link" href={pagePath(locale, '')}>
-          zicks <small>{dict.brandSub}</small>
+          <span class="brand-name">zicks</span>
+          <span class="brand-sub">{dict.brandSub}</span>
         </a>
 
-        <div class="desktop-nav">
-          <nav class="nav-links" aria-label={dict.aria.primaryNav}>
-            {dict.nav.map((item) => (
+        <nav class="nav-links" aria-label={dict.aria.primaryNav}>
+          {dict.nav.map((item) => (
+            <a
+              href={pagePath(locale, item.slug)}
+              aria-current={resolvedSlug === item.slug ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <div class="header-actions">
+          <div class="lang-switch" role="group" aria-label={dict.aria.langSwitcher}>
+            {LOCALES.map((loc) => (
               <a
-                href={pagePath(locale, item.slug)}
-                aria-current={resolvedSlug === item.slug ? 'page' : undefined}
+                href={pagePath(loc, resolvedSlug)}
+                aria-current={loc === locale ? 'true' : undefined}
+                lang={LOCALE_META[loc].htmlLang}
+                hreflang={LOCALE_META[loc].htmlLang}
               >
-                {item.label}
+                {LOCALE_META[loc].nativeLabel}
               </a>
             ))}
-          </nav>
-
-          <div class="header-actions">
-            <div class="lang-switch" role="group" aria-label={dict.aria.langSwitcher}>
-              {LOCALES.map((loc) => (
-                <a
-                  href={pagePath(loc, resolvedSlug)}
-                  class={loc === locale ? 'active' : undefined}
-                  aria-current={loc === locale ? 'true' : undefined}
-                  lang={LOCALE_META[loc].htmlLang}
-                  hreflang={LOCALE_META[loc].htmlLang}
-                >
-                  {LOCALE_META[loc].shortLabel}
-                </a>
-              ))}
-            </div>
-            <a class="header-cta" href={pagePath(locale, 'contact')}>
-              {dict.ctaLabel}
-            </a>
           </div>
+          <a class="header-cta" href={pagePath(locale, 'contact')}>
+            {dict.ctaLabel}
+          </a>
         </div>
 
         <div class="mobile-actions">
@@ -168,12 +166,12 @@ const schemas = [orgSchema, serviceSchema, ...rawExtras];
             data-open-label={dict.aria.openMenu}
             data-close-label={dict.aria.closeMenu}
           >
-            <svg id="icon-open" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <svg id="icon-open" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
               <line x1="4" y1="7" x2="20" y2="7" />
               <line x1="4" y1="12" x2="20" y2="12" />
               <line x1="4" y1="17" x2="20" y2="17" />
             </svg>
-            <svg id="icon-close" aria-hidden="true" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <svg id="icon-close" aria-hidden="true" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
               <line x1="6" y1="6" x2="18" y2="18" />
               <line x1="18" y1="6" x2="6" y2="18" />
             </svg>
@@ -192,13 +190,11 @@ const schemas = [orgSchema, serviceSchema, ...rawExtras];
             </a>
           ))}
         </nav>
-        <div class="mobile-lang-row">
-          <span>{dict.aria.langSwitcher}</span>
+        <div class="mobile-switch-row">
           <div class="lang-switch" role="group" aria-label={dict.aria.langSwitcher}>
             {LOCALES.map((loc) => (
               <a
                 href={pagePath(loc, resolvedSlug)}
-                class={loc === locale ? 'active' : undefined}
                 aria-current={loc === locale ? 'true' : undefined}
                 lang={LOCALE_META[loc].htmlLang}
                 hreflang={LOCALE_META[loc].htmlLang}
@@ -220,8 +216,11 @@ const schemas = [orgSchema, serviceSchema, ...rawExtras];
         <div class="footer-top">
           <div>
             <div class="footer-brand">zicks</div>
-            <div>{dict.footer.companyLine} · {dict.footer.tagline}</div>
-            {dict.footer.addressLine && <div>{dict.footer.addressLine}</div>}
+            <div class="footer-info">
+              <div>{dict.footer.companyLine}</div>
+              {dict.footer.addressLine && <div>{dict.footer.addressLine}</div>}
+              <div>{dict.footer.contactLabel} <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></div>
+            </div>
           </div>
           <nav class="footer-nav" aria-label={dict.aria.footerNav}>
             {dict.nav.map((item) => (
@@ -232,15 +231,10 @@ const schemas = [orgSchema, serviceSchema, ...rawExtras];
         </div>
 
         <div class="footer-bottom">
-          <div>
-            {dict.footer.disclaimer}<br />
-            {dict.footer.openWebNote}
-          </div>
-          <div class="footer-links-right">
-            {dict.footer.contactLabel}: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a><br />
-            <a href="https://www.modoc-ai.com" rel="noopener">modoc-ai.com</a> ·{' '}
-            <a href="https://www.fevercoach.us" rel="noopener">FeverCoach</a> ·{' '}
-            <a href={assetPath('/llms.txt')}>llms.txt</a>
+          <p>{dict.footer.disclaimer}</p>
+          <div class="footer-links">
+            <a href="https://www.modoc-ai.com" rel="noopener">modoc-ai.com</a>
+            <a href="https://www.fevercoach.us" rel="noopener">FeverCoach</a>
           </div>
         </div>
       </div>
@@ -274,32 +268,6 @@ const schemas = [orgSchema, serviceSchema, ...rawExtras];
             if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
               setOpen(false);
               btn.focus();
-            }
-          });
-        }
-
-        if (
-          'IntersectionObserver' in window &&
-          window.matchMedia('(prefers-reduced-motion: no-preference)').matches
-        ) {
-          const targets = document.querySelectorAll('.reveal-on-scroll');
-          const vh = window.innerHeight || 800;
-          const io = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add('is-visible');
-                  io.unobserve(entry.target);
-                }
-              });
-            },
-            { threshold: 0.08 }
-          );
-          targets.forEach((el) => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top > vh * 0.95) {
-              el.classList.add('will-reveal');
-              io.observe(el);
             }
           });
         }

@@ -33,7 +33,6 @@ const faqSchema = {
   <!-- 상단 머리말 -->
   <section class="sub-hero">
     <div class="container">
-      <span class="sec-eyebrow">{c.header.eyebrow}</span>
       <h1>
         {c.header.h1Lines.map((line, idx) => (
           <>
@@ -90,10 +89,9 @@ const faqSchema = {
   </section>
 
   <!-- 2. 질문 20개 구성 / 시작 입력 자료 -->
-  <section class="sec-light reveal-on-scroll">
+  <section class="sec-light">
     <div class="container">
       <div class="sec-head">
-        <span class="sec-eyebrow">{c.composition.eyebrow}</span>
         <h2>{c.composition.heading}</h2>
         <p>{c.composition.lead}</p>
       </div>
@@ -101,7 +99,6 @@ const faqSchema = {
       <div class="comp-grid">
         {c.composition.items.map((item) => (
           <article class="comp-card">
-            <span class="pill">{item.tag}</span>
             <h3>{item.title}</h3>
             <p>{item.body}</p>
           </article>
@@ -111,10 +108,9 @@ const faqSchema = {
   </section>
 
   <!-- 3. 원고 · 검수 · 게시 3규격 -->
-  <section class="sec-white reveal-on-scroll">
+  <section class="sec-white">
     <div class="container">
       <div class="sec-head">
-        <span class="sec-eyebrow purple">{c.craft.eyebrow}</span>
         <h2>{c.craft.heading}</h2>
         <p>{c.craft.lead}</p>
       </div>
@@ -123,7 +119,6 @@ const faqSchema = {
         {c.craft.cards.map((card) => (
           <article class="offer-card">
             <div>
-              <span class="pill">{card.badge}</span>
               <h3>{card.title}</h3>
               <p class="offer-summary">{card.body}</p>
             </div>
@@ -134,10 +129,9 @@ const faqSchema = {
   </section>
 
   <!-- 4. 기존 대행 vs zicks 좌우 대비 블록 -->
-  <section class="sec-light reveal-on-scroll">
+  <section class="sec-light">
     <div class="container">
       <div class="sec-head">
-        <span class="sec-eyebrow">{c.comparison.eyebrow}</span>
         <h2>{c.comparison.heading}</h2>
       </div>
 
@@ -160,10 +154,9 @@ const faqSchema = {
   </section>
 
   <!-- 5. FAQ 아코디언 (FAQPage JSON-LD 자동 동기화) -->
-  <section class="sec-white reveal-on-scroll">
+  <section class="sec-white">
     <div class="container">
       <div class="sec-head">
-        <span class="sec-eyebrow purple">{c.faq.eyebrow}</span>
         <h2>{c.faq.heading}</h2>
       </div>
 
@@ -182,7 +175,7 @@ const faqSchema = {
   </section>
 
   <!-- 6. 하단 배너 + 다음 페이지 안내 -->
-  <section class="bottom-banner-sec reveal-on-scroll">
+  <section class="bottom-banner-sec">
     <div class="container">
       <div class="cta-banner">
         <h2>{c.bottomNav.heading}</h2>

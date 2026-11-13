@@ -19,7 +19,6 @@ const c = dict.cases;
   <!-- 상단 머리말 -->
   <section class="sub-hero">
     <div class="container">
-      <span class="sec-eyebrow">{c.header.eyebrow}</span>
       <h1>
         {c.header.h1Lines.map((line, idx) => (
           <>
@@ -37,7 +36,6 @@ const c = dict.cases;
     <div class="container">
       <div class="proof-top">
         <div class="sec-head">
-          <span class="sec-eyebrow purple">{c.fevercoach.badge}</span>
           <h2>{c.fevercoach.heading}</h2>
           <p>{c.fevercoach.lead}</p>
         </div>
@@ -90,10 +88,9 @@ const c = dict.cases;
   </section>
 
   <!-- 2. zicks 자체 사이트 적용 체크카드 -->
-  <section class="sec-light reveal-on-scroll">
+  <section class="sec-light">
     <div class="container">
       <div class="sec-head">
-        <span class="sec-eyebrow">{c.thisSite.eyebrow}</span>
         <h2>{c.thisSite.heading}</h2>
         <p>{c.thisSite.lead}</p>
       </div>
@@ -102,7 +99,6 @@ const c = dict.cases;
         {c.thisSite.checks.map((chk) => (
           <article class="offer-card">
             <div>
-              <span class="check-num">{chk.num}</span>
               <h3>{chk.title}</h3>
               <p class="offer-summary">{chk.body}</p>
             </div>
@@ -120,12 +116,9 @@ const c = dict.cases;
   </section>
 
   <!-- 3. 고객사 공개 원칙 & 하단 전환 배너 -->
-  <section class="bottom-banner-sec with-top-pad reveal-on-scroll">
+  <section class="bottom-banner-sec with-top-pad">
     <div class="container">
       <div class="cta-banner">
-        <span class="bento-chip on-dark">
-          {c.clientPolicy.badge}
-        </span>
         <h2>{c.clientPolicy.heading}</h2>
         <p>{c.clientPolicy.body}</p>
         <div class="banner-btns">

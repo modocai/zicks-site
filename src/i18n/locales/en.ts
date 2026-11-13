@@ -8,7 +8,7 @@ const P = EN_PRICING.formatted;
 export const en: LocaleDict = {
   locale: 'en',
   brandSub: 'by MoDoc AI',
-  ctaLabel: 'Request a free audit',
+  ctaLabel: 'Get a free audit',
   nav: [
     { slug: 'how', label: 'How it works' },
     { slug: 'services', label: 'Services' },
@@ -40,7 +40,7 @@ export const en: LocaleDict = {
   footer: {
     companyLine: 'zicks by MoDoc AI, Inc.',
     tagline: 'Content services for clinics and healthcare software teams',
-    addressLine: '163 Highland Ave #1015, Needham, MA 02494, United States',
+    addressLine: '163 Highland Ave #1015, Needham, MA 02494',
     disclaimer:
       'Search rankings, AI citations, leads, and revenue are not guaranteed. Tracking setup and account access are agreed separately.',
     openWebNote:

@@ -19,7 +19,6 @@ const p = dict.pricing;
   <!-- 상단 머리말 (가안 기준 시점 배지 명시, JSON-LD Offer 미포함) -->
   <section class="sub-hero">
     <div class="container">
-      <span class="sec-eyebrow purple">{p.header.asOfBadge}</span>
       <h1>
         {p.header.h1Lines.map((line, idx) => (
           <>
@@ -80,10 +79,9 @@ const p = dict.pricing;
   </section>
 
   <!-- 2. 모바일에서도 안 잘리는 가격 가안 카드 3장 + 부가 옵션 -->
-  <section class="sec-light reveal-on-scroll">
+  <section class="sec-light">
     <div class="container">
       <div class="sec-head">
-        <span class="sec-eyebrow">{p.plansSection.eyebrow}</span>
         <h2>{p.plansSection.heading}</h2>
       </div>
 
@@ -91,7 +89,6 @@ const p = dict.pricing;
         {p.plansSection.cards.map((card) => (
           <article class={`plan-card${card.featured ? ' is-featured' : ''}`}>
             <div>
-              <span class="pill">{card.badge}</span>
               <h3 class="plan-title">{card.title}</h3>
               <div class="plan-price">{card.price}</div>
               <p class="plan-billing">{card.billingNote}</p>
@@ -125,7 +122,7 @@ const p = dict.pricing;
   </section>
 
   <!-- 3. 하단 무료 진단 배너 -->
-  <section class="bottom-banner-sec with-top-pad reveal-on-scroll">
+  <section class="bottom-banner-sec with-top-pad">
     <div class="container">
       <div class="cta-banner">
         <h2>{p.bottomNav.heading}</h2>

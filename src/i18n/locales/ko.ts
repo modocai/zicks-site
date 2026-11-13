@@ -8,9 +8,9 @@ const P = KO_PRICING.formatted;
 export const ko: LocaleDict = {
   locale: 'ko',
   brandSub: 'by MoDoc AI',
-  ctaLabel: '무료 진단 요청',
+  ctaLabel: '무료 진단 받기',
   nav: [
-    { slug: 'how', label: '어떻게 일하나' },
+    { slug: 'how', label: '진행 방식' },
     { slug: 'services', label: '서비스' },
     { slug: 'cases', label: '사례' },
     { slug: 'pricing', label: '가격' },
@@ -39,7 +39,7 @@ export const ko: LocaleDict = {
     companyLine: '모닥에이아이코리아 (MoDoc AI)',
     tagline: 'AI native GEO · SEO 운영 엔진',
     disclaimer:
-      'AI 추천 순위 · 검색 순위 · 매출 증가는 보장하지 않습니다. 보고하는 것은 「인용되었는가」와 「인용될 조건이 갖춰졌는가」입니다.',
+      'AI 추천 순위, 검색 순위, 매출 증가는 보장하지 않습니다. 보고하는 것은 인용되었는지, 그리고 인용될 조건이 갖춰졌는지입니다.',
     openWebNote:
       '이 사이트는 정적 사이트(Astro)로 만들어 무료 호스팅에 올렸고, 모든 AI 크롤러에 열려 있습니다.',
     contactLabel: '문의',

@@ -37,21 +37,11 @@ const h = dict.home;
             {h.hero.secondaryCta}
           </a>
         </div>
-        <ul class="trust-list">
-          {h.hero.trustPoints.map((pt) => (
-            <li>{pt}</li>
-          ))}
-        </ul>
       </div>
 
       <figure class="mock-window" data-nosnippet aria-label={h.hero.mock.windowTag}>
         <div class="mock-topbar">
-          <div class="mock-dots">
-            <span class="dots-decor" aria-hidden="true">
-              <i></i><i></i><i></i>
-            </span>
-            <span class="sample-pill">{h.hero.mock.sampleBadge}</span>
-          </div>
+          <span class="sample-pill">{h.hero.mock.sampleBadge}</span>
           <span class="mock-tag">{h.hero.mock.windowTag}</span>
         </div>
 
@@ -78,10 +68,9 @@ const h = dict.home;
   </section>
 
   <!-- 2. 네 조건 (무료 진단 기준) -->
-  <section class="sec-white reveal-on-scroll">
+  <section class="sec-white">
     <div class="container">
       <div class="sec-head">
-        <span class="sec-eyebrow">{h.fourChecks.eyebrow}</span>
         <h2>{h.fourChecks.heading}</h2>
         <p>{h.fourChecks.lead}</p>
       </div>
@@ -100,7 +89,7 @@ const h = dict.home;
   </section>
 
   <!-- 3. 딥 인디고 벤토 블록 (1 특대 + 2 대형) -->
-  <section class="dark-bento-sec reveal-on-scroll">
+  <section class="dark-bento-sec">
     <div class="container">
       <div class="dark-center-head">
         <h2>
@@ -203,10 +192,9 @@ const h = dict.home;
 
   <!-- (영문 등 시장별 파일럿 요약 구역: /en/#pilots 북마크 호환) -->
   {h.pilotsSection && (
-    <section class="sec-light reveal-on-scroll" id={h.pilotsSection.id}>
+    <section class="sec-light" id={h.pilotsSection.id}>
       <div class="container">
         <div class="sec-head">
-          <span class="sec-eyebrow purple">{h.pilotsSection.eyebrow}</span>
           <h2>{h.pilotsSection.heading}</h2>
           <p>{h.pilotsSection.lead}</p>
         </div>
@@ -215,7 +203,6 @@ const h = dict.home;
           {h.pilotsSection.cards.map((card) => (
             <article class="pilot-card">
               <div>
-                <span class="pill">{card.badge}</span>
                 <h3>{card.title}</h3>
                 <div class="pilot-price">{card.price}</div>
                 <p class="pilot-period">{card.period}</p>
@@ -237,11 +224,10 @@ const h = dict.home;
   )}
 
   <!-- 4. FeverCoach 자사 선행 검증 / 배경 -->
-  <section class="sec-white reveal-on-scroll">
+  <section class="sec-white">
     <div class="container">
       <div class="proof-top">
         <div class="sec-head">
-          <span class="sec-eyebrow purple">{h.proof.eyebrow}</span>
           <h2>
             {h.proof.headingLines.map((line, idx) => (
               <>
@@ -295,7 +281,7 @@ const h = dict.home;
   </section>
 
   <!-- 5. 하단 무료 진단 배너 -->
-  <section class="bottom-banner-sec reveal-on-scroll">
+  <section class="bottom-banner-sec">
     <div class="container">
       <div class="cta-banner">
         <h2>{h.bottomCta.heading}</h2>

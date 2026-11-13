@@ -19,7 +19,6 @@ const s = dict.services;
   <!-- 상단 머리말 -->
   <section class="sub-hero">
     <div class="container">
-      <span class="sec-eyebrow">{s.header.eyebrow}</span>
       <h1>
         {s.header.h1Lines.map((line, idx) => (
           <>
@@ -79,10 +78,9 @@ const s = dict.services;
   </section>
 
   <!-- 2. 세 가지 서비스 상세 카드 -->
-  <section class="sec-light reveal-on-scroll" id={s.offersSection.id}>
+  <section class="sec-light" id={s.offersSection.id}>
     <div class="container">
       <div class="sec-head">
-        <span class="sec-eyebrow">{s.offersSection.eyebrow}</span>
         <h2>{s.offersSection.heading}</h2>
         <p>{s.offersSection.lead}</p>
       </div>
@@ -92,7 +90,7 @@ const s = dict.services;
           <article class="offer-card">
             <div>
               <div class="offer-meta-row">
-                <span class="offer-code">{card.code} · {card.duration}</span>
+                <span class="offer-duration">{card.duration}</span>
                 {card.recommendedTag && (
                   <span class="offer-rec">{card.recommendedTag}</span>
                 )}
@@ -115,10 +113,9 @@ const s = dict.services;
   </section>
 
   <!-- 3. 약속하지 않는 것 · 대신 보고하는 것 -->
-  <section class="sec-white reveal-on-scroll">
+  <section class="sec-white">
     <div class="container">
       <div class="sec-head">
-        <span class="sec-eyebrow purple">{s.boundaries.eyebrow}</span>
         <h2>{s.boundaries.heading}</h2>
       </div>
 
@@ -146,7 +143,7 @@ const s = dict.services;
   </section>
 
   <!-- 4. 하단 배너 + 가격 페이지 동선 -->
-  <section class="bottom-banner-sec reveal-on-scroll">
+  <section class="bottom-banner-sec">
     <div class="container">
       <div class="cta-banner">
         <h2>{s.bottomNav.heading}</h2>
